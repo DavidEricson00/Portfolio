@@ -18,10 +18,14 @@ a {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin: 20px;
+    border: 4px solid #32d3a8;
+    border-radius: 50px;
 }
 
 .left-bar img{
     max-width: 250px;
+    border-radius: 50px;
 }
 
 .left-bar p{
