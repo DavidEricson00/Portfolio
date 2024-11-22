@@ -22,6 +22,11 @@ a {
     color: inherit;
 }
 
+section {
+    margin-bottom: 40px;
+}
+
+
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
