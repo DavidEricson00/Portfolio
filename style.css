@@ -80,6 +80,10 @@ section {
     margin-right: 100px;
 }
 
+.indicadores{
+    color: #B3B3B3;
+}
+
 #Introducao h1{
     font-family: 'Inter', sans-serif;
     font-size: 50px;
