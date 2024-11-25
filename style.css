@@ -27,7 +27,6 @@ section {
     margin-top: 20px;
 }
 
-
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
@@ -49,7 +48,6 @@ section {
     border: 4px solid #B3B3B3;
     border-radius: 50px;
 }
-
 
 .left-bar img{
     max-width: 250px;
@@ -90,7 +88,8 @@ section {
     color: #B3B3B3;
 }
 
-#Introducao h1{
+/* Introdução */
+#Introducao h1{ 
     font-family: 'Inter', sans-serif;
     font-size: 50px;
     font-weight: 400;
@@ -100,6 +99,7 @@ section {
     color: #B3B3B3;
 }
 
+/* Historico */
 #Historico h1{
     font-family: 'Inter', sans-serif;
     color: #32d3a8;
@@ -112,8 +112,6 @@ section {
     font-size: 30px;
     font-weight: 400;
 }
-
-
 
 #Historico p{
     color: #B3B3B3;
