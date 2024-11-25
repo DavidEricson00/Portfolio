@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-
 html {
     scroll-behavior: smooth;
 }
@@ -27,16 +26,15 @@ section {
     margin-top: 20px;
 }
 
-.grid-container {
+.pageContainer {
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     gap: 20px;
     padding: 20px;
 }
 
-
 /* Css da Barra Lateral */
-.left-bar {
+.profileBar {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,17 +47,17 @@ section {
     border-radius: 50px;
 }
 
-.left-bar img{
+.profileBar img {
     max-width: 250px;
     border-radius: 50px;
 }
 
-.left-bar p{
+.profileBar p {
     text-align: center;
     margin-top: 20px;
 }
 
-.left-bar a {
+.profileBar a {
     font-size: 2rem;
     margin-left: 10px;
     display: block;
@@ -67,57 +65,68 @@ section {
     transition: color 0.3s, transform 0.5s;
 }
 
-.left-bar a:hover {
+.profileBar strong {
+    font-weight: normal;
+    color: #32d3a8;
+}
+
+.profileBar a:hover {
     color: #32d3a8;
     transform: scale(1.4);
 }
 
-.lbar-links-cont {
+.profileBar-socialLinks {
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
 
 /* Css do Conteúdo Central */
-.main-content{
+.mainSection {
     margin-left: 100px;
     margin-right: 100px;
 }
 
-.indicadores{
+.mainSection-indicadores {
     color: #B3B3B3;
 }
 
 /* Introdução */
-#Introducao h1{ 
+#introducao strong {
+    font-weight: normal;
+    color: #32d3a8;
+}
+
+#introducao h1 { 
     font-family: 'Inter', sans-serif;
-    font-size: 50px;
+    font-size: 80px;
     font-weight: 400;
 }
 
-#Introducao p{
+#introducao p {
     color: #B3B3B3;
 }
 
 /* Historico */
-#Historico h1{
+#historico h1 {
     font-family: 'Inter', sans-serif;
     color: #32d3a8;
     font-size: 70px;
     font-weight: 400;
 }
 
-#Historico h2{
+.historico-infoBlock h2 {
     font-family: 'Inter', sans-serif;
     font-size: 30px;
     font-weight: 400;
 }
 
-#Historico p{
+.historico-infoBlock p {
     color: #B3B3B3;
+    transition: color 0.3s;
 }
 
-.Hist-Container {
+.historico-infoBlock {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -128,18 +137,23 @@ section {
     transition: color 0.3s;
 }
 
-.Hist-Container:hover{
+.historico-infoBlock:hover {
     border-color: #32d3a8;
     color: #32d3a8;
 }
 
-.Hist-Container:hover p {
+.historico-infoBlock:hover p {
     color: #32d3a8 !important;
 }
 
+.historico-infoCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /* Css da Barra de Navegação */
-.navigation-bar {
+.navigationBar {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -154,7 +168,7 @@ section {
     border-radius: 40px;
 }
 
-.navigation-bar a {
+.navigationBar a {
     display: block;
     padding: 5px;
     margin-top: 4px;
@@ -162,7 +176,7 @@ section {
     transition: color 0.3s, transform 0.5s;
 }
 
-.navigation-bar a:hover {
+.navigationBar a:hover {
     color: #32d3a8;
     transform: scale(1.4);
 }

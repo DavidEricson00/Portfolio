@@ -13,29 +13,27 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" 
     rel="stylesheet"/>
     </head>
-
+    
     <body>
-    <div class="grid-container">
+    <div class="pageContainer">
+
         <!-- Barra Lateral (Informações Pessoais) -->
-        <div class="left-bar">
+        <div class="profileBar">
 
             <!-- Foto -->
             <img src="img/foto.jpg" alt="Foto de David Ericson"/>
 
             <!-- Apresentação -->
             <p>
-                Olá, sou 
-                <span style="color: #32d3a8">David Ericson</span>, 
-                desenvolvedor com experiência em
-                <span style="color: #32d3a8">HTML</span> 
-                e
-                <span style="color: #32d3a8">CSS</span> 
-                interessado na área de
-                <span style="color: #32d3a8">Full Stack.</span>
+                Olá, sou <strong>David Ericson</strong>, desenvolvedor com experiência em 
+                <strong>HTML</strong> e <strong>CSS</strong>, interessado na área de 
+                <strong>Full Stack</strong>.
             </p>
+            
+
 
             <!-- Redes -->
-            <p class="lbar-links-cont">
+            <p class="profileBar-socialLinks">
                 <a
                     href="https://www.linkedin.com"
                     target="_blank"
@@ -61,23 +59,24 @@
         </div>
         
         <!-- Conteúdo Pricipal do Site -->
-        <div class="main-content">
+        <div class="mainSection">
+            <section id="introducao">
+                <p class="mainSection-indicadores"><i class="bi bi-person-circle"></i> Introdução</p>
 
-            <section id="Introducao">
-                <p class="indicadores"><i class="bi bi-person-circle"></i> Introdução</p>
-                <h1 style="font-size: 80px;">Sou <span style="color: #32d3a8">David Ericson</span>
-                    programador apaixonado por <span style="color: #32d3a8">soluções eficazes</span>
+                <h1>
+                    Sou <strong>David Ericson</strong> programador apaixonado por <strong>soluções eficazes</strong>
                 </h1>
+
                 <p>Atualmente, sou estudante do terceiro semestre de Sistemas de Informação no IFCE. Com experiência em Python, C, HTML e CSS. Meu objetivo é aplicar tecnologia para resolver desafios de maneira prática e eficiente.</p>
             </section>
 
             <hr><br>
 
-            <section id="Historico">
-                <p class="indicadores"><i class="bi bi-journal-text"></i> Histórico</p>
+            <section id="historico">
+                <p class="mainSection-indicadores"><i class="bi bi-journal-text"></i> Histórico</p>
 
                 <h1>Formação Acadêmica</h1>
-                <div class="Hist-Container">
+                <div class="historico-infoBlock">
                     <div>
                     <h2>Técnico em Informática</h2>
                     <p>Formação técnica inicial</p>
@@ -85,7 +84,7 @@
                     <i class="bi bi-mortarboard" style="font-size: 60px;"></i>
 
                 </div>
-                <div class="Hist-Container">
+                <div class="historico-infoBlock">
                     <div>
                     <h2>Bacharelado em Sistemas de Informação</h2>
                     <p>Atualmente no 3º semestre</p>
@@ -94,7 +93,7 @@
                 </div>
 
                 <h1>Experiência</h1>
-                <div class="Hist-Container">
+                <div class="historico-infoBlock">
                     <div>
                     <h2>Estágio Click Informática</h2>
                     <p>Desenvolvi trabalhos relacionados a edição de imagens e vídeo</p>
@@ -103,59 +102,63 @@
                 </div>
 
                 <h1>Projetos</h1>
-
-
+                <div class="historico-infoCard">
+                    <img src="image-180x130.jpg">
+                    <h2>Titulo</h2>
+                    <p>Descrição</p>
+                    <button>Repositorio</button>
+                </div>
+                
             </section>
 
             <hr><br>
 
-            <section id="Interesses">
-                <p class="indicadores"><i class="bi bi-heart"></i> Interesses</p>
+            <section id="interesses">
+                <p class="mainSection-indicadores"><i class="bi bi-heart"></i> Interesses</p>
                 <p>Essa é a Historico do meu site em html Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta vel possimus et totam qui labore magnam architecto nihil mollitia sint cupiditate ipsa dolore ea, dolor, quasi reiciendis, voluptates nesciunt praesentium.</p>
             </section>
 
             <hr><br>
 
-            <section id="Aprendizado">
-                <p class="indicadores"><i class="bi bi-lightbulb"></i> Aprendizado</p>
+            <section id="aprendizado">
+                <p class="mainSection-indicadores"><i class="bi bi-lightbulb"></i> Aprendizado</p>
                 <p>Essa é a Historico do meu site em html Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta vel possimus et totam qui labore magnam architecto nihil mollitia sint cupiditate ipsa dolore ea, dolor, quasi reiciendis, voluptates nesciunt praesentium.</p>
             </section>
 
             <hr><br>
 
-            <section id="Galeria">
-                <p class="indicadores"><i class="bi bi-images"></i> Galeria</p>
+            <section id="galeria">
+                <p class="mainSection-indicadores"><i class="bi bi-images"></i> Galeria</p>
                 <p>Essa é a Historico do meu site em html Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta vel possimus et totam qui labore magnam architecto nihil mollitia sint cupiditate ipsa dolore ea, dolor, quasi reiciendis, voluptates nesciunt praesentium.</p>
             </section>
 
             <hr><br>
 
-            <section id="Depoimentos">
-                <p class="indicadores"><i class="bi bi-chat-quote"></i> Depoimentos</p>
+            <section id="depoimentos">
+                <p class="mainSection-indicadores"><i class="bi bi-chat-quote"></i> Depoimentos</p>
                 <p>Essa é a Historico do meu site em html Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta vel possimus et totam qui labore magnam architecto nihil mollitia sint cupiditate ipsa dolore ea, dolor, quasi reiciendis, voluptates nesciunt praesentium.</p>
             </section>
 
             <hr><br>
 
-            <section id="Contato">
-                <p class="indicadores"><i class="bi bi-envelope"></i> Contato</p>
+            <section id="contato">
+                <p class="mainSection-indicadores"><i class="bi bi-envelope"></i> Contato</p>
                 <p>Essa é a Historico do meu site em html Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta vel possimus et totam qui labore magnam architecto nihil mollitia sint cupiditate ipsa dolore ea, dolor, quasi reiciendis, voluptates nesciunt praesentium.</p>
             </section>
 
         </div>
 
         <!-- Barra de Navegação -->
-        <div class="navigation-bar">
-            <a href="#Introducao"><i class="bi bi-person-circle"></i></a>
-            <a href="#Historico"><i class="bi bi-journal-text"></i></a>
-            <a href="#Interesses"><i class="bi bi-heart"></i></a>
-            <a href="#Aprendizado"><i class="bi bi-lightbulb"></i></a>
-            <a href="#Galeria"><i class="bi bi-images"></i></a>
-            <a href="#Depoimentos"><i class="bi bi-chat-quote"></i></a>
-            <a href="#Contato"><i class="bi bi-envelope"></i></a>
+        <div class="navigationBar">
+            <a href="#introducao"><i class="bi bi-person-circle"></i></a>
+            <a href="#historico"><i class="bi bi-journal-text"></i></a>
+            <a href="#interesses"><i class="bi bi-heart"></i></a>
+            <a href="#aprendizado"><i class="bi bi-lightbulb"></i></a>
+            <a href="#galeria"><i class="bi bi-images"></i></a>
+            <a href="#depoimentos"><i class="bi bi-chat-quote"></i></a>
+            <a href="#contato"><i class="bi bi-envelope"></i></a>
         </div>
         
-
     </div>
     </body>
 </html>
