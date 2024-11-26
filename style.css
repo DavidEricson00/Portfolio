@@ -192,6 +192,18 @@ section {
     transform: scale(1.05);
 }
 
+/* Interesses */
+.interessesHabilidades-description h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.interessesHabilidades-description p {
+    font-size: 15px;
+    color: #B3B3B3;
+}
+
 /* Css da Barra de Navegação */
 .navigationBar {
     display: flex;
