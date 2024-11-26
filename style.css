@@ -194,16 +194,49 @@ section {
 }
 
 /* Interesses */
-.interessesHabilidades-description h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: 50px;
-    font-weight: 400;
+.interesses-habilidades, .interesses-hobbies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 100px;
 }
 
-.interessesHabilidades-description p {
+.interesses-description {
+    text-align: center;
+}
+
+.interesses-description h1 {
+    font-family: 'Inter', sans-serif;
+    color: #32d3a8;
+    font-size: 50px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.interesses-description p {
     font-size: 15px;
+}
+
+.interesses-infoBlock div {
+    border: 3px solid #B3B3B3;
+    border-radius: 20px;
+    padding: 10px;
+    padding-top: 0px;
+    margin-bottom: 20px;
+}
+
+.interesses-infoBlock p {
+    font-size: 17px;
     color: #B3B3B3;
 }
+
+.interesses-infoBlock h2 {
+    color: #32d3a8;
+}
+
+/* Aprendizados */
+
 
 /* Css da Barra de Navegação */
 .navigationBar {
