@@ -311,6 +311,18 @@ section {
     margin-bottom: 5px;
 }
 
+.aprendizado-duvidas p{
+    color: #B3B3B3;
+}
+
+.aprendizado-duvidas textarea {
+    width: 100%;
+}
+
+.aprendizadoDuvidas-buttons {
+    text-align: right;
+}
+
 /* Barra de Navegação */
 .navigationBar {
     display: flex;
