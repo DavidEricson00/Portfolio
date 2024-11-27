@@ -33,7 +33,7 @@ section {
     padding: 20px;
 }
 
-/* Css da Barra Lateral */
+/* Barra Lateral */
 .profileBar {
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@ section {
     width: 100%;
 }
 
-/* Css do Conteúdo Central */
+/* Conteúdo Central */
 .mainSection {
     margin-left: 100px;
     margin-right: 100px;
@@ -89,6 +89,7 @@ section {
 
 .mainSection-indicadores {
     color: #B3B3B3;
+    margin-bottom: 10px;
 }
 
 /* Introdução */
@@ -238,7 +239,7 @@ section {
 /* Aprendizados */
 
 
-/* Css da Barra de Navegação */
+/* Barra de Navegação */
 .navigationBar {
     display: flex;
     flex-direction: column;
