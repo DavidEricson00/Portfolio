@@ -238,6 +238,58 @@ section {
 
 /* Aprendizados */
 
+#aprendizado h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.aprendizado-porcentageBars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.aprendizado-porcentageBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 3px solid #B3B3B3;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 0px;
+}
+
+.aprendizado-porcentageBlock progress {
+    width: 100%;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.aprendizado-porcentageBlock progress::-webkit-progress-value {
+    background-color: #32d3a8;
+}
+
+.aprendizado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aprendizado-info h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+}
+
+.aprendizado-info img {
+    width: 30px;
+    height: 30px;
+}
 
 /* Barra de Navegação */
 .navigationBar {
