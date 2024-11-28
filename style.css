@@ -316,7 +316,7 @@ section {
 }
 
 .aprendizado-duvidas textarea {
-    resize: none;
+    resize: vertical;
     border: 3px solid #B3B3B3;
     background-color: #121212;
     color: white;
@@ -435,6 +435,64 @@ section {
     margin: 5px 0 0;
 }
 
+/* Contato */
+#contato strong {
+    font-weight: normal;
+    color: #32d3a8;
+}
+
+#contato h1 { 
+    font-family: 'Inter', sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+
+#contato h2 { 
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.contato-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    column-gap: 70px;
+}
+
+.contato-info input {
+    height: 35px;
+    resize: vertical;
+    border: none;
+    outline: none;
+    background-color: #121212;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+#contato textarea {
+    resize: vertical;
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+    background-color: #121212;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+#contato button {
+    color: white;
+    background-color: #121212;
+    width: 10%;
+    height: 40px;
+    border: 3px solid white;
+    cursor: pointer;
+    align-items: center;
+}
 
 /* Barra de Navegação */
 .navigationBar {
