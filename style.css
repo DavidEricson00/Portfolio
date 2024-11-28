@@ -81,6 +81,7 @@ section {
     width: 100%;
 }
 
+
 /* Conteúdo Central */
 .mainSection {
     margin-left: 100px;
@@ -237,7 +238,6 @@ section {
 }
 
 /* Aprendizados */
-
 #aprendizado h1 {
     font-family: 'Inter', sans-serif;
     font-size: 50px;
@@ -336,6 +336,49 @@ section {
     border: 3px solid white;
     cursor: pointer;
 }
+
+/* Galeria */
+#galeria h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.galeria-priceChart {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.galeria-priceChart div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 5px solid white;
+    border-radius: 20px;
+    padding: 10px;
+    padding-top: 0px;
+    margin: 10px;
+    width: 250px;
+}
+
+.galeria-priceChart h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.galeria-priceChart p {
+    font-size: 15px;
+}
+
+.galeria-specialTopic {
+    text-align: center;
+}
+
 
 /* Barra de Navegação */
 .navigationBar {
