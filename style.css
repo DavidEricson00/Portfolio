@@ -379,6 +379,24 @@ section {
     text-align: center;
 }
 
+.galeria-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.galeria-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-images img:hover {
+    transform: scale(1.1);
+}
+
 
 /* Barra de Navegação */
 .navigationBar {
