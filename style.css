@@ -471,7 +471,6 @@ section {
     box-sizing: border-box;
 }
 
-
 #contato textarea {
     resize: vertical;
     border: none;
@@ -483,7 +482,6 @@ section {
     box-sizing: border-box;
 }
 
-
 #contato button {
     color: white;
     background-color: #121212;
@@ -493,6 +491,11 @@ section {
     cursor: pointer;
     align-items: center;
 }
+
+.required {
+    color: rgb(127, 0, 0);
+}
+
 
 /* Barra de Navegação */
 .navigationBar {
