@@ -95,11 +95,6 @@ section {
 }
 
 /* Introdução */
-#introducao strong {
-    font-weight: normal;
-    color: #32d3a8;
-}
-
 #introducao h1 { 
     font-family: 'Inter', sans-serif;
     font-size: 80px;
@@ -113,7 +108,6 @@ section {
 /* Historico */
 #historico h1 {
     font-family: 'Inter', sans-serif;
-    color: #32d3a8;
     font-size: 70px;
     font-weight: 400;
 }
@@ -129,30 +123,31 @@ section {
     transition: color 0.3s;
 }
 
+.historicoInfoBlock-icon {
+    font-size: 60px;
+}
+
 .historico-infoBlock {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    border: 2px solid #B3B3B3;
+    border: 3px solid white;
     border-radius: 35px;
     padding: 20px;
     margin-bottom: 20px;
-    transition: color 0.3s;
+    transition: border-color 0.3s;
 }
 
 .historico-infoBlock:hover {
     border-color: #32d3a8;
-    color: #32d3a8;
-}
-
-.historico-infoBlock:hover p {
-    color: #32d3a8 !important;
 }
 
 .historico-infoCard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    min-height: 300px;
+    height: auto;
 }
 
 .historico-infoCard div {
@@ -175,25 +170,30 @@ section {
 .historico-infoCard h2 {
     text-align: center;
     height: 25%;
+    transition: color 0.3s;
+}
+
+.historico-infoCard div:hover h2{
+    color: #32d3a8;
 }
 
 .historico-infoCard a {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #B3B3B3;
     text-align: center;
-    border: 4px solid #B3B3B3;
-    border-radius: 20px;
+    color: #121212;
     height: 70px;
     width: 200px;
-    transition: color 0.3s, transform 0.5s;
+    background-color: #32d3a8;
+    border: 4px solid #32d3a8;
+    border-radius: 50px;
+    transition: color 0.2s, background-color 0.3s;
 }
 
 .historico-infoCard a:hover {
-    border-color: #32d3a8;
+    background-color: #121212;
     color: #32d3a8;
-    transform: scale(1.05);
 }
 
 /* Interesses */
