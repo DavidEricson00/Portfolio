@@ -26,10 +26,15 @@
 <p>🚀 Para clonar e rodar o projeto, siga os passos abaixo:</p>
 <ol>
     <li>Clone o repositório:</li>
-    <pre><code>git clone https://github.com/seu-usuario/portifolio-pessoal.git</code></pre>
+    <pre><code>git clone https://github.com/DavidEricson00/Portfolio.git</code></pre>
     <li>Navegue até o diretório do projeto:</li>
-    <pre><code>cd portifolio-pessoal</code></pre>
+    <pre><code>cd Portfolio</code></pre>
     <li>Abra o arquivo <code>index.html</code> no navegador:</li>
+    <ul>
+        <li><b>Windows:</b> <code>start index.html</code></li>
+        <li><b>Linux:</b> <code>xdg-open index.html</code></li>
+        <li><b>macOS:</b> <code>open index.html</code></li>
+    </ul>
 </ol>
 
 <p>🧰 Comandos Git principais:</p>
