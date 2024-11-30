@@ -23,7 +23,7 @@
       └── assets/: Pasta contendo imagens do site.
 </pre>
 
-<p>🚀 Para clonar e rodar o projeto, siga os passos abaixo:</p>
+<h2>🚀 Para clonar e rodar o projeto, siga os passos abaixo:</h2>
 <ol>
     <li>Clone o repositório:</li>
     <pre><code>git clone https://github.com/DavidEricson00/Portfolio.git</code></pre>
@@ -37,7 +37,7 @@
     </ul>
 </ol>
 
-<p>🧰 Comandos Git principais:</p>
+<h2>🧰 Comandos Git principais:</h2>
 <ul>
     <li><strong>Clonar o repositório:</strong></li>
     <pre><code>git clone &lt;url-do-repositorio&gt;</code></pre>
