@@ -32,10 +32,6 @@ export function EducationSection() {
               <span>{educations.length} Formações</span>
             </div>
           </div>
-          <p className="home-section-subtitle">
-            Formação acadêmica em Sistemas de Informação, especializações e
-            residência técnica fullstack.
-          </p>
         </motion.header>
 
         {/* Education Cards Accordion List */}
