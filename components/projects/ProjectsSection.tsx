@@ -1,0 +1,55 @@
+"use client";
+
+import { useMemo } from "react";
+import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
+import { getFeaturedProjects } from "@/data/projects.mock";
+import { ProjectsSwiper } from "./ProjectsSwiper";
+
+export function ProjectsSection() {
+  const featuredProjects = useMemo(() => getFeaturedProjects(), []);
+
+  return (
+    <section id="projetos" className="projects-section">
+      <div className="projects-container">
+        {/* Section Header */}
+        <motion.header
+          className="projects-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="projects-eyebrow">PORTFÓLIO & TRABALHOS</p>
+
+          <div className="projects-header-main">
+            <h2 className="projects-title">Projetos em destaque</h2>
+
+            <a
+              href="#todos-os-projetos"
+              className="button button-secondary projects-view-all-btn"
+              onClick={(e) => {
+                // Prepared for future navigation to /projetos
+                e.preventDefault();
+                console.log("Navigate to all projects page");
+              }}
+            >
+              <span>Ver todos os projetos</span>
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </motion.header>
+
+        {/* Carousel / Swiper */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <ProjectsSwiper projects={featuredProjects} />
+        </motion.div>
+      </div>
+    </section>
+  );
+}

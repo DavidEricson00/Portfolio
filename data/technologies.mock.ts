@@ -304,6 +304,96 @@ export const technologies: Technology[] = [
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=ollama",
   },
+  {
+    id: "resend",
+    name: "Resend",
+    category: "ferramentas_outros",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=resend",
+  },
+  {
+    id: "pino",
+    name: "Pino",
+    category: "backend",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=nodejs",
+  },
+  {
+    id: "awslambda",
+    name: "AWS Lambda",
+    category: "cloud_devops",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=lambda",
+  },
+  {
+    id: "apigateway",
+    name: "API Gateway",
+    category: "cloud_devops",
+    iconUrl: "https://skillicons.dev/icons?i=aws",
+  },
+  {
+    id: "dynamodb",
+    name: "DynamoDB",
+    category: "banco_dados_orm",
+    iconUrl: "https://skillicons.dev/icons?i=dynamodb",
+  },
+  {
+    id: "cloudformation",
+    name: "CloudFormation",
+    category: "cloud_devops",
+    iconUrl: "https://skillicons.dev/icons?i=aws",
+  },
+  {
+    id: "cloudwatch",
+    name: "CloudWatch",
+    category: "cloud_devops",
+    iconUrl: "https://skillicons.dev/icons?i=aws",
+  },
+  {
+    id: "sns",
+    name: "SNS",
+    category: "cloud_devops",
+    iconUrl: "https://skillicons.dev/icons?i=aws",
+  },
+  {
+    id: "cicd",
+    name: "CI/CD",
+    category: "cloud_devops",
+    iconUrl: "https://skillicons.dev/icons?i=githubactions",
+  },
+  {
+    id: "zod",
+    name: "Zod",
+    category: "backend",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=zod",
+  },
+  {
+    id: "supertest",
+    name: "Supertest",
+    category: "ferramentas_outros",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=jest",
+  },
+  {
+    id: "gemini",
+    name: "Google Gemini",
+    category: "ferramentas_outros",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=gemini",
+  },
+  {
+    id: "telegram",
+    name: "Telegram Bot API",
+    category: "ferramentas_outros",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=telegram",
+  },
+  {
+    id: "socketio",
+    name: "Socket.IO",
+    category: "frontend",
+    iconUrl: "https://skillicons.dev/icons?i=socketio",
+  },
+  {
+    id: "eslint",
+    name: "ESLint",
+    category: "ferramentas_outros",
+    iconUrl: "https://skillicons.dev/icons?i=eslint",
+  },
 ];
 
 export const technologiesById = new Map<string, Technology>(
