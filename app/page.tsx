@@ -10,6 +10,7 @@ import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { SkillsSection } from "@/components/skills/SkillsSection";
 import { EducationSection } from "@/components/education/EducationSection";
 import { ContactSection } from "@/components/contact/ContactSection";
+import { SectionProgress } from "@/components/navigation/SectionProgress";
 
 export default function Home() {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -69,7 +70,9 @@ export default function Home() {
 
   return (
     <main>
-      <section className="hero">
+      <SectionProgress />
+
+      <section id="inicio" className="hero">
         <div className="hero-background" aria-hidden="true">
           <div className="hero-glow hero-glow-blue" />
           <div className="hero-glow hero-glow-purple" />
