@@ -1,32 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff4e2;
-  --surface: #fff9f0;
-
-  --foreground: #1a1c20;
-  --muted: #5f6268;
-
-  --primary: #195ffa;
-  --primary-hover: #124bd1;
-
-  --border: rgba(26, 28, 32, 0.12);
-
-  --content-width: 1200px;
-  --section-padding: 96px;
-}
-
-.dark {
-  --background: #0f1014;
-  --surface: #1a1c20;
+  --background: #0b0d12;
+  --surface: #12151c;
+  --surface-hover: #181c25;
 
   --foreground: #f5f5f5;
   --muted: #a6a8b0;
 
   --primary: #6c8cff;
   --primary-hover: #879fff;
+  --purple: #7c5cff;
 
   --border: rgba(255, 255, 255, 0.1);
+
+  --content-width: 1200px;
+  --section-padding: 96px;
 }
 
 @theme inline {
@@ -61,10 +50,6 @@ body {
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-
-  transition:
-    background-color 200ms ease,
-    color 200ms ease;
 }
 
 a {
@@ -95,6 +80,7 @@ h2,
 h3,
 h4 {
   margin: 0;
+
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -113,12 +99,477 @@ section {
   padding-block: var(--section-padding);
 }
 
-@media (max-width: 768px) {
-  :root {
-    --section-padding: 64px;
+/* Hero */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+  height: 760px;
+
+  padding-inline: 48px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 78% 50%,
+      rgba(108, 140, 255, 0.08),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 90% 85%,
+      rgba(124, 92, 255, 0.06),
+      transparent 32%
+    );
+}
+
+.hero-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+.hero-glow-blue {
+  top: 5%;
+  right: 5%;
+
+  background: #315eff;
+  opacity: 0.12;
+
+  animation: hero-glow-blue 10s ease-in-out infinite alternate;
+}
+
+.hero-glow-purple {
+  right: 30%;
+  bottom: -15%;
+
+  background: var(--purple);
+  opacity: 0.08;
+
+  animation: hero-glow-purple 12s ease-in-out infinite alternate;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(108, 140, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(108, 140, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+}
+
+.hero-content {
+  position: relative;
+
+  width: 100%;
+  max-width: var(--content-width);
+
+  margin-inline: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(500px, 0.9fr);
+
+  align-items: center;
+
+  gap: 32px;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+
+  max-width: 620px;
+}
+
+.hero-eyebrow {
+  margin-bottom: 20px;
+
+  color: var(--primary);
+
+  font-family: var(--font-geist-mono), monospace;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+}
+
+.hero h1 {
+  font-size: clamp(4rem, 8vw, 7rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -0.065em;
+}
+
+.hero h1 span {
+  color: var(--primary);
+}
+
+.hero-description {
+  max-width: 570px;
+
+  margin-top: 32px;
+
+  color: var(--muted);
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.hero-stack {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.hero-stack span {
+  padding: 6px 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: var(--muted);
+
+  font-family: var(--font-geist-mono), monospace;
+
+  font-size: 0.75rem;
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.hero-stack span:hover {
+  border-color: rgba(108, 140, 255, 0.35);
+
+  background: rgba(108, 140, 255, 0.06);
+
+  color: var(--primary);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 36px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-height: 48px;
+
+  padding: 0 20px;
+
+  border-radius: 8px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background: var(--primary);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 24px rgba(108, 140, 255, 0.12);
+}
+
+.button-primary:hover {
+  background: var(--primary-hover);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 32px rgba(108, 140, 255, 0.22);
+}
+
+.button-secondary {
+  border: 1px solid var(--border);
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: var(--foreground);
+
+  backdrop-filter: blur(8px);
+}
+
+.button-secondary:hover {
+  border-color: rgba(108, 140, 255, 0.5);
+
+  background: rgba(108, 140, 255, 0.06);
+
+  color: var(--primary);
+}
+
+/* Hero visual */
+
+.hero-visual {
+  position: relative;
+
+  height: 760px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  overflow: visible;
+}
+
+.hero-image-halo {
+  position: absolute;
+
+  z-index: 1;
+
+  width: 520px;
+  height: 520px;
+
+  left: 50%;
+  bottom: 40px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(108, 140, 255, 0.2) 0%,
+      rgba(108, 140, 255, 0.1) 28%,
+      rgba(124, 92, 255, 0.05) 50%,
+      transparent 72%
+    );
+
+  filter: blur(24px);
+
+  pointer-events: none;
+
+  animation: hero-image-halo 5s ease-in-out infinite alternate;
+}
+
+.hero-orbit {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 50%;
+  top: 48%;
+
+  border: 1px solid rgba(108, 140, 255, 0.12);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.hero-orbit-one {
+  width: 600px;
+  height: 210px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-18deg);
+}
+
+.hero-orbit-two {
+  width: 680px;
+  height: 250px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(35deg);
+
+  opacity: 0.45;
+}
+
+.hero-image-wrapper {
+  position: absolute;
+
+  z-index: 3;
+
+  width: 768px;
+  height: 768px;
+
+  left: 50%;
+  bottom: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  transform:
+    translateX(-50%)
+    scale(1);
+
+  transform-origin: center bottom;
+
+  animation: hero-breathe 5s ease-in-out infinite alternate;
+
+  transition: filter 250ms ease;
+}
+
+.hero-image-wrapper:hover {
+  filter:
+    drop-shadow(0 0 20px rgba(108, 140, 255, 0.2))
+    drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35));
+}
+
+.hero-image {
+  display: block;
+
+  width: 768px;
+  height: 768px;
+
+  max-width: none;
+
+  object-fit: contain;
+
+  image-rendering: pixelated;
+
+  filter:
+    drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 18px rgba(108, 140, 255, 0.08));
+
+  user-select: none;
+
+  transition:
+    opacity 150ms ease,
+    filter 250ms ease;
+}
+
+@keyframes hero-breathe {
+  from {
+    transform:
+      translateX(-50%)
+      scale(1);
   }
 
-  section {
-    width: min(100% - 32px, var(--content-width));
+  to {
+    transform:
+      translateX(-50%)
+      scale(1.025);
+  }
+}
+
+@keyframes hero-image-halo {
+  from {
+    transform:
+      translateX(-50%)
+      scale(0.94);
+
+    opacity: 0.75;
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      scale(1.06);
+
+    opacity: 1;
+  }
+}
+
+@keyframes hero-glow-blue {
+  from {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  to {
+    transform:
+      translate(-70px, 50px)
+      scale(1.12);
+  }
+}
+
+@keyframes hero-glow-purple {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(60px, -40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image-wrapper,
+  .hero-image-halo,
+  .hero-glow-blue,
+  .hero-glow-purple {
+    animation: none;
+  }
+
+  .hero-image {
+    transition: none;
   }
 }
