@@ -1,0 +1,96 @@
+/* Global Floating Header */
+
+.global-header-wrapper {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+  padding-inline: 16px;
+}
+
+.global-header-pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 6px;
+  border-radius: 9999px;
+  background: rgba(18, 21, 28, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(108, 140, 255, 0.05);
+}
+
+.global-header-list {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.global-header-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.global-header-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 150ms ease;
+  user-select: none;
+  white-space: nowrap;
+  outline: none;
+}
+
+.global-header-link:hover,
+.global-header-link:focus-visible {
+  color: #ffffff;
+}
+
+.global-header-link-active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.global-header-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(108, 140, 255, 0.16);
+  border: 1px solid rgba(108, 140, 255, 0.35);
+  z-index: 1;
+}
+
+.global-header-text {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 640px) {
+  .global-header-wrapper {
+    top: 16px;
+  }
+
+  .global-header-link {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

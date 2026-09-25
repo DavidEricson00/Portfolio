@@ -1,5 +1,6 @@
 import { contactChannels } from "@/data/contact.mock";
 import { ArrowUpRight } from "lucide-react";
+import "./footer.css";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

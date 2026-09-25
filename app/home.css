@@ -1,0 +1,116 @@
+/* Shared Structural System for Home Page */
+
+:root {
+  --home-section-padding-y: clamp(48px, 6vw, 60px);
+  --home-header-margin-bottom: 32px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --home-section-padding-y: 36px;
+    --home-header-margin-bottom: 24px;
+  }
+}
+
+/* Shared Home Section Container - Unified Horizontal Alignment */
+
+.home-section {
+  position: relative;
+  width: min(100% - 48px, var(--content-width));
+  margin-inline: auto;
+  padding-block: var(--home-section-padding-y);
+}
+
+@media (max-width: 640px) {
+  .home-section {
+    width: min(100% - 32px, 100%);
+  }
+}
+
+.home-section-container {
+  width: 100%;
+}
+
+/* Shared Section Header */
+
+.home-section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: var(--home-header-margin-bottom);
+  width: 100%;
+}
+
+.home-section-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+  width: 100%;
+}
+
+/* Shared Eyebrow Typography */
+
+.home-section-eyebrow {
+  margin: 0;
+  color: var(--primary);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Shared Section Title Typography */
+
+.home-section-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--foreground);
+  line-height: 1.1;
+}
+
+/* Shared Subtitle Description */
+
+.home-section-subtitle {
+  margin: 0;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.65;
+  max-width: 600px;
+}
+
+/* Shared Pill Badge (Count / Duration) */
+
+.home-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: rgba(108, 140, 255, 0.08);
+  border: 1px solid rgba(108, 140, 255, 0.2);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  box-shadow: 0 2px 10px rgba(108, 140, 255, 0.05);
+}
+
+.home-section-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px rgba(108, 140, 255, 0.8);
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+.home-section-badge-highlight {
+  color: #ffffff;
+  font-weight: 600;
+}

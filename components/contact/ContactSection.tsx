@@ -3,24 +3,25 @@
 import { motion } from "motion/react";
 import { ContactForm } from "./ContactForm";
 import { ContactChannels } from "./ContactChannels";
+import "./contact.css";
 
 export function ContactSection() {
   return (
-    <section id="contato" className="contact-section">
-      <div className="contact-container">
+    <section id="contato" className="home-section contact-section">
+      <div className="home-section-container">
         {/* Section Header */}
         <motion.header
-          className="contact-header"
+          className="home-section-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="contact-eyebrow">VAMOS CONVERSAR?</p>
-          <div className="contact-header-row">
-            <h2 className="contact-main-title">Contato</h2>
+          <p className="home-section-eyebrow">VAMOS CONVERSAR?</p>
+          <div className="home-section-header-row">
+            <h2 className="home-section-title">Contato</h2>
           </div>
-          <p className="contact-subtitle-desc">
+          <p className="home-section-subtitle">
             Procura alguém para desenvolver uma aplicação, API ou solução para um
             problema específico? Me conte sobre o projeto, a oportunidade ou o que você
             precisa construir.

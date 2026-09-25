@@ -38,12 +38,12 @@ export function ExperienceStats({ experiences }: ExperienceStatsProps) {
   return (
     <div
       ref={ref}
-      className="experience-duration-badge"
+      className="home-section-badge experience-duration-badge"
       aria-label={`Total de experiência: ${formatted}`}
     >
-      <span className="experience-duration-dot" aria-hidden="true" />
+      <span className="home-section-badge-dot" aria-hidden="true" />
       <span className="experience-duration-text">
-        <strong className="experience-duration-highlight">{formatted}</strong> de
+        <strong className="home-section-badge-highlight">{formatted}</strong> de
         experiência acumulada
       </span>
     </div>

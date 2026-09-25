@@ -5,25 +5,26 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { getFeaturedProjects } from "@/data/projects.mock";
 import { ProjectsSwiper } from "./ProjectsSwiper";
+import "./projects.css";
 
 export function ProjectsSection() {
   const featuredProjects = useMemo(() => getFeaturedProjects(), []);
 
   return (
-    <section id="projetos" className="projects-section">
-      <div className="projects-container">
+    <section id="projetos" className="home-section projects-section">
+      <div className="home-section-container">
         {/* Section Header */}
         <motion.header
-          className="projects-header"
+          className="home-section-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="projects-eyebrow">PORTFÓLIO & TRABALHOS</p>
+          <p className="home-section-eyebrow">PORTFÓLIO & TRABALHOS</p>
 
-          <div className="projects-header-main">
-            <h2 className="projects-title">Projetos em destaque</h2>
+          <div className="home-section-header-row">
+            <h2 className="home-section-title">Projetos em destaque</h2>
 
             <a
               href="#todos-os-projetos"

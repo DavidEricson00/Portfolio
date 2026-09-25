@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { MAIN_NAV_ROUTES } from "@/data/navigation.mock";
+import "./header.css";
 
 export function Header() {
   const pathname = usePathname();

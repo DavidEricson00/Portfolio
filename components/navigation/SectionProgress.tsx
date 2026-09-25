@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { HOME_SECTIONS } from "@/data/navigation.mock";
+import "./section-progress.css";
 
 export function SectionProgress() {
   const [activeSection, setActiveSection] = useState<string>("inicio");
@@ -34,7 +35,9 @@ export function SectionProgress() {
   }, []);
 
   useEffect(() => {
-    updateActiveSection();
+    const frameId = window.requestAnimationFrame(() => {
+      updateActiveSection();
+    });
 
     let ticking = false;
     const handleScroll = () => {
@@ -51,6 +54,7 @@ export function SectionProgress() {
     window.addEventListener("resize", updateActiveSection, { passive: true });
 
     return () => {
+      window.cancelAnimationFrame(frameId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateActiveSection);
     };

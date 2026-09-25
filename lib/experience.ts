@@ -1,4 +1,4 @@
-import type { Experience, ExperienceWithTechnologies } from "@/types/experience";
+import type { Experience } from "@/types/experience";
 
 const MONTH_NAMES_SHORT = [
   "JAN",

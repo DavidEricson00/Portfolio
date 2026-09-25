@@ -18,15 +18,8 @@ export type ProjectsSwiperProps = {
 
 export function ProjectsSwiper({ projects }: ProjectsSwiperProps) {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
-
-  const updateNavigationState = (swiper: SwiperType) => {
-    setIsBeginning(swiper.isBeginning);
-    setIsEnd(swiper.isEnd);
-  };
 
   return (
     <div className="projects-swiper-wrapper">
@@ -65,11 +58,7 @@ export function ProjectsSwiper({ projects }: ProjectsSwiperProps) {
         modules={[Navigation, Pagination, Keyboard, A11y, Autoplay]}
         onSwiper={(swiper) => {
           setSwiperInstance(swiper);
-          updateNavigationState(swiper);
         }}
-        onSlideChange={updateNavigationState}
-        onBreakpoint={updateNavigationState}
-        onResize={updateNavigationState}
         slidesPerView={1}
         slidesPerGroup={1}
         spaceBetween={16}

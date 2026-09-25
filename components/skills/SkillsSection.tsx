@@ -2,10 +2,11 @@
 
 import { useMemo } from "react";
 import { motion } from "motion/react";
-import type { TechnologyCategory, Technology } from "@/types/technology";
+import type { TechnologyCategory } from "@/types/technology";
 import { technologies } from "@/data/technologies.mock";
 import { SkillCategoryRow } from "./SkillCategoryRow";
 import { MoveHorizontal } from "lucide-react";
+import "./skills.css";
 
 const CATEGORY_ROWS: {
   category: TechnologyCategory;
@@ -20,7 +21,7 @@ const CATEGORY_ROWS: {
 
 export function SkillsSection() {
   const technologiesByCategory = useMemo(() => {
-    const map = new Map<TechnologyCategory, Technology[]>();
+    const map = new Map<TechnologyCategory, typeof technologies>();
 
     CATEGORY_ROWS.forEach(({ category }) => {
       map.set(
@@ -32,7 +33,7 @@ export function SkillsSection() {
     return map;
   }, []);
 
-  const handleSelectTechnology = (tech: Technology) => {
+  const handleSelectTechnology = () => {
     // Reusing the selection behavior (e.g. scroll to projects or filter)
     const projectsSection = document.getElementById("projetos");
     if (projectsSection) {
@@ -41,22 +42,24 @@ export function SkillsSection() {
   };
 
   return (
-    <section id="habilidades" className="skills-section">
-      <div className="skills-container">
+    <section id="habilidades" className="home-section skills-section">
+      <div className="home-section-container">
         {/* Section Header */}
         <motion.header
-          className="skills-header"
+          className="home-section-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="skills-eyebrow">STACK & DOMÍNIO TÉCNICO</p>
-          <h2 className="skills-title">Habilidades</h2>
-          <div className="projects-swiper-drag-hint" aria-hidden="true">
-            <MoveHorizontal size={15} />
-          <span>Arraste para explorar</span>
-        </div>
+          <p className="home-section-eyebrow">STACK & DOMÍNIO TÉCNICO</p>
+          <div className="home-section-header-row">
+            <h2 className="home-section-title">Habilidades</h2>
+            <div className="skills-drag-hint" aria-hidden="true">
+              <MoveHorizontal size={15} />
+              <span>Arraste para explorar</span>
+            </div>
+          </div>
         </motion.header>
 
         {/* Categories Marquee Rows */}

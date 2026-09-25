@@ -1,21 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowUpRight, Copy, Check, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { contactChannels } from "@/data/contact.mock";
 import { ContactIcon } from "./ContactIcon";
 
 export function ContactChannels() {
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const handleCopy = (id: string, text: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
   return (
     <aside className="contact-channels-container">
       {/* Availability Status Card */}
@@ -37,7 +26,6 @@ export function ContactChannels() {
 
         <div className="contact-channels-grid">
           {contactChannels.map((channel) => {
-            const isCopied = copiedId === channel.id;
 
             return (
               <a
