@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import pixelDavid from "./assets/images/pixel-david.png";
 import pixelDavidHover from "./assets/images/pixel-david-hover.png";
+import { ExperienceSection } from "@/components/experience/ExperienceSection";
 
 export default function Home() {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -129,6 +130,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ExperienceSection />
+
       <section id="sobre">
         <h2>Sobre mim</h2>
       </section>
@@ -137,9 +140,6 @@ export default function Home() {
         <h2>Projetos</h2>
       </section>
 
-      <section id="experiencia">
-        <h2>Experiência</h2>
-      </section>
 
       <section id="habilidades">
         <h2>Habilidades</h2>
