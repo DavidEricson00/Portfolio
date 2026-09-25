@@ -7,6 +7,7 @@ import pixelDavid from "./assets/images/pixel-david.png";
 import pixelDavidHover from "./assets/images/pixel-david-hover.png";
 import { ExperienceSection } from "@/components/experience/ExperienceSection";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
+import { SkillsSection } from "@/components/skills/SkillsSection";
 
 export default function Home() {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -136,9 +137,7 @@ export default function Home() {
       <ProjectsSection />
 
 
-      <section id="habilidades">
-        <h2>Habilidades</h2>
-      </section>
+      <SkillsSection />
 
       <section id="formacao">
         <h2>Formação</h2>
