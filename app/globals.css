@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff4e2;
+  --surface: #fff9f0;
+
+  --foreground: #1a1c20;
+  --muted: #5f6268;
+
+  --primary: #195ffa;
+  --primary-hover: #124bd1;
+
+  --border: rgba(26, 28, 32, 0.12);
+
+  --content-width: 1200px;
+  --section-padding: 96px;
+}
+
+.dark {
+  --background: #0f1014;
+  --surface: #1a1c20;
+
+  --foreground: #f5f5f5;
+  --muted: #a6a8b0;
+
+  --primary: #6c8cff;
+  --primary-hover: #879fff;
+
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-border: var(--border);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
+  min-height: 100vh;
+
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-geist-sans), sans-serif;
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+
+  transition:
+    color 150ms ease,
+    opacity 150ms ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+p {
+  margin: 0;
+}
+
+main {
+  width: 100%;
+}
+
+section {
+  width: min(100% - 48px, var(--content-width));
+  margin-inline: auto;
+  padding-block: var(--section-padding);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 64px;
+  }
+
+  section {
+    width: min(100% - 32px, var(--content-width));
+  }
 }
