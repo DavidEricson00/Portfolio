@@ -93,7 +93,7 @@
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  user-select: none;
+  /* user-select: none; */
   outline: none;
   transition:
     border-color 200ms ease,

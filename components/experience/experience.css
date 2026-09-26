@@ -214,10 +214,9 @@
   color: #cbd5e1;
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.74rem;
-  cursor: default;
+  cursor: pointer;
   outline: none;
   transition: all 150ms ease;
-  user-select: none;
 }
 
 .tech-pill:hover,
