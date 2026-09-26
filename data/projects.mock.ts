@@ -43,6 +43,7 @@ export const projects: Project[] = [
     screenshots: [],
     featured: true,
     featuredOrder: 1,
+    ranking: 100,
   },
   {
     id: "linkshortener",
@@ -79,6 +80,7 @@ export const projects: Project[] = [
     screenshots: [],
     featured: true,
     featuredOrder: 2,
+    ranking: 90,
   },
   {
     id: "supportdesk",
@@ -127,6 +129,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     featuredOrder: 3,
+    ranking: 85,
   },
   {
     id: "pedeai",
@@ -164,6 +167,7 @@ export const projects: Project[] = [
     screenshots: ["https://i.imgur.com/FiRIJcS.png"],
     featured: true,
     featuredOrder: 4,
+    ranking: 80,
   },
   {
     id: "dialogo",
@@ -200,6 +204,7 @@ export const projects: Project[] = [
       "https://github.com/user-attachments/assets/bfd731cf-2ed8-4a61-b430-4c567eb59120",
     ],
     featured: false,
+    ranking: 75,
   },
 ];
 
@@ -213,10 +218,10 @@ export function getFeaturedProjects(): Project[] {
 }
 
 /**
- * Returns all projects
+ * Returns all projects sorted by ranking in descending order (highest ranking first)
  */
 export function getAllProjects(): Project[] {
-  return projects;
+  return [...projects].sort((a, b) => (b.ranking ?? 0) - (a.ranking ?? 0));
 }
 
 /**
@@ -224,4 +229,19 @@ export function getAllProjects(): Project[] {
  */
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
+}
+
+/**
+ * Returns unique technologies used in any registered project
+ */
+export function getAvailableProjectTechnologies() {
+  const map = new Map<string, (typeof projects)[0]["technologies"][0]>();
+  for (const proj of projects) {
+    for (const tech of proj.technologies) {
+      if (!map.has(tech.id)) {
+        map.set(tech.id, tech);
+      }
+    }
+  }
+  return Array.from(map.values());
 }

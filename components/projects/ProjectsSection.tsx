@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { motion } from "motion/react";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getFeaturedProjects } from "@/data/projects.mock";
 import { ProjectsSwiper } from "./ProjectsSwiper";
@@ -26,18 +27,13 @@ export function ProjectsSection() {
           <div className="home-section-header-row">
             <h2 className="home-section-title">Projetos em destaque</h2>
 
-            <a
-              href="#todos-os-projetos"
+            <Link
+              href="/projetos"
               className="button button-secondary projects-view-all-btn"
-              onClick={(e) => {
-                // Prepared for future navigation to /projetos
-                e.preventDefault();
-                console.log("Navigate to all projects page");
-              }}
             >
               <span>Ver todos os projetos</span>
               <ArrowRight size={16} />
-            </a>
+            </Link>
           </div>
         </motion.header>
 

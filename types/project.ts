@@ -16,4 +16,5 @@ export type Project = {
   architecture?: string;
   featured: boolean;
   featuredOrder?: number;
+  ranking?: number;
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import type { Technology } from "@/types/technology";
 import { technologyCategoryConfig } from "@/types/technology";
 
@@ -9,23 +10,30 @@ export type SkillItemProps = {
 };
 
 export function SkillItem({ technology, onClick }: SkillItemProps) {
+  const router = useRouter();
   const config = technologyCategoryConfig[technology.category];
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onClick) {
+      onClick(technology);
+    } else {
+      router.push(`/projetos?tech=${encodeURIComponent(technology.id)}`);
+    }
+  };
 
   return (
     <button
       type="button"
       className="skill-item"
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick?.(technology);
-      }}
+      onClick={handleClick}
       title={`Ver projetos com ${technology.name}`}
       aria-label={technology.name}
       style={
         {
           "--tech-accent": config?.accentColor ?? "var(--primary)",
           "--tech-hover-border":
-            config?.hoverBorder ?? "rgba(108, 140, 255, 0.4)",
+            config?.hoverBorder ?? "rgba(108, 140, 255, 0.45)",
           "--tech-hover-bg": config?.hoverBg ?? "rgba(108, 140, 255, 0.1)",
         } as React.CSSProperties
       }

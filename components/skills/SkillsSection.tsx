@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import { motion } from "motion/react";
-import type { TechnologyCategory } from "@/types/technology";
+import { useRouter } from "next/navigation";
+import type { Technology, TechnologyCategory } from "@/types/technology";
 import { technologies } from "@/data/technologies.mock";
 import { SkillCategoryRow } from "./SkillCategoryRow";
 import { MoveHorizontal } from "lucide-react";
@@ -20,6 +21,7 @@ const CATEGORY_ROWS: {
 ];
 
 export function SkillsSection() {
+  const router = useRouter();
   const technologiesByCategory = useMemo(() => {
     const map = new Map<TechnologyCategory, typeof technologies>();
 
@@ -33,12 +35,8 @@ export function SkillsSection() {
     return map;
   }, []);
 
-  const handleSelectTechnology = () => {
-    // Reusing the selection behavior (e.g. scroll to projects or filter)
-    const projectsSection = document.getElementById("projetos");
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleSelectTechnology = (tech: Technology) => {
+    router.push(`/projetos?tech=${encodeURIComponent(tech.id)}`);
   };
 
   return (
