@@ -28,8 +28,8 @@ export function TechnologyPill({ technology, onClick }: TechnologyPillProps) {
       type="button"
       className="tech-pill"
       onClick={handleClick}
-      whileHover={{ y: -2, scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ y: -1, scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
       title={`Ver projetos com ${technology.name}`}
       style={
         {

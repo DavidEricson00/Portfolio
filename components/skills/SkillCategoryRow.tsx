@@ -12,6 +12,8 @@ export type SkillCategoryRowProps = {
   onSelectTechnology?: (technology: Technology) => void;
 };
 
+export type GetHasDragged = () => boolean;
+
 export function SkillCategoryRow({
   category,
   technologies,
@@ -24,14 +26,15 @@ export function SkillCategoryRow({
 
   const [isHovered, setIsHovered] = useState(false);
   const isDraggingRef = useRef(false);
+  const hasDraggedRef = useRef(false); 
 
   const posRef = useRef(0);
   const singleSetWidthRef = useRef(0);
   const animationFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
   const lastPointerXRef = useRef(0);
+  const pointerDownXRef = useRef(0); 
 
-  // Measure single set width
   const updateMetrics = useCallback(() => {
     if (singleSetRef.current) {
       const width = singleSetRef.current.offsetWidth;
@@ -47,28 +50,23 @@ export function SkillCategoryRow({
     return () => window.removeEventListener("resize", updateMetrics);
   }, [updateMetrics, technologies]);
 
-  // Set initial position for left-to-right so it starts within the negative range
   useEffect(() => {
     if (direction === "left-to-right" && singleSetWidthRef.current > 0) {
       posRef.current = -singleSetWidthRef.current / 2;
     }
   }, [direction]);
 
-  // Continuous Animation Loop
   useEffect(() => {
-    const speedPxPerSec = 28; // Constant, smooth speed
+    const speedPxPerSec = 28;
 
     const animate = (time: number) => {
       if (lastTimeRef.current !== null) {
         const deltaSec = Math.min((time - lastTimeRef.current) / 1000, 0.1);
-
-        // Auto move when not hovered and not currently dragging
         const shouldAutoMove = !isHovered && !isDraggingRef.current;
 
         if (shouldAutoMove) {
           const moveDelta =
-            (direction === "left-to-right" ? speedPxPerSec : -speedPxPerSec) *
-            deltaSec;
+            (direction === "left-to-right" ? speedPxPerSec : -speedPxPerSec) * deltaSec;
           posRef.current += moveDelta;
         }
 
@@ -99,28 +97,38 @@ export function SkillCategoryRow({
     };
   }, [direction, isHovered]);
 
-  // Pointer drag handlers
+  // Pointer drag handlers atualizados
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.button !== 0) return;
     isDraggingRef.current = true;
+    hasDraggedRef.current = false;
     lastPointerXRef.current = e.clientX;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    pointerDownXRef.current = e.clientX;
+    // Removido setPointerCapture para permitir que os cliques fluam para os botões filhos
   };
+
+  const DRAG_THRESHOLD_PX = 4;
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDraggingRef.current) return;
+    e.preventDefault(); // Impede seleção de texto acidental enquanto arrasta
+    
     const deltaX = e.clientX - lastPointerXRef.current;
     lastPointerXRef.current = e.clientX;
+
+    if (!hasDraggedRef.current) {
+      const totalDelta = Math.abs(e.clientX - pointerDownXRef.current);
+      if (totalDelta >= DRAG_THRESHOLD_PX) {
+        hasDraggedRef.current = true;
+      }
+    }
 
     posRef.current += deltaX;
 
     const singleWidth = singleSetWidthRef.current;
     if (singleWidth > 0) {
-      if (posRef.current <= -singleWidth) {
-        posRef.current += singleWidth;
-      } else if (posRef.current >= 0) {
-        posRef.current -= singleWidth;
-      }
+      if (posRef.current <= -singleWidth) posRef.current += singleWidth;
+      else if (posRef.current >= 0) posRef.current -= singleWidth;
     }
 
     if (trackRef.current) {
@@ -128,14 +136,22 @@ export function SkillCategoryRow({
     }
   };
 
-  const handlePointerUpOrCancel = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (isDraggingRef.current) {
-      isDraggingRef.current = false;
-      try {
-        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-      } catch {
-        // Ignore
-      }
+  const handlePointerUpOrCancel = () => {
+    isDraggingRef.current = false;
+  };
+
+  const getHasDragged = useCallback(() => {
+    const was = hasDraggedRef.current;
+    if (was) hasDraggedRef.current = false;
+    return was;
+  }, []);
+
+  // Usa onClickCapture (Fase de Captura) para barrar o clique de descer pro botão se tiver arrastado
+  const handleClickCapture = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (hasDraggedRef.current) {
+      e.stopPropagation();
+      e.preventDefault();
+      hasDraggedRef.current = false;
     }
   };
 
@@ -144,13 +160,8 @@ export function SkillCategoryRow({
       className="skill-category-row"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={
-        {
-          "--row-accent": config?.accentColor ?? "var(--primary)",
-        } as React.CSSProperties
-      }
+      style={{ "--row-accent": config?.accentColor ?? "var(--primary)" } as React.CSSProperties}
     >
-      {/* Category Header with Title and Count Badge */}
       <div className="skill-category-header">
         <div className="skill-category-title-group">
           <span className="skill-category-dot" aria-hidden="true" />
@@ -159,62 +170,36 @@ export function SkillCategoryRow({
         </div>
       </div>
 
-      {/* Marquee Viewport & Track */}
       <div
         className="skill-marquee-viewport"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUpOrCancel}
         onPointerCancel={handlePointerUpOrCancel}
+        onPointerLeave={handlePointerUpOrCancel} // Cancela o drag se o mouse sair da faixa
+        onClickCapture={handleClickCapture} // Substitui onClick normal por capture
       >
-        {/* Left and Right Fade Gradients */}
         <div className="skill-fade-mask skill-fade-left" aria-hidden="true" />
         <div className="skill-fade-mask skill-fade-right" aria-hidden="true" />
 
         <div ref={trackRef} className="skill-marquee-track">
-          {/* Set 1 (measured) */}
-          <div ref={singleSetRef} className="skill-set">
-            {technologies.map((tech) => (
-              <SkillItem
-                key={`${tech.id}-1`}
-                technology={tech}
-                onClick={onSelectTechnology}
-              />
-            ))}
-          </div>
-
-          {/* Set 2 */}
-          <div className="skill-set" aria-hidden="true">
-            {technologies.map((tech) => (
-              <SkillItem
-                key={`${tech.id}-2`}
-                technology={tech}
-                onClick={onSelectTechnology}
-              />
-            ))}
-          </div>
-
-          {/* Set 3 */}
-          <div className="skill-set" aria-hidden="true">
-            {technologies.map((tech) => (
-              <SkillItem
-                key={`${tech.id}-3`}
-                technology={tech}
-                onClick={onSelectTechnology}
-              />
-            ))}
-          </div>
-
-          {/* Set 4 */}
-          <div className="skill-set" aria-hidden="true">
-            {technologies.map((tech) => (
-              <SkillItem
-                key={`${tech.id}-4`}
-                technology={tech}
-                onClick={onSelectTechnology}
-              />
-            ))}
-          </div>
+          {[1, 2, 3, 4].map((setNum) => (
+            <div
+              key={setNum}
+              ref={setNum === 1 ? singleSetRef : null}
+              className="skill-set"
+              aria-hidden={setNum !== 1 ? "true" : undefined}
+            >
+              {technologies.map((tech) => (
+                <SkillItem
+                  key={`${tech.id}-${setNum}`}
+                  technology={tech}
+                  onClick={onSelectTechnology}
+                  getHasDragged={getHasDragged}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>

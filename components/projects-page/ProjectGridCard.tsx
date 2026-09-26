@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+
+
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
 import { technologyCategoryConfig } from "@/types/technology";
@@ -39,12 +40,7 @@ export function ProjectGridCard({
   };
 
   return (
-    <motion.article
-      layout="position"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+    <article
       className="project-grid-card"
       onClick={handleCardClick}
       role="button"
@@ -142,7 +138,7 @@ export function ProjectGridCard({
         {/* Tech Stack Badges */}
         <div className="project-grid-card-tech">
           <div className="project-grid-tech-list">
-            {project.technologies.slice(0, 6).map((tech) => {
+            {project.technologies.slice(0, 8).map((tech) => {
               const cfg = technologyCategoryConfig[tech.category];
               return (
                 <button
@@ -188,6 +184,6 @@ export function ProjectGridCard({
           </div>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

@@ -45,10 +45,10 @@ export function SkillsSection() {
         {/* Section Header */}
         <motion.header
           className="home-section-header"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <p className="home-section-eyebrow">STACK & DOMÍNIO TÉCNICO</p>
           <div className="home-section-header-row">
@@ -63,10 +63,10 @@ export function SkillsSection() {
         {/* Categories Marquee Rows */}
         <motion.div
           className="skills-rows-wrapper"
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {CATEGORY_ROWS.map(({ category, direction }) => {
             const list = technologiesByCategory.get(category) ?? [];

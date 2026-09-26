@@ -7,14 +7,22 @@ import { technologyCategoryConfig } from "@/types/technology";
 export type SkillItemProps = {
   technology: Technology;
   onClick?: (technology: Technology) => void;
+  /** Retorna true se o marquee está num estado de drag — evita navegação acidental */
+  getHasDragged?: () => boolean;
 };
 
-export function SkillItem({ technology, onClick }: SkillItemProps) {
+export function SkillItem({ technology, onClick, getHasDragged }: SkillItemProps) {
   const router = useRouter();
   const config = technologyCategoryConfig[technology.category];
 
   const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+    // Aborta o clique se o usuário estava arrastando o marquee
+    if (getHasDragged?.()) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
     if (onClick) {
       onClick(technology);
     } else {
@@ -32,8 +40,7 @@ export function SkillItem({ technology, onClick }: SkillItemProps) {
       style={
         {
           "--tech-accent": config?.accentColor ?? "var(--primary)",
-          "--tech-hover-border":
-            config?.hoverBorder ?? "rgba(108, 140, 255, 0.45)",
+          "--tech-hover-border": config?.hoverBorder ?? "rgba(108, 140, 255, 0.45)",
           "--tech-hover-bg": config?.hoverBg ?? "rgba(108, 140, 255, 0.1)",
         } as React.CSSProperties
       }
@@ -47,6 +54,7 @@ export function SkillItem({ technology, onClick }: SkillItemProps) {
           loading="lazy"
           width={32}
           height={32}
+          draggable={false} // IMPORTANTE: Impede o arrasto nativo da imagem no navegador
         />
       </div>
     </button>

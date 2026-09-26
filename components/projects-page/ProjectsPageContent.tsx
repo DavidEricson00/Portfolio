@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { getAllProjects, getAvailableProjectTechnologies } from "@/data/projects.mock";
+import { getAllProjects } from "@/data/projects.mock";
+import { technologies } from "@/data/technologies.mock";
 import { ProjectsHeader } from "./ProjectsHeader";
 import { ProjectSearch } from "./ProjectSearch";
 import { TechnologyFilterGroup } from "./TechnologyFilterGroup";
@@ -14,44 +15,36 @@ export function ProjectsPageContent() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // All projects sorted by ranking descending
   const allProjects = useMemo(() => getAllProjects(), []);
-  const availableTechnologies = useMemo(() => getAvailableProjectTechnologies(), []);
+  const availableTechnologies = technologies;
 
-  // Initialize filters from search params
-  const initialTechs = useMemo(() => {
+  // 1. Inicializamos o estado lendo diretamente a URL no primeiro load
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get("q") || "");
+  const [selectedTechIds, setSelectedTechIds] = useState<string[]>(() => {
     const techParam = searchParams.get("tech");
     if (!techParam) return [];
-    return techParam
-      .split(",")
-      .map((t) => t.trim().toLowerCase())
-      .filter(Boolean);
-  }, [searchParams]);
+    return techParam.split(",").map((t) => t.trim().toLowerCase()).filter(Boolean);
+  });
 
-  const initialSearch = useMemo(() => {
-    return searchParams.get("q") || "";
-  }, [searchParams]);
+  // 2. Estado para guardar a URL anterior e detectar navegações externas (botões de voltar/avançar do navegador)
+  const [prevSearch, setPrevSearch] = useState(searchParams.toString());
 
-  const [searchQuery, setSearchQuery] = useState(initialSearch);
-  const [selectedTechIds, setSelectedTechIds] = useState<string[]>(initialTechs);
-
-  // Sync state when URL searchParams change (e.g. from back/forward navigation or clicking external link)
-  useEffect(() => {
+  // 3. Atualizamos o estado DURANTE a renderização (Padrão recomendado pelo React para substituir o useEffect)
+  if (searchParams.toString() !== prevSearch) {
+    setPrevSearch(searchParams.toString());
+    
     const techParam = searchParams.get("tech");
     const qParam = searchParams.get("q") || "";
 
     if (techParam) {
-      const parsed = techParam
-        .split(",")
-        .map((t) => t.trim().toLowerCase())
-        .filter(Boolean);
+      const parsed = techParam.split(",").map((t) => t.trim().toLowerCase()).filter(Boolean);
       setSelectedTechIds(parsed);
     } else {
       setSelectedTechIds([]);
     }
-
+    
     setSearchQuery(qParam);
-  }, [searchParams]);
+  }
 
   // Update URL search params when filters change without reload
   const syncUrlParams = useCallback(
@@ -73,13 +66,11 @@ export function ProjectsPageContent() {
     [pathname]
   );
 
-  // Handler for search change
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
     syncUrlParams(query, selectedTechIds);
   };
 
-  // Handler for toggling a tech filter
   const handleToggleTech = (techId: string) => {
     const nextTechs = selectedTechIds.includes(techId)
       ? selectedTechIds.filter((id) => id !== techId)
@@ -89,25 +80,21 @@ export function ProjectsPageContent() {
     syncUrlParams(searchQuery, nextTechs);
   };
 
-  // Handler for clearing all filters
   const handleClearFilters = () => {
     setSearchQuery("");
     setSelectedTechIds([]);
     router.replace(pathname, { scroll: false });
   };
 
-  // Filter projects based on search query (case-insensitive name) and selected technologies (AND condition)
   const filteredProjects = useMemo(() => {
     const trimmedQuery = searchQuery.trim().toLowerCase();
 
     return allProjects.filter((project) => {
-      // Name match
       const matchesSearch =
         !trimmedQuery || project.name.toLowerCase().includes(trimmedQuery);
 
       if (!matchesSearch) return false;
 
-      // Technology match (must have ALL selected technologies)
       if (selectedTechIds.length > 0) {
         const projectTechIds = new Set(project.technologies.map((t) => t.id));
         const hasAllSelectedTechs = selectedTechIds.every((id) =>
@@ -124,16 +111,13 @@ export function ProjectsPageContent() {
 
   return (
     <main className="projects-page-container">
-      {/* Page Header */}
       <ProjectsHeader />
 
-      {/* Search Bar */}
       <ProjectSearch
         value={searchQuery}
         onChange={handleSearchChange}
       />
 
-      {/* Technology Filters */}
       <TechnologyFilterGroup
         availableTechnologies={availableTechnologies}
         selectedTechIds={selectedTechIds}
@@ -142,7 +126,6 @@ export function ProjectsPageContent() {
         hasActiveFilters={hasActiveFilters}
       />
 
-      {/* Results Count Bar */}
       <div className="projects-results-bar">
         <span className="projects-results-count">
           {hasActiveFilters ? (
@@ -159,7 +142,6 @@ export function ProjectsPageContent() {
         </span>
       </div>
 
-      {/* Projects Grid or Empty State */}
       <ProjectGrid
         projects={filteredProjects}
         searchQuery={searchQuery}

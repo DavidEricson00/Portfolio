@@ -144,7 +144,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               className="project-tech-list"
               onClick={(e) => e.stopPropagation()}
             >
-              {project.technologies.slice(0, 7).map((tech) => (
+              {project.technologies.slice(0, 8).map((tech) => (
                 <TechnologyPill key={tech.id} technology={tech} />
               ))}
               {project.technologies.length > 7 && (

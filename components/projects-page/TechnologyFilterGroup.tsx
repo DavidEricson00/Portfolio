@@ -51,17 +51,18 @@ export function TechnologyFilterGroup({
           )}
         </div>
 
-        {hasActiveFilters && (
-          <button
-            type="button"
-            className="technology-filters-clear-btn"
-            onClick={onClearFilters}
-            aria-label="Limpar todos os filtros"
-          >
-            <RotateCcw size={13} />
-            <span>Limpar filtros</span>
-          </button>
-        )}
+        <button
+          type="button"
+          className="technology-filters-clear-btn"
+          onClick={onClearFilters}
+          aria-label="Limpar todos os filtros"
+          aria-hidden={!hasActiveFilters}
+          tabIndex={hasActiveFilters ? 0 : -1}
+          style={{ visibility: hasActiveFilters ? "visible" : "hidden" }}
+        >
+          <RotateCcw size={13} />
+          <span>Limpar filtros</span>
+        </button>
       </div>
 
       <div className="technology-filters-pills-wrap">
