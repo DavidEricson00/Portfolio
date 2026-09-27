@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { motion } from "motion/react";
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
@@ -30,11 +31,11 @@ export type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleCardClick = () => {
-    // Prepared for future navigation by slug
-    console.log(`Navigate to project: /projetos/${project.slug}`);
+    router.push(`/projetos/${project.slug}`);
   };
 
   return (

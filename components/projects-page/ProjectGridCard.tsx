@@ -2,6 +2,7 @@
 
 
 
+import { useRouter } from "next/navigation";
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
 import { technologyCategoryConfig } from "@/types/technology";
@@ -34,9 +35,10 @@ export function ProjectGridCard({
   project,
   onSelectTechnology,
 }: ProjectGridCardProps) {
+  const router = useRouter();
+
   const handleCardClick = () => {
-    // Prepared for future navigation to project details page: /projetos/[slug]
-    console.log(`Navigate to project: /projetos/${project.slug}`);
+    router.push(`/projetos/${project.slug}`);
   };
 
   return (
