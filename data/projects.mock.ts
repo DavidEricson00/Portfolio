@@ -18,6 +18,8 @@ export const projects: Project[] = [
     summary:
       "Plataforma de newsletters construída com NestJS e microsserviços, utilizando RabbitMQ para processamento assíncrono, rastreamento idempotente de entregas e tratamento resiliente de falhas.",
     technologies: resolveTech([
+      "git",
+      "github",
       "nodejs",
       "typescript",
       "nestjs",
@@ -31,6 +33,9 @@ export const projects: Project[] = [
       "resend",
       "jest",
       "docker",
+      "eslint",
+      "sqlite",
+  "prettier",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/LetterDrop",
     featured: true,
@@ -191,7 +196,10 @@ export const projects: Project[] = [
       "IAM com princípio do menor privilégio",
     ],
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
+      "aws",
       "awslambda",
       "apigateway",
       "dynamodb",
@@ -200,6 +208,7 @@ export const projects: Project[] = [
       "githubactions",
       "cloudwatch",
       "sns",
+      "pytest",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/LinkShortener",
     liveUrl:
@@ -360,6 +369,8 @@ Além da implementação das funções, foram trabalhados:
       "NGINX como reverse proxy",
     ],
     technologies: resolveTech([
+      "git",
+      "github",
       "nodejs",
       "express",
       "typescript",
@@ -371,10 +382,12 @@ Além da implementação das funções, foram trabalhados:
       "supertest",
       "react",
       "vite",
-      "reactquery",
+      "tanstackquery",
+      "bcrypt",
       "axios",
       "docker",
       "nginx",
+      "reactrouter",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/SupportDesk",
     coverImage: "https://i.imgur.com/zPxxCk0.png",
@@ -565,6 +578,8 @@ Entre os principais aprendizados estão:
       "Docker Compose",
     ],
     technologies: resolveTech([
+      "git",
+      "github",
       "nodejs",
       "express",
       "postgresql",
@@ -574,6 +589,8 @@ Entre os principais aprendizados estão:
       "gemini",
       "telegram",
       "swagger",
+      "axios",
+      "ngrok",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/PedeAi",
     coverImage: "https://i.imgur.com/FiRIJcS.png",
@@ -761,11 +778,16 @@ O projeto permitiu aprofundar:
       "Interface baseada em Telegram",
     ],
     technologies: resolveTech([
+      "git",
+      "github",
       "nodejs",
       "typescript",
       "gemini",
       "telegram",
       "zod",
+      "googlecalendar",
+      "googleapis",
+      "datefns",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/AgendaIA",
     featured: true,
@@ -909,6 +931,8 @@ Os principais conceitos explorados foram:
     coverImage:
       "https://github.com/user-attachments/assets/fe3386d4-5ebe-4bc8-adfa-58f7f1234167",
     technologies: resolveTech([
+      "git",
+      "github",
       "nodejs",
       "express",
       "typescript",
@@ -919,6 +943,7 @@ Os principais conceitos explorados foram:
       "socketio",
       "jwt",
       "bcrypt",
+      "eslint",
       "reactrouter",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/DialoGO-Frontend",
@@ -1060,6 +1085,8 @@ Os principais conceitos explorados foram:
       "Projeto estático executado diretamente no navegador",
     ],
     technologies: resolveTech([
+      "git",
+      "github",
       "javascript",
       "html5",
       "css3",
@@ -1187,6 +1214,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Plataforma fullstack de gerenciamento de projetos e atividades, desenvolvida para explorar o ecossistema Laravel com autenticação, controle de acesso, relacionamentos Eloquent e tarefas agendadas.",
     coverImage: "https://i.imgur.com/mmkglfF.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "laravel",
       "php",
       "react",
@@ -1197,6 +1226,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "reactrouter",
       "zustand",
       "mysql",
+      "reactrouter",
+      "sanctum"
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/TeamUP",
     featured: false,
@@ -1315,6 +1346,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Chatbot de FAQ para Telegram construído com n8n e Ollama, explorando integração de LLM local, contexto empresarial e workflows automatizados sem inferência em nuvem.",
     coverImage: "https://i.imgur.com/oRnQ0Fo.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "n8n",
       "ollama",
       "docker",
@@ -1432,6 +1465,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Bot para Discord que permite criar enquetes diretamente dentro de servidores utilizando comandos slash e o sistema nativo de polls da plataforma.",
     technologies: resolveTech([
+      "git",
+      "github",
       "nodejs",
       "discordjs",
     ]),
@@ -1508,6 +1543,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Blog minimalista desenvolvido em PHP para explorar fundamentos da linguagem, deploy automatizado, cache de assets e publicação em hospedagem compartilhada.",
     technologies: resolveTech([
+      "git",
+      "github",
       "php",
       "html5",
       "css3",
@@ -1591,6 +1628,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Aplicação de chat via terminal desenvolvida em Python para estudar sockets TCP, arquitetura cliente-servidor, comunicação em tempo real e múltiplos clientes com threads.",
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/TalkShell",
@@ -1696,6 +1735,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Aplicação de notas adesivas com frontend em Next.js e backend em Spring Boot, combinando uma interface moderna com uma API REST estruturada em camadas.",
     coverImage: "https://i.imgur.com/H2ajzWa.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "nextjs",
       "react",
       "typescript",
@@ -1821,6 +1862,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Ferramenta de linha de comando para baixar vídeos e extrair áudios do YouTube, com suporte a playlists e diretórios personalizados.",
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
       "ytdlp",
       "ffmpeg",
@@ -1889,6 +1932,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Aplicação web de gerenciamento de contatos desenvolvida em PHP, com CRUD completo e persistência em MySQL.",
     coverImage: "https://i.imgur.com/tz7FABM.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "php",
       "mysql",
       "bootstrap",
@@ -1954,6 +1999,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Aplicação de linha de comando em Java para cadastro e validação de usuários, com exceções personalizadas e persistência em arquivo.",
     technologies: resolveTech([
+      "git",
+      "github",
       "java",
     ]),
     repositoryUrl:
@@ -1999,6 +2046,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Calculadora web desenvolvida com HTML, CSS e JavaScript para praticar interfaces dinâmicas e manipulação do DOM.",
     technologies: resolveTech([
+      "git",
+      "github",
       "html5",
       "css3",
       "javascript",
@@ -2055,6 +2104,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Simulador de batalhas em Java desenvolvido para estudar orientação a objetos, classes, regras de combate e composição de sistemas.",
     coverImage: "https://imgur.com/txKsYRt.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "java",
     ]),
     repositoryUrl:
@@ -2113,6 +2164,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Aplicação de linha de comando para montagem de hambúrgueres, criada para praticar Factory Methods e conceitos fundamentais de Java.",
     technologies: resolveTech([
+      "git",
+      "github",
       "java",
     ]),
     repositoryUrl:
@@ -2165,6 +2218,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Jogo de forca em Python com modos jogador contra jogador e jogador contra máquina.",
     coverImage: "https://i.imgur.com/05lZqFr.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
     ]),
     repositoryUrl:
@@ -2218,6 +2273,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Jogo da velha em Python com modos jogador contra jogador e jogador contra computador.",
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
     ]),
     repositoryUrl:
@@ -2270,6 +2327,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "Jogo endless runner desenvolvido em Python com Pygame, com combate, obstáculos, animações, pontuação e sistema de áudio.",
     coverImage: "https://i.imgur.com/oO4y9DF.png",
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
       "pygame",
     ]),
@@ -2333,6 +2392,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Calculadora de terminal desenvolvida em C para praticar funções, entrada de dados e estruturas de controle.",
     technologies: resolveTech([
+      "git",
+      "github",
       "c",
     ]),
     repositoryUrl:
@@ -2383,6 +2444,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Sistema de mercado em Python com gerenciamento de produtos, carrinho de compras e persistência em SQLite.",
     technologies: resolveTech([
+      "git",
+      "github",
       "python",
       "sqlite",
     ]),
@@ -2436,6 +2499,8 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
     summary:
       "Plataforma de experiências desenvolvida em equipe, com marketplace de eventos, autenticação, gerenciamento de tickets e API REST integrada ao frontend.",
     technologies: resolveTech([
+      "git",
+      "github",
       "react",
       "typescript",
       "vite",
@@ -2455,6 +2520,10 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "supertest",
       "github",
       "githubactions",
+      "eslint",
+      "prettier",
+      "reactrouter",
+      "bcrypt",
     ]),
     repositoryUrl:
       "https://github.com/vivereTeam/vivere-front",

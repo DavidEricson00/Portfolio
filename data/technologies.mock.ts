@@ -42,7 +42,7 @@ export const technologies: Technology[] = [
     name: "Python",
     category: "backend",
     iconUrl: "https://skillicons.dev/icons?i=python",
-    featured: true,
+    featured: false,
   },
   {
     id: "java",
@@ -128,21 +128,21 @@ export const technologies: Technology[] = [
     name: "React Router",
     category: "frontend",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=reactrouter",
-    featured: false,
+    featured: true,
   },
   {
     id: "html5",
     name: "HTML5",
     category: "frontend",
     iconUrl: "https://skillicons.dev/icons?i=html",
-    featured: false,
+    featured: true,
   },
   {
     id: "css3",
     name: "CSS3",
     category: "frontend",
     iconUrl: "https://skillicons.dev/icons?i=css",
-    featured: false,
+    featured: true,
   },
   {
     id: "zustand",
@@ -242,7 +242,7 @@ export const technologies: Technology[] = [
     name: "Supabase",
     category: "banco_dados_orm",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=supabase",
-    featured: false,
+    featured: true,
   },
 
   // Nuvem & DevOps
@@ -323,14 +323,14 @@ export const technologies: Technology[] = [
     name: "Google Gemini",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=gemini",
-    featured: false,
+    featured: true,
   },
   {
     id: "electron",
     name: "Electron",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=electron",
-    featured: true,
+    featured: false,
   },
   {
     id: "jest",
@@ -344,7 +344,7 @@ export const technologies: Technology[] = [
     name: "Supertest",
     category: "ferramentas_outros",
     iconUrl: "https://skillicons.dev/icons?i=jest",
-    featured: false,
+    featured: true,
   },
   {
     id: "postman",
@@ -358,42 +358,42 @@ export const technologies: Technology[] = [
     name: "Figma",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=figma",
-    featured: false,
+    featured: true,
   },
   {
     id: "axios",
     name: "Axios",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=axios",
-    featured: false,
+    featured: true,
   },
   {
     id: "jwt",
     name: "JWT",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=jwt",
-    featured: false,
+    featured: true,
   },
   {
     id: "zod",
     name: "Zod",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=zod",
-    featured: false,
+    featured: true,
   },
   {
     id: "swagger",
     name: "Swagger",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=swagger",
-    featured: false,
+    featured: true,
   },
   {
     id: "pino",
     name: "Pino",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=nodejs",
-    featured: false,
+    featured: true,
   },
   {
     id: "pdfkit",
@@ -480,18 +480,11 @@ export const technologies: Technology[] = [
     featured: false,
   },
   {
-    id: "reactquery",
-    name: "TanStack React Query",
-    category: "ferramentas_outros",
-    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=reactquery",
-    featured: false,
-  },
-  {
     id: "socketio",
     name: "Socket.IO",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=socketio",
-    featured: false,
+    featured: true,
   },
   {
     id: "googlecalendar",
@@ -505,7 +498,7 @@ export const technologies: Technology[] = [
     name: "Google APIs",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=google",
-    featured: false,
+    featured: true,
   },
   {
     id: "datefns",
@@ -526,7 +519,7 @@ export const technologies: Technology[] = [
     name: "bcrypt",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=bcrypt",
-    featured: false,
+    featured: true,
   },
   {
     id: "styledcomponents",
@@ -589,7 +582,7 @@ export const technologies: Technology[] = [
     name: "TanStack Query",
     category: "ferramentas_outros",
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=reactquery",
-    featured: false,
+    featured: true,
   },
   {
     id: "multer",
@@ -619,7 +612,21 @@ export const technologies: Technology[] = [
     iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=nodejs",
     featured: false,
   },
-];
+  {
+    id: "eslint",
+    name: "ESLint",
+    category: "ferramentas_outros",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=eslint",
+    featured: false,
+  },
+  {
+    id: "prettier",
+    name: "Prettier",
+    category: "ferramentas_outros",
+    iconUrl: "https://go-skill-icons.vercel.app/api/icons?i=prettier",
+    featured: false,
+  },
+  ];
 
 export const technologiesById = new Map<string, Technology>(
   technologies.map((tech) => [tech.id, tech])

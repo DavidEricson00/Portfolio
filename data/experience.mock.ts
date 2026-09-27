@@ -13,7 +13,7 @@ export const experiences: Experience[] = [
     startDate: "2025-04-01",
     endDate: "2025-06-30",
     points: [
-      "Desenvolvi, em equipe, uma API para gestão de projetos de pesquisa e produções acadêmicas, como projeto final do curso de desenvolvimento de 280 horas.",
+      "Desenvolvi, em equipe, uma API para gestão de projetos de pesquisa e produções acadêmicas, como projeto final do curso de desenvolvimento de 480 horas.",
       "Implementei funcionalidades de autenticação, controle de acesso por perfil, fluxo de submissão e aprovação, gerenciamento de arquivos e geração de documentos.",
       "Participei de reuniões semanais com a equipe e o supervisor do projeto para discutir requisitos, propostas técnicas, divisão de tarefas e evolução das entregas.",
       "Trabalhei com Kanban, divisão de tarefas e documentação técnica para facilitar a integração e a continuidade do trabalho entre os membros da equipe.",
