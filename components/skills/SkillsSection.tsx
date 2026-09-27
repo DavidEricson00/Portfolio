@@ -24,11 +24,12 @@ export function SkillsSection() {
   const router = useRouter();
   const technologiesByCategory = useMemo(() => {
     const map = new Map<TechnologyCategory, typeof technologies>();
+    const featuredTechnologies = technologies.filter((tech) => tech.featured);
 
     CATEGORY_ROWS.forEach(({ category }) => {
       map.set(
         category,
-        technologies.filter((tech) => tech.category === category)
+        featuredTechnologies.filter((tech) => tech.category === category)
       );
     });
 

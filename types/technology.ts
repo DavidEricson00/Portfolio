@@ -10,6 +10,7 @@ export type Technology = {
   name: string;
   category: TechnologyCategory;
   iconUrl: string;
+  featured: boolean;
 };
 
 export type CategoryConfig = {
