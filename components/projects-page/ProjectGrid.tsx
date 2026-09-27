@@ -30,9 +30,6 @@ export function ProjectGrid({
   onSelectTechnology,
   onClearFilters,
 }: ProjectGridProps) {
-  // Conjunto de IDs que devem estar visíveis agora
-  const visibleIds = new Set(projects.map((p) => p.id));
-
   // Mantém uma lista "renderizada" = projetos que ainda precisam estar no DOM
   // para terminar a animação de saída antes de desmontar.
   const [renderedProjects, setRenderedProjects] = useState<Project[]>(projects);
@@ -47,58 +44,57 @@ export function ProjectGrid({
 
   useEffect(() => {
     const nextVisibleIds = new Set(projects.map((p) => p.id));
+    const timers = removalTimersRef.current;
 
     // Cancela timers de remoção para projetos que voltaram
     for (const id of nextVisibleIds) {
-      const timer = removalTimersRef.current.get(id);
+      const timer = timers.get(id);
       if (timer !== undefined) {
         clearTimeout(timer);
-        removalTimersRef.current.delete(id);
+        timers.delete(id);
       }
     }
 
-    // Adiciona novos projetos ao DOM imediatamente (ainda sem fade-in)
-    setRenderedProjects((prev) => {
-      const prevIds = new Set(prev.map((p) => p.id));
-      const toAdd = projects.filter((p) => !prevIds.has(p.id));
-      // mantém ordem: primeiro os que já existiam, depois os novos
-      const merged = [
-        ...prev.filter((p) => prevIds.has(p.id)),
-        ...toAdd,
-      ];
-      return merged;
-    });
+    // Adiciona novos projetos ao DOM (ainda sem fade-in) e agenda saída dos que saíram
+    const rafId = requestAnimationFrame(() => {
+      setRenderedProjects((prev) => {
+        const prevIds = new Set(prev.map((p) => p.id));
+        const toAdd = projects.filter((p) => !prevIds.has(p.id));
+        const merged = [
+          ...prev.filter((p) => prevIds.has(p.id)),
+          ...toAdd,
+        ];
 
-    // Agenda fade-in para projetos novos (next frame)
-    requestAnimationFrame(() => {
+        const exitingIds = merged
+          .map((p) => p.id)
+          .filter((id) => !nextVisibleIds.has(id));
+
+        for (const id of exitingIds) {
+          if (!timers.has(id)) {
+            const timer = setTimeout(() => {
+              setRenderedProjects((curr) => curr.filter((p) => p.id !== id));
+              timers.delete(id);
+            }, 220); // duração da animação de saída
+            timers.set(id, timer);
+          }
+        }
+
+        return merged;
+      });
+
       setFadedInIds(new Set(projects.map((p) => p.id)));
     });
 
-    // Agenda remoção do DOM dos projetos que saíram (após animação de saída)
-    setRenderedProjects((prev) => {
-      const exitingIds = prev
-        .map((p) => p.id)
-        .filter((id) => !nextVisibleIds.has(id));
-
-      for (const id of exitingIds) {
-        if (!removalTimersRef.current.has(id)) {
-          const timer = setTimeout(() => {
-            setRenderedProjects((curr) => curr.filter((p) => p.id !== id));
-            removalTimersRef.current.delete(id);
-          }, 220); // duração da animação de saída
-          removalTimersRef.current.set(id, timer);
-        }
-      }
-
-      return prev; // não muda imediatamente
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      cancelAnimationFrame(rafId);
+    };
   }, [projects]);
 
   // Cleanup timers on unmount
   useEffect(() => {
+    const timers = removalTimersRef.current;
     return () => {
-      for (const timer of removalTimersRef.current.values()) {
+      for (const timer of timers.values()) {
         clearTimeout(timer);
       }
     };

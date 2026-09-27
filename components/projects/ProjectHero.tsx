@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ExternalLink,
   ChevronRight,
@@ -40,12 +41,29 @@ export function ProjectHero({ project }: ProjectHeroProps) {
     <header className="project-hero">
       {/* Breadcrumb Context Navigation */}
       <nav className="project-breadcrumb" aria-label="Navegação de contexto">
-        <Link href="/projetos" className="project-breadcrumb-link">
-          <ArrowLeft size={14} />
-          <span>Projetos</span>
-        </Link>
-        <ChevronRight size={13} className="project-breadcrumb-separator" />
-        <span className="project-breadcrumb-current">{project.name}</span>
+        <ol
+          style={{
+            listStyle: "none",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: 0,
+            margin: 0,
+          }}
+        >
+          <li>
+            <Link href="/projetos" className="project-breadcrumb-link">
+              <ArrowLeft size={14} />
+              <span>Projetos</span>
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight size={13} className="project-breadcrumb-separator" />
+          </li>
+          <li aria-current="page">
+            <span className="project-breadcrumb-current">{project.name}</span>
+          </li>
+        </ol>
       </nav>
 
       {/* Liquid Glass Hero Card */}
@@ -117,10 +135,11 @@ export function ProjectHero({ project }: ProjectHeroProps) {
           <div className="project-hero-thumbnail-column">
             <div className="project-hero-thumbnail-frame">
               {project.coverImage ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={project.coverImage}
                   alt={`Screenshot de capa de ${project.name}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 340px"
                   className="project-hero-thumbnail-image"
                 />
               ) : (
@@ -143,3 +162,4 @@ export function ProjectHero({ project }: ProjectHeroProps) {
     </header>
   );
 }
+

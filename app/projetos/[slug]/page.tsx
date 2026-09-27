@@ -4,6 +4,10 @@ import { getAllProjects, getProjectBySlug } from "@/data/projects.mock";
 import { getProjectSectionConfig } from "@/types/project";
 import { ProjectHero } from "@/components/projects/ProjectHero";
 import { ProjectSection } from "@/components/projects/ProjectSection";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildProjectSchema } from "@/lib/seo/schemas/project";
+import { buildBreadcrumbSchema } from "@/lib/seo/schemas/breadcrumb";
+import { SITE_CONFIG } from "@/lib/seo/config";
 import "@/components/projects/project-detail.css";
 
 type PageProps = {
@@ -27,32 +31,29 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: "Projeto não encontrado - David Ericson",
+      title: "Projeto não encontrado",
       description: "O projeto solicitado não foi encontrado.",
     };
   }
 
-  const techNames = project.technologies.map((t) => t.name).join(", ");
+  const projectUrl = `${SITE_CONFIG.url}/projetos/${project.slug}`;
 
   return {
-    title: `${project.name} | David Ericson`,
+    title: project.name,
     description: project.summary,
-    keywords: [
-      project.name,
-      ...project.technologies.map((t) => t.name),
-      "David Ericson",
-      "Fullstack Developer",
-      "Projetos",
-    ],
+    alternates: { canonical: projectUrl },
     openGraph: {
-      title: `${project.name} - David Ericson`,
+      type: "website",
+      url: projectUrl,
+      title: project.name,
       description: project.summary,
-      type: "article",
-      images: project.coverImage ? [{ url: project.coverImage }] : undefined,
+      images: project.coverImage
+        ? [{ url: project.coverImage, alt: `Screenshot de ${project.name}` }]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.name} - David Ericson`,
+      title: project.name,
       description: project.summary,
       images: project.coverImage ? [project.coverImage] : undefined,
     },
@@ -67,6 +68,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const projectUrl = `${SITE_CONFIG.url}/projetos/${project.slug}`;
+
   // Sort sections dynamically based on the central section configuration order
   const sortedSections = [...project.sections].sort((a, b) => {
     const orderA = getProjectSectionConfig(a.type).order;
@@ -74,22 +77,37 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     return orderA - orderB;
   });
 
-  return (
-    <main className="project-detail-page">
-      <div className="project-detail-container">
-        <ProjectHero project={project} />
+  const breadcrumbs = [
+    { name: "Home", url: SITE_CONFIG.url },
+    { name: "Projetos", url: `${SITE_CONFIG.url}/projetos` },
+    { name: project.name, url: projectUrl },
+  ];
 
-        <div className="project-sections-timeline">
-          {sortedSections.map((section, index) => (
-            <ProjectSection
-              key={section.id}
-              section={section}
-              projectName={project.name}
-              isLast={index === sortedSections.length - 1}
-            />
-          ))}
+  return (
+    <>
+      <JsonLd
+        schema={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildProjectSchema(project),
+        ]}
+      />
+      <main className="project-detail-page">
+        <div className="project-detail-container">
+          <ProjectHero project={project} />
+
+          <div className="project-sections-timeline">
+            {sortedSections.map((section, index) => (
+              <ProjectSection
+                key={section.id}
+                section={section}
+                projectName={project.name}
+                isLast={index === sortedSections.length - 1}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
+

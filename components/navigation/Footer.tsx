@@ -12,7 +12,7 @@ export function Footer() {
         <div className="site-footer-grid">
           {/* Left Column: Identity & Presentation */}
           <div className="site-footer-brand">
-            <h3 className="site-footer-name">David Ericson</h3>
+            <p className="site-footer-name">David Ericson</p>
             <p className="site-footer-role">Fullstack Developer</p>
             <p className="site-footer-stack">
               Node.js <span>|</span> TypeScript <span>|</span> React <span>|</span> PostgreSQL
@@ -24,7 +24,7 @@ export function Footer() {
 
           {/* Right Column: Contact & Social Links */}
           <div className="site-footer-nav">
-            <h4 className="site-footer-heading">Contato & Redes</h4>
+            <p className="site-footer-heading">Contato & Redes</p>
             <ul className="site-footer-links-list">
               {contactChannels.map((channel) => (
                 <li key={channel.id}>

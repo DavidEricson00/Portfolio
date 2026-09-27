@@ -42,6 +42,7 @@ export type Project = {
   highlights?: string[];
   featured: boolean;
   ranking: number;
+  dateCreated?: string;
   sections: ProjectSection[];
 };
 

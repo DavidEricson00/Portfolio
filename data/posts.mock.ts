@@ -239,7 +239,7 @@ export function formatPostDate(dateString: string): string {
  * Estimates reading time in minutes based on words count
  */
 export function estimateReadingTime(content: string): number {
-  const words = content.trim().split(/\\s+/).length;
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
   const wordsPerMinute = 200;
   return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
