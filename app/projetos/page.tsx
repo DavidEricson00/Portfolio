@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ProjectsPageContent } from "@/components/projects-page/ProjectsPageContent";
 
 export const metadata: Metadata = {
-  title: "Projetos — David Ericson | Desenvolvedor Fullstack",
+  title: "David Ericson | Projetos",
   description:
     "Explore todos os projetos de David Ericson: microsserviços NestJS, backend com Node.js e Python, infraestrutura serverless na AWS, banco de dados e aplicações fullstack.",
   keywords: [

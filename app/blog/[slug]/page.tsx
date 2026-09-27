@@ -33,23 +33,23 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Artigo não encontrado — David Ericson",
+      title: "Artigo não encontrado - David Ericson",
       description: "O artigo solicitado não foi encontrado.",
     };
   }
 
   return {
-    title: `${post.title} — Blog | David Ericson`,
+    title: `${post.title} | David Ericson`,
     description: post.content.slice(0, 160).replace(/[#*`_]/g, "").trim(),
     openGraph: {
-      title: `${post.title} — David Ericson`,
+      title: `${post.title} - David Ericson`,
       description: post.content.slice(0, 160).replace(/[#*`_]/g, "").trim(),
       type: "article",
       publishedTime: post.date,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} — David Ericson`,
+      title: `${post.title} - David Ericson`,
       description: post.content.slice(0, 160).replace(/[#*`_]/g, "").trim(),
     },
   };

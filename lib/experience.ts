@@ -104,7 +104,7 @@ export function formatExperienceDuration(totalMonths: number): string {
 }
 
 /**
- * Formats a period range for visual display, e.g. "ABR 2025 — JUN 2025" or "MAI 2026 — ATUAL"
+ * Formats a period range for visual display, e.g. "ABR 2025 - JUN 2025" or "MAI 2026 - ATUAL"
  */
 export function formatExperiencePeriod(
   startDateStr: string,
@@ -114,13 +114,13 @@ export function formatExperiencePeriod(
   const startFormatted = `${MONTH_NAMES_SHORT[start.month]} ${start.year}`;
 
   if (!endDateStr) {
-    return `${startFormatted} — PRESENTE`;
+    return `${startFormatted} - PRESENTE`;
   }
 
   const end = parseDateParts(endDateStr);
   const endFormatted = `${MONTH_NAMES_SHORT[end.month]} ${end.year}`;
 
-  return `${startFormatted} — ${endFormatted}`;
+  return `${startFormatted} - ${endFormatted}`;
 }
 
 /**

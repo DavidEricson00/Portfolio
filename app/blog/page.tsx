@@ -4,7 +4,7 @@ import { BlogTimelineItem } from "@/components/blog/BlogTimelineItem";
 import "@/components/blog/blog.css";
 
 export const metadata: Metadata = {
-  title: "Blog — David Ericson | Desenvolvedor Fullstack",
+  title: "David Ericson | Blog",
   description:
     "Artigos, notas de arquitetura e aprendizados práticos sobre engenharia de software, microsserviços, backend e sistemas distribuídos.",
   keywords: [

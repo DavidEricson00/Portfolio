@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: "Projeto não encontrado — David Ericson",
+      title: "Projeto não encontrado - David Ericson",
       description: "O projeto solicitado não foi encontrado.",
     };
   }
@@ -35,7 +35,7 @@ export async function generateMetadata({
   const techNames = project.technologies.map((t) => t.name).join(", ");
 
   return {
-    title: `${project.name} — Projetos | David Ericson`,
+    title: `${project.name} | David Ericson`,
     description: project.summary,
     keywords: [
       project.name,
@@ -45,14 +45,14 @@ export async function generateMetadata({
       "Projetos",
     ],
     openGraph: {
-      title: `${project.name} — David Ericson`,
+      title: `${project.name} - David Ericson`,
       description: project.summary,
       type: "article",
       images: project.coverImage ? [{ url: project.coverImage }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.name} — David Ericson`,
+      title: `${project.name} - David Ericson`,
       description: project.summary,
       images: project.coverImage ? [project.coverImage] : undefined,
     },

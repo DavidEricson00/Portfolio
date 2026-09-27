@@ -7,7 +7,7 @@ import { technologyCategoryConfig } from "@/types/technology";
 export type SkillItemProps = {
   technology: Technology;
   onClick?: (technology: Technology) => void;
-  /** Retorna true se o marquee está num estado de drag — evita navegação acidental */
+  /** Retorna true se o marquee está num estado de drag - evita navegação acidental */
   getHasDragged?: () => boolean;
 };
 

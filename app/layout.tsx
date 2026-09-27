@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "David Ericson — Desenvolvedor Fullstack",
+  title: "David Ericson | Fullstack Dev",
   description:
     "Portfólio de David Ericson, desenvolvedor Fullstack com foco em Node.js, TypeScript, APIs, PostgreSQL e arquitetura de sistemas.",
   authors: [{ name: "David Ericson" }],

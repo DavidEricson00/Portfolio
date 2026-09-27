@@ -23,8 +23,8 @@ export function EducationCard({
   onToggle,
 }: EducationCardProps) {
   const periodText = education.endDate
-    ? `${education.startDate} — ${education.endDate}`
-    : `${education.startDate} — Atual`;
+    ? `${education.startDate} - ${education.endDate}`
+    : `${education.startDate} - Atual`;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {

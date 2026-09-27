@@ -17,7 +17,7 @@ export type ProjectGridProps = {
  * ProjectGrid
  *
  * Animação: cards entram/saem com fade CSS simples.
- * A reorganização da grid acontece pelo layout CSS grid normal —
+ * A reorganização da grid acontece pelo layout CSS grid normal -
  * sem layout animation (evita o efeito "gelatina" do motion layout).
  *
  * Cada card recebe a classe "card-visible" quando está presente,

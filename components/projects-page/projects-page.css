@@ -315,7 +315,7 @@
   width: 100%;
 }
 
-/* Card fade wrapper — controla entrada e saída dos cards sem layout animation */
+/* Card fade wrapper - controla entrada e saída dos cards sem layout animation */
 .project-grid-card-wrapper {
   transition: opacity 200ms ease;
   min-width: 0;
