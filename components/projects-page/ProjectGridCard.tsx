@@ -138,6 +138,8 @@ export function ProjectGridCard({
         {/* Tech Stack Badges */}
         <div className="project-grid-card-tech">
           <div className="project-grid-tech-list">
+            
+            {/* 1. MOSTRA ATÉ O 8º ITEM */}
             {project.technologies.slice(0, 8).map((tech) => {
               const cfg = technologyCategoryConfig[tech.category];
               return (
@@ -170,15 +172,17 @@ export function ProjectGridCard({
                 </button>
               );
             })}
-            {project.technologies.length > 6 && (
+            
+            {/* 2. SE TIVER MAIS QUE 8, CRIA A PÍLULA EXTRA CORTANDO OS 8 PRIMEIROS */}
+            {project.technologies.length > 8 && (
               <span
                 className="project-grid-tech-more"
                 title={project.technologies
-                  .slice(6)
+                  .slice(8)
                   .map((t) => t.name)
                   .join(", ")}
               >
-                +{project.technologies.length - 6}
+                +{project.technologies.length - 8}
               </span>
             )}
           </div>

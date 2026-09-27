@@ -144,18 +144,21 @@ export function ProjectCard({ project }: ProjectCardProps) {
               className="project-tech-list"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* 1. MOSTRA ATÉ O 8º ITEM */}
               {project.technologies.slice(0, 8).map((tech) => (
                 <TechnologyPill key={tech.id} technology={tech} />
               ))}
-              {project.technologies.length > 7 && (
+              
+              {/* 2. SE TIVER MAIS QUE 8, CRIA A PÍLULA EXTRA CORTANDO OS 8 PRIMEIROS */}
+              {project.technologies.length > 8 && (
                 <span
                   className="tech-pill-more"
                   title={project.technologies
-                    .slice(7)
+                    .slice(8)
                     .map((t) => t.name)
                     .join(", ")}
                 >
-                  +{project.technologies.length - 7}
+                  +{project.technologies.length - 8}
                 </span>
               )}
             </div>
