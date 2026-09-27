@@ -90,7 +90,11 @@ export function ExperienceItem({
 
         {experience.technologies.length > 0 && (
           <div className="experience-item-tech">
-            <div className="experience-tech-wrap">
+            <span className="sr-only">Tecnologias utilizadas:</span>
+            <div
+              className="experience-tech-wrap"
+              aria-label="Tecnologias utilizadas"
+            >
               {experience.technologies.map((tech) => (
                 <TechnologyPill key={tech.id} technology={tech} />
               ))}

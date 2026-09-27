@@ -155,6 +155,10 @@
   color: var(--primary);
 }
 
+.hero-title-last {
+  display: block;
+}
+
 .hero-description {
   max-width: 570px;
 

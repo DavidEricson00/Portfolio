@@ -78,9 +78,7 @@ export function HeroSection() {
           <p className="hero-eyebrow">FULLSTACK DEVELOPER</p>
 
           <h1>
-            David
-            <br />
-            <span>Ericson.</span>
+            David <span className="hero-title-last">Ericson.</span>
           </h1>
 
           <p className="hero-description">
@@ -89,7 +87,8 @@ export function HeroSection() {
             aplicações bem estruturadas.
           </p>
 
-          <div className="hero-stack">
+          <div className="hero-stack" aria-label="Principais tecnologias">
+            <span className="sr-only">Principais tecnologias:</span>
             {HERO_STACK.map((tech) => (
               <span key={tech}>{tech}</span>
             ))}
