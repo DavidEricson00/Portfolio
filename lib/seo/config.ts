@@ -9,6 +9,8 @@ export const SITE_CONFIG = {
   email: "davidestudofcg@gmail.com",
   github: "https://github.com/DavidEricson00",
   linkedin: "https://www.linkedin.com/in/davidericson00/",
+  twitter: "https://x.com/DavidEricson00",
+  twitterHandle: "@DavidEricson00",
   locale: "pt_BR",
   language: "pt-BR",
   // IDs de entidades para linked data

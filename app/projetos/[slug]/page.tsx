@@ -38,6 +38,12 @@ export async function generateMetadata({
 
   const projectUrl = `${SITE_CONFIG.url}/projetos/${project.slug}`;
 
+  const projectImage = project.coverImage
+    ? project.coverImage.startsWith("http")
+      ? project.coverImage
+      : `${SITE_CONFIG.url}${project.coverImage}`
+    : `${SITE_CONFIG.url}/og-image.png`;
+
   return {
     title: project.name,
     description: project.summary,
@@ -47,15 +53,24 @@ export async function generateMetadata({
       url: projectUrl,
       title: project.name,
       description: project.summary,
-      images: project.coverImage
-        ? [{ url: project.coverImage, alt: `Screenshot de ${project.name}` }]
-        : undefined,
+      siteName: SITE_CONFIG.siteName,
+      locale: SITE_CONFIG.locale,
+      images: [
+        {
+          url: projectImage,
+          width: 1200,
+          height: 630,
+          alt: `Screenshot de ${project.name}`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
+      site: SITE_CONFIG.twitterHandle,
+      creator: SITE_CONFIG.twitterHandle,
       title: project.name,
       description: project.summary,
-      images: project.coverImage ? [project.coverImage] : undefined,
+      images: [projectImage],
     },
   };
 }

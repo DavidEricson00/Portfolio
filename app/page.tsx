@@ -22,6 +22,25 @@ export const metadata: Metadata = {
     url: SITE_CONFIG.url,
     title: `${SITE_CONFIG.name} | Fullstack Dev`,
     description: SITE_CONFIG.description,
+    siteName: SITE_CONFIG.siteName,
+    locale: SITE_CONFIG.locale,
+    images: [
+      {
+        url: `${SITE_CONFIG.url}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.name} | Fullstack Dev`,
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: SITE_CONFIG.twitterHandle,
+    creator: SITE_CONFIG.twitterHandle,
+    title: `${SITE_CONFIG.name} | Fullstack Dev`,
+    description: SITE_CONFIG.description,
+    images: [`${SITE_CONFIG.url}/og-image.png`],
   },
 };
 

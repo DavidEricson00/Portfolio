@@ -46,6 +46,12 @@ export async function generateMetadata({
   const postUrl = `${SITE_CONFIG.url}/blog/${post.slug}`;
   const description = post.excerpt ?? extractExcerpt(post.content);
 
+  const postImage = post.coverImage
+    ? post.coverImage.startsWith("http")
+      ? post.coverImage
+      : `${SITE_CONFIG.url}${post.coverImage}`
+    : `${SITE_CONFIG.url}/og-image.png`;
+
   return {
     title: post.title,
     description,
@@ -55,17 +61,26 @@ export async function generateMetadata({
       url: postUrl,
       title: post.title,
       description,
+      siteName: SITE_CONFIG.siteName,
+      locale: SITE_CONFIG.locale,
       publishedTime: post.date,
       modifiedTime: post.dateModified,
-      images: post.coverImage
-        ? [{ url: post.coverImage, alt: post.title }]
-        : undefined,
+      images: [
+        {
+          url: postImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
+      site: SITE_CONFIG.twitterHandle,
+      creator: SITE_CONFIG.twitterHandle,
       title: post.title,
       description,
-      images: post.coverImage ? [post.coverImage] : undefined,
+      images: [postImage],
     },
   };
 }
