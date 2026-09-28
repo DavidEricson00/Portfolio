@@ -1,6 +1,6 @@
 // lib/seo/config.ts
 export const SITE_CONFIG = {
-  url: "https://davidericson.dev",
+  url: "https://davidericson.vercel.app",
   name: "David Ericson",
   siteName: "David Ericson — Portfólio",
   description:
@@ -12,8 +12,8 @@ export const SITE_CONFIG = {
   locale: "pt_BR",
   language: "pt-BR",
   // IDs de entidades para linked data
-  personId: "https://davidericson.dev/#person",
-  websiteId: "https://davidericson.dev/#website",
+  personId: "https://davidericson.vercel.app/#person",
+  websiteId: "https://davidericson.vercel.app/#website",
 } as const;
 
 export type SiteConfig = typeof SITE_CONFIG;
