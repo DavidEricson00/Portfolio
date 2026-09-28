@@ -7,8 +7,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildPersonSchema } from "@/lib/seo/schemas/person";
 import { buildWebsiteSchema } from "@/lib/seo/schemas/website";
 import { SITE_CONFIG } from "@/lib/seo/config";
-import { Analytics } from "@vercel/analytics/nuxt/runtime";
-import { SpeedInsights } from "@vercel/speed-insights/nuxt/runtime";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
