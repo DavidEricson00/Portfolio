@@ -19,8 +19,8 @@ export const PROGRAMMING_LANGUAGE_IDS = [
 
 export function buildPersonSchema() {
   const educations = getAllEducations();
-  const degree = educations.find((e) => e.type === "graduacao");
-  const technical = educations.find((e) => e.type === "tecnico");
+  const degree = educations.find((e) => e.category === "graduacao");
+  const technical = educations.find((e) => e.category === "tecnico");
 
   const knowsAbout = technologies
     .filter((t) => KNOW_ABOUT_CATEGORIES.includes(t.category))

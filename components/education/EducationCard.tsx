@@ -5,10 +5,11 @@ import {
   ChevronDown,
   Calendar,
   Clock,
-  Sparkles,
   Layers,
+  Award,
 } from "lucide-react";
 import type { Education } from "@/types/education";
+import { educationCategoryConfig } from "@/types/education";
 import { EducationIcon } from "./EducationIcon";
 
 export type EducationCardProps = {
@@ -25,6 +26,9 @@ export function EducationCard({
   const periodText = education.endDate
     ? `${education.startDate} - ${education.endDate}`
     : `${education.startDate} - Atual`;
+
+  const categoryConfig = educationCategoryConfig[education.category];
+  const categoryLabel = categoryConfig?.label ?? education.category;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -53,11 +57,13 @@ export function EducationCard({
         <div className="education-card-lead">
           {/* Icon Badge */}
           <div className="education-icon-box" aria-hidden="true">
-            <EducationIcon type={education.type} size={22} />
+            <EducationIcon category={education.category} size={22} />
           </div>
 
           {/* Core Info */}
           <div className="education-lead-info">
+            <span className="education-category-badge">{categoryLabel}</span>
+
             <div className="education-title-row">
               <h3 className="education-title">{education.title}</h3>
             </div>
@@ -71,23 +77,17 @@ export function EducationCard({
                 <time>{periodText}</time>
               </span>
 
-              {education.status && (
-                <span
-                  className={`education-status-pill ${
-                    education.status.toLowerCase().includes("andamento")
-                      ? "status-in-progress"
-                      : "status-completed"
-                  }`}
-                >
-                  <span className="education-status-dot" />
-                  {education.status}
-                </span>
-              )}
-
               {education.workload && (
                 <span className="education-meta-pill education-workload-pill">
                   <Clock size={13} className="education-meta-icon" />
                   <span>{education.workload}</span>
+                </span>
+              )}
+
+              {education.grade && (
+                <span className="education-meta-pill education-grade-pill">
+                  <Award size={13} className="education-meta-icon" />
+                  <span>CR: {education.grade}</span>
                 </span>
               )}
             </div>
@@ -134,30 +134,19 @@ export function EducationCard({
             <div className="education-divider" />
 
             <div className="education-details-grid">
-              {/* Optional Description / Program Banner */}
-              {education.description && (
-                <div className="education-program-banner">
-                  <span className="education-program-badge">
-                    <Sparkles size={14} />
-                    <span>Programa</span>
-                  </span>
-                  <p className="education-program-text">{education.description}</p>
-                </div>
-              )}
-
-              {/* Extra Meta Grid (Area / Grade / Workload if present) */}
-              {(education.area || education.grade) && (
+              {/* Extra Specs (Workload / Grade if present) */}
+              {(education.workload || education.grade) && (
                 <div className="education-specs-row">
-                  {education.area && (
+                  {education.workload && (
                     <div className="education-spec-item">
-                      <span className="education-spec-label">Área de estudo</span>
-                      <span className="education-spec-value">{education.area}</span>
+                      <span className="education-spec-label">Carga horária</span>
+                      <span className="education-spec-value">{education.workload}</span>
                     </div>
                   )}
 
                   {education.grade && (
                     <div className="education-spec-item">
-                      <span className="education-spec-label">Média Acadêmica</span>
+                      <span className="education-spec-label">Média acadêmica</span>
                       <span className="education-spec-value education-grade-highlight">
                         {education.grade}
                       </span>
@@ -171,7 +160,7 @@ export function EducationCard({
                 <div className="education-highlights-group">
                   <h4 className="education-subtitle">
                     <Layers size={15} className="education-subtitle-icon" />
-                    Principais Conteúdos & Destaques
+                    Principais pontos
                   </h4>
                   <ul className="education-highlights-list">
                     {education.highlights.map((highlight, idx) => (

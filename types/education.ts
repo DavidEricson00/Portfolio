@@ -1,24 +1,58 @@
-export type EducationType =
+import type { LucideIcon } from "lucide-react";
+import {
+  GraduationCap,
+  School,
+  BookOpen,
+  Award,
+  Code,
+} from "lucide-react";
+
+export type EducationCategory =
   | "graduacao"
-  | "curso"
   | "tecnico"
-  | "bootcamp"
-  | "certificacao";
+  | "curso"
+  | "certificacao"
+  | "bootcamp";
 
 export type Education = {
   id: string;
-  type: EducationType;
-
-  title: string;
+  category: EducationCategory;
   institution: string;
-  area?: string;
-
+  title: string;
+  workload?: string;
   startDate: string;
   endDate?: string;
-  status?: string;
-  workload?: string;
   grade?: string;
-
-  description?: string;
   highlights?: string[];
+};
+
+export type EducationCategoryConfig = {
+  label: string;
+  icon: LucideIcon;
+};
+
+export const educationCategoryConfig: Record<
+  EducationCategory,
+  EducationCategoryConfig
+> = {
+  graduacao: {
+    label: "Graduação",
+    icon: GraduationCap,
+  },
+  tecnico: {
+    label: "Técnico",
+    icon: School,
+  },
+  curso: {
+    label: "Curso",
+    icon: BookOpen,
+  },
+  certificacao: {
+    label: "Certificação",
+    icon: Award,
+  },
+  bootcamp: {
+    label: "Bootcamp",
+    icon: Code,
+  },
 };
