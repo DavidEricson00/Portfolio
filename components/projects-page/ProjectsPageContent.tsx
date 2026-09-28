@@ -89,22 +89,24 @@ export function ProjectsPageContent() {
   const filteredProjects = useMemo(() => {
     const trimmedQuery = searchQuery.trim().toLowerCase();
 
-    return allProjects.filter((project) => {
-      const matchesSearch =
-        !trimmedQuery || project.name.toLowerCase().includes(trimmedQuery);
+    return allProjects
+      .filter((project) => {
+        const matchesSearch =
+          !trimmedQuery || project.name.toLowerCase().includes(trimmedQuery);
 
-      if (!matchesSearch) return false;
+        if (!matchesSearch) return false;
 
-      if (selectedTechIds.length > 0) {
-        const projectTechIds = new Set(project.technologies.map((t) => t.id));
-        const hasAllSelectedTechs = selectedTechIds.every((id) =>
-          projectTechIds.has(id)
-        );
-        if (!hasAllSelectedTechs) return false;
-      }
+        if (selectedTechIds.length > 0) {
+          const projectTechIds = new Set(project.technologies.map((t) => t.id));
+          const hasAllSelectedTechs = selectedTechIds.every((id) =>
+            projectTechIds.has(id)
+          );
+          if (!hasAllSelectedTechs) return false;
+        }
 
-      return true;
-    });
+        return true;
+      })
+      .sort((a, b) => (b.ranking ?? 0) - (a.ranking ?? 0));
   }, [allProjects, searchQuery, selectedTechIds]);
 
   const hasActiveFilters = searchQuery.trim().length > 0 || selectedTechIds.length > 0;

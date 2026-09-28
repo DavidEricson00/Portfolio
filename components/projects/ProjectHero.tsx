@@ -116,6 +116,25 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               </div>
             )}
 
+            {/* Highlights List */}
+            {project.highlights && project.highlights.length > 0 && (
+              <div className="project-hero-highlights-container">
+                <span className="project-hero-highlights-label">
+                  Principais pontos
+                </span>
+                <ul className="project-hero-highlights-list">
+                  {project.highlights.map((highlight, idx) => (
+                    <li key={idx} className="project-hero-highlight-item">
+                      <span className="project-hero-highlight-bullet" aria-hidden="true">
+                        •
+                      </span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Technologies Grid */}
             {project.technologies.length > 0 && (
               <div className="project-hero-tech-container">

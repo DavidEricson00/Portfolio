@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import type { Technology } from "@/types/technology";
 import { technologyCategoryConfig } from "@/types/technology";
+import "./technology-pill.css";
 
 export type TechnologyPillProps = {
   technology: Technology;

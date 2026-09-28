@@ -16,6 +16,7 @@
 @media (max-width: 640px) {
   .blog-page-container {
     width: min(100% - 32px, var(--content-narrow));
+    padding-top: clamp(80px, 18vw, 96px);
   }
 }
 
@@ -262,6 +263,7 @@
 @media (max-width: 640px) {
   .blog-detail-container {
     width: min(100% - 32px, 780px);
+    padding-top: clamp(80px, 18vw, 96px);
   }
 }
 

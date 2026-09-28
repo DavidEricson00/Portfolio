@@ -1,0 +1,40 @@
+/* Technology Pill Component Styles */
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #cbd5e1;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+
+.tech-pill:hover,
+.tech-pill:focus-visible {
+  border-color: var(--tech-hover-border, rgba(108, 140, 255, 0.4));
+  background: var(--tech-hover-bg, rgba(108, 140, 255, 0.08));
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tech-pill-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  border-radius: 2px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.tech-pill-name {
+  line-height: 1;
+}

@@ -11,6 +11,7 @@ export type Technology = {
   category: TechnologyCategory;
   iconUrl: string;
   featured: boolean;
+  ranking: number;
 };
 
 export type CategoryConfig = {

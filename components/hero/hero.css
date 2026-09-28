@@ -519,7 +519,7 @@
   .hero {
     padding-inline: 20px;
 
-    padding-top: 84px;
+    padding-top: clamp(88px, 18vw, 100px);
     padding-bottom: 0;
 
     overflow: hidden;

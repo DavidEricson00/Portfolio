@@ -4,7 +4,8 @@ import { technologiesById } from "./technologies.mock";
 function resolveTech(ids: string[]) {
   return ids
     .map((id) => technologiesById.get(id))
-    .filter((t): t is NonNullable<typeof t> => Boolean(t));
+    .filter((t): t is NonNullable<typeof t> => Boolean(t))
+    .sort((a, b) => (b.ranking ?? 0) - (a.ranking ?? 0));
 }
 
 export const projects: Project[] = [
@@ -2518,7 +2519,6 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "docker",
       "jest",
       "supertest",
-      "github",
       "githubactions",
       "eslint",
       "prettier",
