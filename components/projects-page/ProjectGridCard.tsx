@@ -3,6 +3,7 @@
 
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
 import { technologyCategoryConfig } from "@/types/technology";
@@ -45,25 +46,16 @@ export function ProjectGridCard({
     <article
       className="project-grid-card"
       onClick={handleCardClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleCardClick();
-        }
-      }}
-      aria-label={`Ver detalhes do projeto ${project.name}`}
     >
       {/* Cover / Image Area */}
       <div className="project-grid-card-cover-wrap">
         {project.coverImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={project.coverImage}
             alt={`Screenshot do projeto ${project.name}`}
             className="project-grid-card-cover"
-            loading="lazy"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
           />
         ) : (
           <div className="project-grid-card-fallback">

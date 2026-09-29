@@ -62,7 +62,7 @@ export function ExperienceItem({
             <span className="experience-item-company">{experience.company}</span>
             {experience.location && (
               <span className="experience-item-location">
-                <span className="experience-sep">•</span>
+                <span className="experience-sep" aria-hidden="true">•</span>
                 {experience.location}
               </span>
             )}

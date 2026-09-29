@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Home, Compass } from "lucide-react";
+import { Home, Compass } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Página não encontrada",

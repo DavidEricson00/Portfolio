@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export type ProjectScreenshotsProps = {
   images: string[];
@@ -28,12 +29,13 @@ export function ProjectScreenshots({
             </span>
           </div>
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={src}
             alt={`${projectName} - Captura de tela ${index + 1}`}
             className="project-screenshot-img"
-            loading="lazy"
+            width={1365}
+            height={768}
+            sizes="(max-width: 768px) 100vw, 860px"
           />
         </div>
       ))}

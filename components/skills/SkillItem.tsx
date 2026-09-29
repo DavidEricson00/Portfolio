@@ -9,9 +9,15 @@ export type SkillItemProps = {
   technology: Technology;
   onClick?: (technology: Technology) => void;
   getHasDragged?: () => boolean;
+  isClone?: boolean;
 };
 
-export function SkillItem({ technology, onClick, getHasDragged }: SkillItemProps) {
+export function SkillItem({
+  technology,
+  onClick,
+  getHasDragged,
+  isClone = false,
+}: SkillItemProps) {
   const [imageError, setImageError] = useState(false);
   const router = useRouter();
   const config = technologyCategoryConfig[technology.category];
@@ -39,6 +45,8 @@ export function SkillItem({ technology, onClick, getHasDragged }: SkillItemProps
       onClick={handleClick}
       title={`Ver projetos com ${technology.name}`}
       aria-label={technology.name}
+      tabIndex={isClone ? -1 : undefined}
+      aria-hidden={isClone ? "true" : undefined}
       style={
         {
           "--tech-accent": config?.accentColor ?? "var(--primary)",
@@ -54,7 +62,8 @@ export function SkillItem({ technology, onClick, getHasDragged }: SkillItemProps
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={technology.iconUrl}
-            alt={technology.name}
+            alt=""
+            aria-hidden="true"
             className="skill-item-icon"
             loading="lazy"
             width={32}

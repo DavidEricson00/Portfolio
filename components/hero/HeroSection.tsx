@@ -116,10 +116,10 @@ export function HeroSection() {
               ref={imageRef}
               src={isHoveringImage ? pixelDavidHover : pixelDavid}
               alt="Pixel art de David Ericson com os braços cruzados"
-              width={1024}
-              height={1024}
+              width={768}
+              height={768}
               priority
-              unoptimized
+              sizes="(max-width: 640px) 290px, (max-width: 1024px) 480px, 768px"
               className="hero-image"
             />
           </div>

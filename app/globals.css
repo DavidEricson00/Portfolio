@@ -139,7 +139,7 @@ section {
 }
 
 .button-primary {
-  background: var(--primary);
+  background: #526fd1;
   color: #ffffff;
   border: 1px solid transparent;
   box-shadow: 0 6px 20px rgba(108, 140, 255, 0.2);

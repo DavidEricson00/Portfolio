@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
@@ -44,25 +45,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
       className="project-card"
       onClick={handleCardClick}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleCardClick();
-        }
-      }}
-      aria-label={`Ver detalhes do projeto ${project.name}`}
     >
       {/* Visual Cover / Fallback */}
       <div className="project-card-cover-container">
         {project.coverImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={project.coverImage}
             alt={`Screenshot do projeto ${project.name}`}
             className="project-card-cover"
-            loading="lazy"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
           />
         ) : (
           <div className="project-card-fallback-cover">
@@ -116,7 +108,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <header className="project-card-header">
           <h3 className="project-card-title">
             <span>{project.name}</span>
-            <ArrowUpRight className="project-card-arrow" size={18} />
+            <ArrowUpRight className="project-card-arrow" size={18} aria-hidden="true" />
           </h3>
 
           <p className="project-card-summary">{project.summary}</p>

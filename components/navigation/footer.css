@@ -150,7 +150,7 @@
 .site-footer-tech {
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.74rem;
-  color: rgba(166, 168, 176, 0.6);
+  color: var(--muted);
 }
 
 @media (max-width: 768px) {

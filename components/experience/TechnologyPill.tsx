@@ -48,7 +48,8 @@ export function TechnologyPill({ technology, onClick }: TechnologyPillProps) {
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={technology.iconUrl}
-          alt={technology.name}
+          alt=""
+          aria-hidden="true"
           className="tech-pill-icon"
           loading="lazy"
           width={14}

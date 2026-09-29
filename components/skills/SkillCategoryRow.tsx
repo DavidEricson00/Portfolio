@@ -196,6 +196,7 @@ export function SkillCategoryRow({
                   technology={tech}
                   onClick={onSelectTechnology}
                   getHasDragged={getHasDragged}
+                  isClone={setNum !== 1}
                 />
               ))}
             </div>

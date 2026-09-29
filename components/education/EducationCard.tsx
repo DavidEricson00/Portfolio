@@ -44,9 +44,9 @@ export function EducationCard({
       onClick={onToggle}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      role="button"
       aria-expanded={isExpanded}
       aria-controls={`education-details-${education.id}`}
+      aria-label={`${education.title} - ${education.institution}`}
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
