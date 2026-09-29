@@ -42,7 +42,7 @@ export function TechnologyFilterGroup({
 
       if (orderA !== orderB) return orderA - orderB;
 
-      return a.name.localeCompare(b.name);
+      return b.ranking - a.ranking;
     });
 
     if (!query) return sorted;

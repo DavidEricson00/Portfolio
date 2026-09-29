@@ -47,7 +47,7 @@ export const technologies: Technology[] = [
     name: "Python",
     category: "backend",
     iconUrl: "https://skillicons.dev/icons?i=python",
-    featured: false,
+    featured: true,
     ranking: 82,
   },
   {
