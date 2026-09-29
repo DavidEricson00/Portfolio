@@ -1,0 +1,62 @@
+# David Ericson
+
+> Portfólio profissional de David Ericson, desenvolvedor Fullstack com foco em Node.js, TypeScript, APIs, PostgreSQL e arquitetura de sistemas.
+
+## Principal
+
+- [Página inicial](https://davidericson.vercel.app/): apresentação profissional, experiência, formação e principais tecnologias.
+- [Projetos](https://davidericson.vercel.app/projetos): lista de projetos de desenvolvimento de software.
+- [Blog](https://davidericson.vercel.app/blog): artigos e conteúdos técnicos.
+
+## Projetos Principais
+
+- [LetterDrop](https://davidericson.vercel.app/projetos/letterdrop): plataforma de newsletters construída com NestJS e microsserviços, utilizando RabbitMQ para processamento assíncrono, rastreamento idempotente de entregas e tratamento resiliente de falhas.
+
+- [LinkShortener](https://davidericson.vercel.app/projetos/linkshortener): encurtador de URLs serverless desenvolvido na AWS, com rastreamento de acessos, autenticação por API Key, infraestrutura como código e expiração automática de dados.
+
+- [SupportDesk](https://davidericson.vercel.app/projetos/supportdesk): plataforma fullstack de gerenciamento de tickets de suporte, com RBAC, API REST, máquina de estados, cache no frontend e infraestrutura containerizada.
+
+- [PedeAi](https://davidericson.vercel.app/projetos/pedeai): plataforma de pedidos via Telegram que combina automação de workflows com n8n, backend Node.js, PostgreSQL, Redis e assistência baseada em Gemini.
+
+- [AgendaIA](https://davidericson.vercel.app/projetos/agendaia): bot de agenda para Telegram que interpreta comandos em linguagem natural com Gemini e executa operações no Google Calendar.
+
+- [DialoGO](https://davidericson.vercel.app/projetos/dialogo): plataforma de chat em tempo real construída com React, Node.js, Express, PostgreSQL e Socket.IO, explorando comunicação via WebSockets, autenticação e arquitetura fullstack em camadas.
+
+- [Vivere+](https://davidericson.vercel.app/projetos/vivere): plataforma de experiências desenvolvida em equipe, com marketplace de eventos, autenticação, gerenciamento de tickets e API REST integrada ao frontend.
+
+- [TeamUP!](https://davidericson.vercel.app/projetos/teamup): plataforma fullstack de gerenciamento de projetos e atividades, desenvolvida com Laravel, React e TypeScript, explorando autenticação, controle de acesso, relacionamentos Eloquent e tarefas agendadas.
+
+- [StickIt!](https://davidericson.vercel.app/projetos/stickit): aplicação web de notas adesivas com frontend em Next.js e backend em Spring Boot, utilizando arquitetura em camadas, DTOs, validação, tratamento global de exceções e persistência com Spring Data JPA.
+
+- [LocalFAQ AI](https://davidericson.vercel.app/projetos/localfaq-ai): chatbot de FAQ para Telegram construído com n8n e Ollama, explorando integração de LLM local, contexto empresarial e workflows automatizados sem inferência em nuvem.
+
+- [Rapadura Clicker](https://davidericson.vercel.app/projetos/rapadura-clicker): jogo clicker/idle desenvolvido em Godot, com progressão, construções, upgrades, conquistas e versões para Windows, Linux e macOS.
+
+## Projetos adicionais
+
+- [Me Conte uma História](https://davidericson.vercel.app/projetos/me-conte-uma-historia): jogo educativo web que apresenta lendas do folclore brasileiro através de um mapa interativo, cenas ilustradas e diálogos.
+
+- [TalkShell](https://davidericson.vercel.app/projetos/talkshell): aplicação de chat via terminal desenvolvida em Python para estudar sockets TCP, arquitetura cliente-servidor, comunicação em tempo real e múltiplos clientes com threads.
+
+- [Market System](https://davidericson.vercel.app/projetos/market-system): sistema de mercado em Python com gerenciamento de produtos, carrinho de compras e persistência em SQLite.
+
+- [YouTube CLI Downloader](https://davidericson.vercel.app/projetos/youtube-cli-downloader): ferramenta de linha de comando para baixar vídeos e extrair áudios do YouTube, com suporte a playlists e diretórios personalizados.
+
+- [Spacionave](https://davidericson.vercel.app/projetos/spacionave): jogo endless runner desenvolvido em Python com Pygame, com combate, obstáculos, animações, pontuação e sistema de áudio.
+
+- [Discord TierMaker](https://davidericson.vercel.app/projetos/discord-tiermaker): bot para Discord que permite criar enquetes diretamente dentro de servidores utilizando comandos slash e o sistema nativo de polls da plataforma.
+
+- [DavidLog](https://davidericson.vercel.app/projetos/davidlog): blog minimalista desenvolvido em PHP para explorar fundamentos da linguagem, deploy automatizado, cache de assets e publicação em hospedagem compartilhada.
+
+## Perfil profissional
+
+- [GitHub](https://github.com/DavidEricson00): código-fonte e projetos de David Ericson.
+- [LinkedIn](https://www.linkedin.com/in/davidericson00/): perfil profissional.
+
+## Tecnologias
+
+Node.js, TypeScript, JavaScript, NestJS, Express, React, Next.js, PostgreSQL, MongoDB, Redis, Prisma, TypeORM, Docker, AWS, RabbitMQ, Laravel, PHP, Java, Spring Boot, Python, n8n, Ollama, Gemini, Socket.IO, Godot e outras tecnologias utilizadas nos projetos apresentados no portfólio.
+
+## Conteúdo técnico
+
+- [Blog](https://davidericson.vercel.app/blog): artigos e conteúdos sobre desenvolvimento de software, backend, arquitetura de sistemas e tecnologias.
