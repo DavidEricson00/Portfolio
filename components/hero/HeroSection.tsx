@@ -119,6 +119,7 @@ export function HeroSection() {
               width={768}
               height={768}
               priority
+              fetchPriority="high"
               sizes="(max-width: 640px) 290px, (max-width: 1024px) 480px, 768px"
               className="hero-image"
             />
