@@ -36,7 +36,7 @@ export const projects: Project[] = [
       "docker",
       "eslint",
       "sqlite",
-  "prettier",
+      "prettier",
     ]),
     repositoryUrl: "https://github.com/DavidEricson00/LetterDrop",
     featured: true,
@@ -1224,7 +1224,6 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "vite",
       "tailwindcss",
       "axios",
-      "reactrouter",
       "zustand",
       "mysql",
       "reactrouter",
@@ -1727,7 +1726,7 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
   // ============================================================
   // STICKIT
   // ============================================================
-  
+
   {
     id: "stickit",
     slug: "stickit",
@@ -2506,7 +2505,6 @@ O resultado combina desenvolvimento web, narrativa, ilustração e interação c
       "typescript",
       "vite",
       "mui",
-      "reactrouter",
       "reacthookform",
       "yup",
       "axios",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import type { Technology } from "@/types/technology";
@@ -12,8 +13,10 @@ export type TechnologyPillProps = {
 };
 
 export function TechnologyPill({ technology, onClick }: TechnologyPillProps) {
+  const [imageError, setImageError] = useState(false);
   const router = useRouter();
   const config = technologyCategoryConfig[technology.category];
+  const initial = technology.name ? technology.name.charAt(0).toUpperCase() : "?";
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -41,15 +44,22 @@ export function TechnologyPill({ technology, onClick }: TechnologyPillProps) {
         } as React.CSSProperties
       }
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={technology.iconUrl}
-        alt={technology.name}
-        className="tech-pill-icon"
-        loading="lazy"
-        width={14}
-        height={14}
-      />
+      {!imageError && technology.iconUrl ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={technology.iconUrl}
+          alt={technology.name}
+          className="tech-pill-icon"
+          loading="lazy"
+          width={14}
+          height={14}
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        <span className="tech-pill-fallback-icon" aria-hidden="true">
+          {initial}
+        </span>
+      )}
       <span className="tech-pill-name">{technology.name}</span>
     </motion.button>
   );

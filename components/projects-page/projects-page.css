@@ -365,6 +365,26 @@
   flex-shrink: 0;
 }
 
+.technology-filter-fallback-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--filter-accent, var(--primary));
+  background: color-mix(in srgb, var(--filter-accent, var(--primary)) 20%, rgba(255, 255, 255, 0.05));
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.technology-filter-pill-selected .technology-filter-fallback-icon {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .technology-filter-label {
   line-height: 1;
 }

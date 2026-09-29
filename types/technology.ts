@@ -9,7 +9,7 @@ export type Technology = {
   id: string;
   name: string;
   category: TechnologyCategory;
-  iconUrl: string;
+  iconUrl?: string;
   featured: boolean;
   ranking: number;
 };

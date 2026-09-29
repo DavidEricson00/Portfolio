@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Technology } from "@/types/technology";
 import { technologyCategoryConfig } from "@/types/technology";
@@ -7,16 +8,17 @@ import { technologyCategoryConfig } from "@/types/technology";
 export type SkillItemProps = {
   technology: Technology;
   onClick?: (technology: Technology) => void;
-  /** Retorna true se o marquee está num estado de drag - evita navegação acidental */
   getHasDragged?: () => boolean;
 };
 
 export function SkillItem({ technology, onClick, getHasDragged }: SkillItemProps) {
+  const [imageError, setImageError] = useState(false);
   const router = useRouter();
   const config = technologyCategoryConfig[technology.category];
+  const initial = technology.name ? technology.name.charAt(0).toUpperCase() : "?";
+  const showFallback = imageError || !technology.iconUrl;
 
   const handleClick = (e: React.MouseEvent) => {
-    // Aborta o clique se o usuário estava arrastando o marquee
     if (getHasDragged?.()) {
       e.preventDefault();
       e.stopPropagation();
@@ -45,17 +47,26 @@ export function SkillItem({ technology, onClick, getHasDragged }: SkillItemProps
         } as React.CSSProperties
       }
     >
-      <div className="skill-item-icon-wrap">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={technology.iconUrl}
-          alt={technology.name}
-          className="skill-item-icon"
-          loading="lazy"
-          width={32}
-          height={32}
-          draggable={false} // IMPORTANTE: Impede o arrasto nativo da imagem no navegador
-        />
+      <div
+        className={`skill-item-icon-wrap${showFallback ? " skill-item-icon-wrap-fallback" : ""}`}
+      >
+        {!showFallback ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={technology.iconUrl}
+            alt={technology.name}
+            className="skill-item-icon"
+            loading="lazy"
+            width={32}
+            height={32}
+            draggable={false}
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <span className="skill-item-fallback-icon" aria-hidden="true">
+            {initial}
+          </span>
+        )}
       </div>
     </button>
   );
