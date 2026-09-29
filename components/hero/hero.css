@@ -551,7 +551,7 @@
 
   .hero-visual {
     width: 100%;
-    height: 360px;
+    height: 290px;
 
     margin-top: 0;
 
@@ -559,21 +559,21 @@
   }
 
   .hero-image-wrapper {
-    width: 360px;
-    height: 360px;
+    width: 290px;
+    height: 290px;
 
     left: 50%;
     bottom: 0;
   }
 
   .hero-image {
-    width: 360px;
-    height: 360px;
+    width: 290px;
+    height: 290px;
   }
 
   .hero-image-halo {
-    width: 320px;
-    height: 320px;
+    width: 260px;
+    height: 260px;
 
     bottom: 0;
   }
