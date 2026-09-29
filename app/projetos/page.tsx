@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { ProjectsPageContent } from "@/components/projects-page/ProjectsPageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildProjectListSchema } from "@/lib/seo/schemas/collection";
@@ -42,36 +41,14 @@ export const metadata: Metadata = {
   },
 };
 
-function ProjectsLoadingFallback() {
-  return (
-    <main className="projects-page-container">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "400px",
-          color: "var(--muted)",
-          fontFamily: "var(--font-geist-mono), monospace",
-          fontSize: "0.9rem",
-        }}
-      >
-        Carregando projetos...
-      </div>
-    </main>
-  );
-}
-
 export default function ProjectsPage() {
   const projects = getAllProjects();
 
   return (
     <>
       <JsonLd schema={buildProjectListSchema(projects)} />
-      <Suspense fallback={<ProjectsLoadingFallback />}>
-        <ProjectsPageContent />
-      </Suspense>
+
+      <ProjectsPageContent projects={projects} />
     </>
   );
 }
-

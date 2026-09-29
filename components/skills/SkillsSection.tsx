@@ -3,7 +3,11 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
-import type { Technology, TechnologyCategory } from "@/types/technology";
+import {
+  technologyCategoryConfig,
+  type Technology,
+  type TechnologyCategory,
+} from "@/types/technology";
 import { technologies } from "@/data/technologies.mock";
 import { SkillCategoryRow } from "./SkillCategoryRow";
 import { MoveHorizontal } from "lucide-react";
@@ -22,6 +26,7 @@ const CATEGORY_ROWS: {
 
 export function SkillsSection() {
   const router = useRouter();
+
   const technologiesByCategory = useMemo(() => {
     const map = new Map<TechnologyCategory, typeof technologies>();
     const featuredTechnologies = technologies.filter((tech) => tech.featured);
@@ -43,7 +48,7 @@ export function SkillsSection() {
   return (
     <section id="habilidades" className="home-section skills-section">
       <div className="home-section-container">
-        {/* Section Header */}
+
         <motion.header
           className="home-section-header"
           initial={{ opacity: 0, y: 12 }}
@@ -51,9 +56,13 @@ export function SkillsSection() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <p className="home-section-eyebrow">STACK & DOMÍNIO TÉCNICO</p>
+          <p className="home-section-eyebrow">
+            STACK & DOMÍNIO TÉCNICO
+          </p>
+
           <div className="home-section-header-row">
             <h2 className="home-section-title">Habilidades</h2>
+
             <div className="skills-drag-hint" aria-hidden="true">
               <MoveHorizontal size={15} />
               <span>Arraste para explorar</span>
@@ -61,16 +70,46 @@ export function SkillsSection() {
           </div>
         </motion.header>
 
-        {/* Categories Marquee Rows */}
+        <div className="sr-only">
+          <h3>Tecnologias utilizadas</h3>
+
+          {CATEGORY_ROWS.map(({ category }) => {
+            const list = technologiesByCategory.get(category) ?? [];
+
+            if (list.length === 0) return null;
+
+            return (
+              <div key={category}>
+                <h4>
+                  {technologyCategoryConfig[category]?.label ?? category}
+                </h4>
+
+                <ul>
+                  {list.map((tech) => (
+                    <li key={tech.id}>
+                      {tech.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
         <motion.div
           className="skills-rows-wrapper"
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.5, delay: 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{
+            duration: 0.5,
+            delay: 0.08,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
         >
           {CATEGORY_ROWS.map(({ category, direction }) => {
             const list = technologiesByCategory.get(category) ?? [];
+
             if (list.length === 0) return null;
 
             return (
