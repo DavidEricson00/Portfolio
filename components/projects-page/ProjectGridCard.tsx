@@ -1,12 +1,11 @@
 "use client";
 
-
-
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
 import { technologyCategoryConfig } from "@/types/technology";
+import { useState } from "react";
 
 function GithubIcon({ size = 15 }: { size?: number }) {
   return (
@@ -37,6 +36,8 @@ export function ProjectGridCard({
   onSelectTechnology,
 }: ProjectGridCardProps) {
   const router = useRouter();
+
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   const handleCardClick = () => {
     router.push(`/projetos/${project.slug}`);
@@ -153,15 +154,31 @@ export function ProjectGridCard({
                   }
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={tech.iconUrl}
-                    alt=""
-                    className="project-grid-tech-chip-icon"
-                    loading="lazy"
-                    width={13}
-                    height={13}
-                    aria-hidden="true"
-                  />
+                  {!imageErrors[tech.id] && tech.iconUrl ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={tech.iconUrl}
+                      alt=""
+                      className="project-grid-tech-chip-icon"
+                      loading="lazy"
+                      width={13}
+                      height={13}
+                      aria-hidden="true"
+                      onError={() =>
+                        setImageErrors((prev) => ({
+                          ...prev,
+                          [tech.id]: true,
+                        }))
+                      }
+                    />
+                  ) : (
+                    <span
+                      className="project-grid-tech-chip-fallback-icon"
+                      aria-hidden="true"
+                    >
+                      {tech.name ? tech.name.charAt(0).toUpperCase() : "?"}
+                    </span>
+                  )}
                   <span>{tech.name}</span>
                 </button>
               );

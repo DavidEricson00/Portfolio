@@ -385,6 +385,25 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.project-grid-tech-chip-fallback-icon {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--chip-accent, var(--primary));
+  background: color-mix(
+    in srgb,
+    var(--chip-accent, var(--primary)) 16%,
+    rgba(255, 255, 255, 0.05)
+  );
+  flex-shrink: 0;
+  line-height: 1;
+}
+
 .technology-filter-label {
   line-height: 1;
 }

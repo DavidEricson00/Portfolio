@@ -8,11 +8,9 @@ export const educations: Education[] = [
     institution:
       "Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE)",
     startDate: "07/2023",
-    endDate: "07/2027",
     grade: "8,92",
     highlights: [
       "Coeficiente de Rendimento (CR): 8,92.",
-      "122 créditos adquiridos até o momento.",
       "Formação abrangendo desenvolvimento de software, bancos de dados, engenharia de software, sistemas distribuídos, redes, inteligência artificial e gestão de projetos.",
       "Principais disciplinas concluídas: Algoritmos e Estruturas de Dados, Banco de Dados, Programação Orientada a Objetos, Sistemas Distribuídos, Engenharia de Software, Inteligência Artificial e Projetos de Sistemas Web.",
     ],
