@@ -4,11 +4,11 @@ const isDevelopment = process.env.NODE_ENV === "development";
 
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' ${isDevelopment ? "'unsafe-eval'" : ""} https://va.vercel-scripts.com;
+  script-src 'self' 'unsafe-inline' ${isDevelopment ? "'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https://i.imgur.com https://imgur.com https://img.itch.zone https://github.com https://user-images.githubusercontent.com https://skillicons.dev https://go-skill-icons.vercel.app;
   font-src 'self' data:;
-  connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://skillicons.dev https://go-skill-icons.vercel.app;
+  connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://skillicons.dev https://go-skill-icons.vercel.app https://firebase.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://www.google-analytics.com;
   frame-ancestors 'none';
   object-src 'none';
   base-uri 'self';
