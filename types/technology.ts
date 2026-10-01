@@ -14,13 +14,7 @@ export type Technology = {
   ranking: number;
 };
 
-export type TechnologyInput = {
-  name: string;
-  category: TechnologyCategory;
-  iconUrl?: string;
-  featured: boolean;
-  ranking: number;
-};
+export type TechnologyInput = Omit<Technology, "id">;
 
 export type CategoryConfig = {
   label: string;
