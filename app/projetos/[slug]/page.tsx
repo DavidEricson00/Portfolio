@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllProjects, getProjectBySlug } from "@/data/projects.mock";
+
+import {
+  getProjects,
+  getProjectBySlug,
+} from "@/lib/data/projects";
+
 import { getProjectSectionConfig } from "@/types/project";
+
 import { ProjectHero } from "@/components/projects/ProjectHero";
 import { ProjectSection } from "@/components/projects/ProjectSection";
+
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildProjectSchema } from "@/lib/seo/schemas/project";
 import { buildBreadcrumbSchema } from "@/lib/seo/schemas/breadcrumb";
+
 import { SITE_CONFIG } from "@/lib/seo/config";
+
 import "@/components/projects/project-detail.css";
 
 type PageProps = {
@@ -17,7 +26,8 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const projects = getAllProjects();
+  const projects = await getProjects();
+
   return projects.map((project) => ({
     slug: project.slug,
   }));
@@ -27,7 +37,8 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -47,7 +58,11 @@ export async function generateMetadata({
   return {
     title: project.name,
     description: project.summary,
-    alternates: { canonical: projectUrl },
+
+    alternates: {
+      canonical: projectUrl,
+    },
+
     openGraph: {
       type: "website",
       url: projectUrl,
@@ -64,6 +79,7 @@ export async function generateMetadata({
         },
       ],
     },
+
     twitter: {
       card: "summary_large_image",
       site: SITE_CONFIG.twitterHandle,
@@ -75,9 +91,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectDetailPage({ params }: PageProps) {
+export default async function ProjectDetailPage({
+  params,
+}: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -85,17 +104,28 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   const projectUrl = `${SITE_CONFIG.url}/projetos/${project.slug}`;
 
-  // Sort sections dynamically based on the central section configuration order
-  const sortedSections = [...project.sections].sort((a, b) => {
-    const orderA = getProjectSectionConfig(a.type).order;
-    const orderB = getProjectSectionConfig(b.type).order;
-    return orderA - orderB;
-  });
+  const sortedSections = [...project.sections].sort(
+    (a, b) => {
+      const orderA = getProjectSectionConfig(a.type).order;
+      const orderB = getProjectSectionConfig(b.type).order;
+
+      return orderA - orderB;
+    },
+  );
 
   const breadcrumbs = [
-    { name: "Home", url: SITE_CONFIG.url },
-    { name: "Projetos", url: `${SITE_CONFIG.url}/projetos` },
-    { name: project.name, url: projectUrl },
+    {
+      name: "Home",
+      url: SITE_CONFIG.url,
+    },
+    {
+      name: "Projetos",
+      url: `${SITE_CONFIG.url}/projetos`,
+    },
+    {
+      name: project.name,
+      url: projectUrl,
+    },
   ];
 
   return (
@@ -106,6 +136,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           buildProjectSchema(project),
         ]}
       />
+
       <main className="project-detail-page">
         <div className="project-detail-container">
           <ProjectHero project={project} />
@@ -116,7 +147,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 key={section.id}
                 section={section}
                 projectName={project.name}
-                isLast={index === sortedSections.length - 1}
+                isLast={
+                  index === sortedSections.length - 1
+                }
               />
             ))}
           </div>
@@ -125,4 +158,3 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     </>
   );
 }
-

@@ -9,6 +9,7 @@ import { buildWebsiteSchema } from "@/lib/seo/schemas/website";
 import { SITE_CONFIG } from "@/lib/seo/config";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { getTechnologies } from "@/lib/data/technologies";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,16 +77,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: LayoutProps<"/">) {
+  const technologies = await getTechnologies();
+
   return (
     <html
       lang={SITE_CONFIG.language}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <JsonLd schema={[buildPersonSchema(), buildWebsiteSchema()]} />
+        <JsonLd
+          schema={[
+            buildPersonSchema(technologies),
+            buildWebsiteSchema(),
+          ]}
+        />
+
         <Header />
         {children}
         <Footer />

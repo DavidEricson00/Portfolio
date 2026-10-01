@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ProjectsPageContent } from "@/components/projects-page/ProjectsPageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildProjectListSchema } from "@/lib/seo/schemas/collection";
-import { getAllProjects } from "@/data/projects.mock";
+import { getProjects } from "@/lib/data/projects";
 import { SITE_CONFIG } from "@/lib/seo/config";
 import { getTechnologies } from "@/lib/data/technologies";
 
@@ -43,14 +43,19 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const projects = getAllProjects();
-  const technologies = await getTechnologies();
+  const [projects, technologies] = await Promise.all([
+    getProjects(),
+    getTechnologies(),
+  ]);
 
   return (
     <>
       <JsonLd schema={buildProjectListSchema(projects)} />
 
-      <ProjectsPageContent projects={projects} technologies={technologies} />
+      <ProjectsPageContent
+        projects={projects}
+        technologies={technologies}
+      />
     </>
   );
 }
