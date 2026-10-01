@@ -3,7 +3,7 @@ import type {
   ExperienceTechnology,
   ExperienceWithTechnologies,
 } from "@/types/experience";
-import { technologiesById } from "./technologies.mock";
+import { Technology } from "@/types/technology";
 
 export const experiences: Experience[] = [
   {
@@ -96,7 +96,13 @@ export const experienceTechnologies: ExperienceTechnology[] = [
   { experienceId: "exp-secretaria-educacao", technologyId: "tanstackquery" },
 ];
 
-export function getExperiencesWithTechnologies(): ExperienceWithTechnologies[] {
+export function getExperiencesWithTechnologies(
+  technologies: Technology[]
+): ExperienceWithTechnologies[] {
+  const technologiesById = new Map(
+    technologies.map((technology) => [technology.id, technology])
+  );
+
   return experiences.map((exp) => {
     const techLinks = experienceTechnologies.filter(
       (pivot) => pivot.experienceId === exp.id
@@ -104,7 +110,7 @@ export function getExperiencesWithTechnologies(): ExperienceWithTechnologies[] {
 
     const resolvedTechnologies = techLinks
       .map((pivot) => technologiesById.get(pivot.technologyId))
-      .filter((tech): tech is NonNullable<typeof tech> => Boolean(tech));
+      .filter((tech): tech is Technology => Boolean(tech));
 
     return {
       ...exp,

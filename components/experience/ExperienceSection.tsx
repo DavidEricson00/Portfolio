@@ -1,14 +1,20 @@
 "use client";
 
-import { useMemo } from "react";
 import { motion } from "motion/react";
+import type { Technology } from "@/types/technology";
 import { getExperiencesWithTechnologies } from "@/data/experience.mock";
 import { ExperienceStats } from "./ExperienceStats";
 import { ExperienceTimeline } from "./ExperienceTimeline";
 import "./experience.css";
 
-export function ExperienceSection() {
-  const experiences = useMemo(() => getExperiencesWithTechnologies(), []);
+type ExperienceSectionProps = {
+  technologies: Technology[];
+};
+
+export function ExperienceSection({
+  technologies,
+}: ExperienceSectionProps) {
+  const experiences = getExperiencesWithTechnologies(technologies);
 
   return (
     <section id="experiencia" className="home-section experience-section">

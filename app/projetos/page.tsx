@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildProjectListSchema } from "@/lib/seo/schemas/collection";
 import { getAllProjects } from "@/data/projects.mock";
 import { SITE_CONFIG } from "@/lib/seo/config";
+import { getTechnologies } from "@/lib/data/technologies";
 
 export const metadata: Metadata = {
   title: "Projetos",
@@ -41,14 +42,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
   const projects = getAllProjects();
+  const technologies = await getTechnologies();
 
   return (
     <>
       <JsonLd schema={buildProjectListSchema(projects)} />
 
-      <ProjectsPageContent projects={projects} />
+      <ProjectsPageContent projects={projects} technologies={technologies} />
     </>
   );
 }

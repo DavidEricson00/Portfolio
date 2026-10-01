@@ -3,23 +3,21 @@
 import { useState, useMemo, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import type { Project } from "@/types/project";
-import { technologies } from "@/data/technologies.mock";
 import { ProjectsHeader } from "./ProjectsHeader";
 import { ProjectSearch } from "./ProjectSearch";
 import { TechnologyFilterGroup } from "./TechnologyFilterGroup";
 import { ProjectGrid } from "./ProjectGrid";
 import "./projects-page.css";
+import type { Technology } from "@/types/technology";
 
-export type ProjectsPageContentProps = {
+type ProjectsPageContentProps = {
   projects: Project[];
+  technologies: Technology[];
 };
 
-// ----------------------------------------------------------------------
-// 1. COMPONENTE DE UI PURO (APRESENTAÇÃO)
-// Não sabe nada sobre URL, rotas ou Suspense. Apenas renderiza os dados.
-// ----------------------------------------------------------------------
 type ProjectsUIProps = {
   projects: Project[];
+  technologies: Technology[];
   searchQuery: string;
   selectedTechIds: string[];
   onSearchChange: (query: string) => void;
@@ -29,6 +27,7 @@ type ProjectsUIProps = {
 
 function ProjectsUI({
   projects,
+  technologies,
   searchQuery,
   selectedTechIds,
   onSearchChange,
@@ -114,11 +113,10 @@ function ProjectsUI({
   );
 }
 
-// ----------------------------------------------------------------------
-// 2. COMPONENTE LÓGICO (CLIENT-SIDE COM HOOKS DE NAVEGAÇÃO)
-// Lê a URL e passa os estados para o componente de apresentação
-// ----------------------------------------------------------------------
-function ProjectsLogic({ projects }: ProjectsPageContentProps) {
+function ProjectsLogic({
+  projects,
+  technologies,
+}: ProjectsPageContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -129,7 +127,9 @@ function ProjectsLogic({ projects }: ProjectsPageContentProps) {
 
   const [selectedTechIds, setSelectedTechIds] = useState<string[]>(() => {
     const techParam = searchParams.get("tech");
+
     if (!techParam) return [];
+
     return techParam
       .split(",")
       .map((t) => t.trim().toLowerCase())
@@ -149,6 +149,7 @@ function ProjectsLogic({ projects }: ProjectsPageContentProps) {
         .split(",")
         .map((t) => t.trim().toLowerCase())
         .filter(Boolean);
+
       setSelectedTechIds(parsed);
     } else {
       setSelectedTechIds([]);
@@ -200,6 +201,7 @@ function ProjectsLogic({ projects }: ProjectsPageContentProps) {
   return (
     <ProjectsUI
       projects={projects}
+      technologies={technologies}
       searchQuery={searchQuery}
       selectedTechIds={selectedTechIds}
       onSearchChange={handleSearchChange}
@@ -209,17 +211,16 @@ function ProjectsLogic({ projects }: ProjectsPageContentProps) {
   );
 }
 
-// ----------------------------------------------------------------------
-// 3. EXPORT PRINCIPAL (WRAPPER COM SUSPENSE E FALLBACK ESTATICO)
-// ----------------------------------------------------------------------
-export function ProjectsPageContent({ projects }: ProjectsPageContentProps) {
+export function ProjectsPageContent({
+  projects,
+  technologies,
+}: ProjectsPageContentProps) {
   return (
     <Suspense
-      // Este Fallback renderiza a UI estática com os filtros zerados.
-      // É exatamente isso que os Crawlers de SEO e o HTML Inicial (SSR) verão.
       fallback={
         <ProjectsUI
           projects={projects}
+          technologies={technologies}
           searchQuery=""
           selectedTechIds={[]}
           onSearchChange={() => {}}
@@ -228,8 +229,10 @@ export function ProjectsPageContent({ projects }: ProjectsPageContentProps) {
         />
       }
     >
-      {/* Somente a parte lógica que utiliza useSearchParams é suspensa */}
-      <ProjectsLogic projects={projects} />
+      <ProjectsLogic
+        projects={projects}
+        technologies={technologies}
+      />
     </Suspense>
   );
 }

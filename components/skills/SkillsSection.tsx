@@ -8,7 +8,6 @@ import {
   type Technology,
   type TechnologyCategory,
 } from "@/types/technology";
-import { technologies } from "@/data/technologies.mock";
 import { SkillCategoryRow } from "./SkillCategoryRow";
 import { MoveHorizontal } from "lucide-react";
 import "./skills.css";
@@ -24,22 +23,28 @@ const CATEGORY_ROWS: {
   { category: "ferramentas_outros", direction: "left-to-right" },
 ];
 
-export function SkillsSection() {
+type SkillsSectionProps = {
+  technologies: Technology[];
+};
+
+export function SkillsSection({
+  technologies,
+}: SkillsSectionProps) {
   const router = useRouter();
 
   const technologiesByCategory = useMemo(() => {
-    const map = new Map<TechnologyCategory, typeof technologies>();
+    const map = new Map<TechnologyCategory, Technology[]>();
     const featuredTechnologies = technologies.filter((tech) => tech.featured);
 
     CATEGORY_ROWS.forEach(({ category }) => {
       map.set(
         category,
-        featuredTechnologies.filter((tech) => tech.category === category)
+        featuredTechnologies.filter((tech) => tech.category === category),
       );
     });
 
     return map;
-  }, []);
+  }, [technologies]);
 
   const handleSelectTechnology = (tech: Technology) => {
     router.push(`/projetos?tech=${encodeURIComponent(tech.id)}`);

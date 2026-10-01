@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildProfilePageSchema } from "@/lib/seo/schemas/profile-page";
 import { SITE_CONFIG } from "@/lib/seo/config";
 import "./home.css";
+import { getTechnologies } from "@/lib/data/technologies";
 
 export const metadata: Metadata = {
   title: `${SITE_CONFIG.name} | Fullstack Dev`,
@@ -44,16 +45,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const technologies = await getTechnologies();
+
   return (
     <>
-      <JsonLd schema={buildProfilePageSchema()} />
+      <JsonLd schema={buildProfilePageSchema(technologies)} />
       <main>
         <SectionProgress />
         <HeroSection />
-        <ExperienceSection />
+        <ExperienceSection technologies={technologies} />
         <ProjectsSection />
-        <SkillsSection />
+        <SkillsSection technologies={technologies} />
         <EducationSection />
         <ContactSection />
       </main>

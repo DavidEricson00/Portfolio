@@ -1,7 +1,7 @@
 // lib/seo/schemas/person.ts
 import { SITE_CONFIG } from "../config";
 import { getAllEducations } from "@/data/education.mock";
-import { technologies } from "@/data/technologies.mock";
+import type { Technology } from "@/types/technology";
 
 // Tecnologias que valem como knowsAbout (principais)
 const KNOW_ABOUT_CATEGORIES = ["backend", "banco_dados_orm", "cloud_devops"];
@@ -17,7 +17,7 @@ export const PROGRAMMING_LANGUAGE_IDS = [
   "c",
 ];
 
-export function buildPersonSchema() {
+export function buildPersonSchema(technologies: Technology[]) {
   const educations = getAllEducations();
   const degree = educations.find((e) => e.category === "graduacao");
   const technical = educations.find((e) => e.category === "tecnico");
@@ -48,7 +48,7 @@ export function buildPersonSchema() {
     jobTitle: SITE_CONFIG.jobTitle,
     description: SITE_CONFIG.description,
     sameAs: [SITE_CONFIG.github, SITE_CONFIG.linkedin],
-    knowsAbout: knowsAbout,
-    alumniOf: alumniOf,
+    knowsAbout,
+    alumniOf,
   };
 }

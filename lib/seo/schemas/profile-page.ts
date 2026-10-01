@@ -1,7 +1,8 @@
 // lib/seo/schemas/profile-page.ts
+import { Technology } from "@/types/technology";
 import { SITE_CONFIG } from "../config";
 
-export function buildProfilePageSchema() {
+export function buildProfilePageSchema(technologies: Technology[]) {
   return {
     "@context": "https://schema.org" as const,
     "@type": "ProfilePage" as const,
