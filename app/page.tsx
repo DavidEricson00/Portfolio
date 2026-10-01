@@ -15,6 +15,7 @@ import { SITE_CONFIG } from "@/lib/seo/config";
 
 import { getTechnologies } from "@/lib/data/technologies";
 import { getFeaturedProjects } from "@/lib/data/projects";
+import { getExperiences } from "@/lib/data/experiences";
 
 import "./home.css";
 
@@ -55,11 +56,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const [technologies, featuredProjects] =
-    await Promise.all([
-      getTechnologies(),
-      getFeaturedProjects(),
-    ]);
+  const [
+    technologies,
+    featuredProjects,
+    experiences,
+  ] = await Promise.all([
+    getTechnologies(),
+    getFeaturedProjects(),
+    getExperiences(),
+  ]);
 
   return (
     <>
@@ -73,7 +78,7 @@ export default async function Home() {
         <HeroSection />
 
         <ExperienceSection
-          technologies={technologies}
+          experiences={experiences}
         />
 
         <ProjectsSection
