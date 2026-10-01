@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getProjects } from "@/lib/data/projects";
-import { getAllPosts } from "@/data/posts.mock";
+import { getPosts } from "@/lib/data/posts";
 
 import { SITE_CONFIG } from "@/lib/seo/config";
 
@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const [projects, posts] = await Promise.all([
     getProjects(),
-    Promise.resolve(getAllPosts()),
+    getPosts(),
   ]);
 
   return [

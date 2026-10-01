@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllPosts } from "@/data/posts.mock";
+import { getPosts } from "@/lib/data/posts";
 import { BlogTimelineItem } from "@/components/blog/BlogTimelineItem";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildBlogListSchema } from "@/lib/seo/schemas/collection";
@@ -42,23 +42,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getPosts();
 
   return (
     <>
       <JsonLd schema={buildBlogListSchema(posts)} />
+
       <main className="blog-page-container">
         <header className="blog-page-header">
-          <span className="blog-page-eyebrow">BLOG & ARTIGOS</span>
-          <h1 className="blog-page-title">Anotações de um Desenvolvedor</h1>
+          <span className="blog-page-eyebrow">
+            BLOG & ARTIGOS
+          </span>
+
+          <h1 className="blog-page-title">
+            Anotações de um Desenvolvedor
+          </h1>
+
           <p className="blog-page-description">
-            Coisas que eu aprendi, construí, descobri e achei interessante 
+            Coisas que eu aprendi, construí, descobri e achei interessante
             o bastante para escrever sobre.
           </p>
         </header>
 
-        <section className="blog-timeline" aria-label="Lista de artigos">
+        <section
+          className="blog-timeline"
+          aria-label="Lista de artigos"
+        >
           {posts.map((post, index) => (
             <BlogTimelineItem
               key={post.id}
@@ -71,4 +81,3 @@ export default function BlogPage() {
     </>
   );
 }
-
