@@ -1,14 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
+
 import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/navigation/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+
 import { buildPersonSchema } from "@/lib/seo/schemas/person";
 import { buildWebsiteSchema } from "@/lib/seo/schemas/website";
 import { SITE_CONFIG } from "@/lib/seo/config";
+
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { getTechnologies } from "@/lib/data/technologies";
 
 const geistSans = Geist({
@@ -30,26 +35,55 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
+
   title: {
     template: `%s | ${SITE_CONFIG.name}`,
     default: `${SITE_CONFIG.name} | Fullstack Dev`,
   },
+
   description: SITE_CONFIG.description,
+
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
-  robots: { index: true, follow: true },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/icon.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
+
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
+
   manifest: "/site.webmanifest",
+
   openGraph: {
     siteName: SITE_CONFIG.siteName,
     locale: SITE_CONFIG.locale,
@@ -57,6 +91,7 @@ export const metadata: Metadata = {
     url: SITE_CONFIG.url,
     title: `${SITE_CONFIG.name} | Fullstack Dev`,
     description: SITE_CONFIG.description,
+
     images: [
       {
         url: `${SITE_CONFIG.url}/og-image.png`,
@@ -67,13 +102,16 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     site: SITE_CONFIG.twitterHandle,
     creator: SITE_CONFIG.twitterHandle,
     title: `${SITE_CONFIG.name} | Fullstack Dev`,
     description: SITE_CONFIG.description,
-    images: [`${SITE_CONFIG.url}/og-image.png`],
+    images: [
+      `${SITE_CONFIG.url}/og-image.png`,
+    ],
   },
 };
 
@@ -90,13 +128,15 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <JsonLd
           schema={[
-            buildPersonSchema(technologies),
+            await buildPersonSchema(technologies),
             buildWebsiteSchema(),
           ]}
         />
 
         <Header />
+
         {children}
+
         <Footer />
 
         <Analytics />

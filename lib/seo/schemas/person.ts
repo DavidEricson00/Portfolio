@@ -1,10 +1,14 @@
-// lib/seo/schemas/person.ts
 import { SITE_CONFIG } from "../config";
-import { getAllEducations } from "@/data/education.mock";
+import { getEducations } from "@/lib/data/education";
 import type { Technology } from "@/types/technology";
 
 // Tecnologias que valem como knowsAbout (principais)
-const KNOW_ABOUT_CATEGORIES = ["backend", "banco_dados_orm", "cloud_devops"];
+const KNOW_ABOUT_CATEGORIES = [
+  "backend",
+  "banco_dados_orm",
+  "cloud_devops",
+];
+
 const KNOW_ABOUT_MAX = 15;
 
 // Linguagens de programação reais para programmingLanguage
@@ -17,13 +21,23 @@ export const PROGRAMMING_LANGUAGE_IDS = [
   "c",
 ];
 
-export function buildPersonSchema(technologies: Technology[]) {
-  const educations = getAllEducations();
-  const degree = educations.find((e) => e.category === "graduacao");
-  const technical = educations.find((e) => e.category === "tecnico");
+export async function buildPersonSchema(
+  technologies: Technology[],
+) {
+  const educations = await getEducations();
+
+  const degree = educations.find(
+    (e) => e.category === "graduacao",
+  );
+
+  const technical = educations.find(
+    (e) => e.category === "tecnico",
+  );
 
   const knowsAbout = technologies
-    .filter((t) => KNOW_ABOUT_CATEGORIES.includes(t.category))
+    .filter((t) =>
+      KNOW_ABOUT_CATEGORIES.includes(t.category),
+    )
     .map((t) => t.name)
     .slice(0, KNOW_ABOUT_MAX);
 
@@ -47,7 +61,10 @@ export function buildPersonSchema(technologies: Technology[]) {
     email: SITE_CONFIG.email,
     jobTitle: SITE_CONFIG.jobTitle,
     description: SITE_CONFIG.description,
-    sameAs: [SITE_CONFIG.github, SITE_CONFIG.linkedin],
+    sameAs: [
+      SITE_CONFIG.github,
+      SITE_CONFIG.linkedin,
+    ],
     knowsAbout,
     alumniOf,
   };

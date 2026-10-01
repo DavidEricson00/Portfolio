@@ -18,6 +18,7 @@ import { getFeaturedProjects } from "@/lib/data/projects";
 import { getExperiences } from "@/lib/data/experiences";
 
 import "./home.css";
+import { getEducations } from "@/lib/data/education";
 
 export const metadata: Metadata = {
   title: `${SITE_CONFIG.name} | Fullstack Dev`,
@@ -60,10 +61,12 @@ export default async function Home() {
     technologies,
     featuredProjects,
     experiences,
+    educations,
   ] = await Promise.all([
     getTechnologies(),
     getFeaturedProjects(),
     getExperiences(),
+    getEducations(),
   ]);
 
   return (
@@ -89,7 +92,9 @@ export default async function Home() {
           technologies={technologies}
         />
 
-        <EducationSection />
+        <EducationSection
+          educations={educations}
+        />
 
         <ContactSection />
       </main>
