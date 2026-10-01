@@ -14,6 +14,14 @@ export type Technology = {
   ranking: number;
 };
 
+export type TechnologyInput = {
+  name: string;
+  category: TechnologyCategory;
+  iconUrl?: string;
+  featured: boolean;
+  ranking: number;
+};
+
 export type CategoryConfig = {
   label: string;
   accentColor: string;
