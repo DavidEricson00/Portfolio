@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { contactChannels } from "@/data/contact.mock";
+import { contactChannels } from "@/data/contact";
 import { ContactIcon } from "./ContactIcon";
 
 export function ContactChannels() {

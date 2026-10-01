@@ -1,4 +1,4 @@
-import { contactChannels } from "@/data/contact.mock";
+import { contactChannels } from "@/data/contact";
 import { ArrowUpRight } from "lucide-react";
 import "./footer.css";
 

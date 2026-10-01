@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
-import { MAIN_NAV_ROUTES } from "@/data/navigation.mock";
+import { MAIN_NAV_ROUTES } from "@/data/navigation";
 import "./header.css";
 
 export function Header() {

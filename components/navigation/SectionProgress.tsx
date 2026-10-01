@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { HOME_SECTIONS } from "@/data/navigation.mock";
+import { HOME_SECTIONS } from "@/data/navigation";
 import "./section-progress.css";
 
 export function SectionProgress() {
