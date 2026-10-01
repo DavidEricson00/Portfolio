@@ -10,10 +10,11 @@ export type Experience = {
   points: string[];
 };
 
-export type ExperienceTechnology = {
-  experienceId: string;
-  technologyId: string;
+export type ExperienceDocument = Omit<Experience, "id"> & {
+  technologyIds: string[];
 };
+
+export type ExperienceInput = ExperienceDocument;
 
 export type ExperienceWithTechnologies = Experience & {
   technologies: Technology[];
