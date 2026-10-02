@@ -9,6 +9,10 @@ import "./header.css";
 export function Header() {
   const pathname = usePathname();
 
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <div className="global-header-wrapper">
       <motion.header

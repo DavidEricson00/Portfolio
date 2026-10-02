@@ -30,7 +30,12 @@ export default function AdminGuard({ children }: AdminGuardProps) {
   }, [router]);
 
   if (checking) {
-    return <p>Verificando autenticação...</p>;
+    return (
+      <div className="admin-loading-screen">
+        <div className="admin-loading-spinner" />
+        <p>Verificando autenticação...</p>
+      </div>
+    );
   }
 
   if (!user) {
