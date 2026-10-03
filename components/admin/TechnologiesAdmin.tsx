@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
+  ChevronDown,
   Pencil,
   Plus,
   Search,
@@ -179,10 +180,6 @@ export default function TechnologiesAdmin({
           <div className="admin-page-title-row">
             <h1 className="admin-page-title">Tecnologias</h1>
           </div>
-
-          <p className="admin-placeholder-desc">
-            Gerencie as tecnologias utilizadas no portfólio.
-          </p>
         </div>
 
         <div className="admin-page-header-actions">
@@ -219,9 +216,7 @@ export default function TechnologiesAdmin({
               value={categoryFilter}
               onChange={(event) =>
                 setCategoryFilter(
-                  event.target.value as
-                    | "all"
-                    | TechnologyCategory,
+                  event.target.value as "all" | TechnologyCategory,
                 )
               }
               className="admin-select"
@@ -239,6 +234,12 @@ export default function TechnologiesAdmin({
                 </option>
               ))}
             </select>
+
+            <ChevronDown
+              size={18}
+              className="admin-select-icon"
+              aria-hidden="true"
+            />
           </div>
         </div>
 
@@ -278,17 +279,6 @@ export default function TechnologiesAdmin({
                 ? "Cadastre sua primeira tecnologia para começar."
                 : "Tente alterar a pesquisa ou o filtro de categoria."}
             </p>
-
-            {technologies.length === 0 && (
-              <button
-                type="button"
-                className="admin-btn admin-btn-primary"
-                onClick={openCreateModal}
-              >
-                <Plus size={18} />
-                Nova tecnologia
-              </button>
-            )}
           </div>
         ) : (
           <div className="admin-table-responsive">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
-import { X, Save, Plus } from "lucide-react";
+import { X, Save, Plus, ChevronDown } from "lucide-react";
 import type { Technology, TechnologyCategory, TechnologyInput } from "@/types/technology";
 import { technologyCategoryConfig } from "@/types/technology";
 
@@ -156,21 +156,37 @@ function TechnologyModalForm({
               <span>Categoria</span>
               <span className="required">*</span>
             </label>
-            <select
-              id="tech-category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value as TechnologyCategory)}
-              className={`admin-form-select ${errors.category ? "admin-form-input-error" : ""}`}
-              disabled={loading}
-            >
-              {CATEGORY_OPTIONS.map((catKey) => (
-                <option key={catKey} value={catKey}>
-                  {technologyCategoryConfig[catKey].label}
-                </option>
-              ))}
-            </select>
+
+            <div className="admin-select-wrapper">
+              <select
+                id="tech-category"
+                value={category}
+                onChange={(e) =>
+                  setCategory(e.target.value as TechnologyCategory)
+                }
+                className={`admin-form-select ${
+                  errors.category ? "admin-form-input-error" : ""
+                }`}
+                disabled={loading}
+              >
+                {CATEGORY_OPTIONS.map((catKey) => (
+                  <option key={catKey} value={catKey}>
+                    {technologyCategoryConfig[catKey].label}
+                  </option>
+                ))}
+              </select>
+
+              <ChevronDown
+                size={22}
+                className="admin-select-icon"
+                aria-hidden="true"
+              />
+            </div>
+
             {errors.category && (
-              <span className="admin-form-error-msg">{errors.category}</span>
+              <span className="admin-form-error-msg">
+                {errors.category}
+              </span>
             )}
           </div>
 
