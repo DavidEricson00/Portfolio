@@ -8,6 +8,7 @@ import type {
 } from "@/types/education";
 import { educationCategoryConfig } from "@/types/education";
 import { DynamicTextList } from "@/components/admin/DynamicTextList";
+import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
 import { slugify } from "@/lib/utils/slugify";
 
 interface EducationModalProps {
@@ -67,6 +68,7 @@ function EducationModalForm({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [isConfirmSaveOpen, setIsConfirmSaveOpen] = useState(false);
 
   function validate(): boolean {
     const newErrors: Record<string, string> = {};
@@ -91,11 +93,7 @@ function EducationModalForm({
     return Object.keys(newErrors).length === 0;
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-
-    if (!validate()) return;
-
+  async function executeSave() {
     setLoading(true);
     try {
       // Clean highlights - ignore empty strings
@@ -126,14 +124,29 @@ function EducationModalForm({
       }
 
       await onSave(id, data, isEditing);
+      setIsConfirmSaveOpen(false);
     } catch (err) {
       console.error("Erro ao salvar formação:", err);
       setErrors({
         form: "Ocorreu um erro ao salvar a formação. Tente novamente.",
       });
+      setIsConfirmSaveOpen(false);
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    if (isEditing) {
+      setIsConfirmSaveOpen(true);
+      return;
+    }
+
+    await executeSave();
   }
 
   return (
@@ -390,6 +403,14 @@ function EducationModalForm({
           </button>
         </div>
       </form>
+
+      <ConfirmSaveModal
+        isOpen={isConfirmSaveOpen}
+        itemName={title.trim() || undefined}
+        loading={loading}
+        onClose={() => setIsConfirmSaveOpen(false)}
+        onConfirm={executeSave}
+      />
     </div>
   );
 }

@@ -208,8 +208,6 @@
   justify-content: flex-end;
   gap: 14px;
   padding: 16px 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 14px;
 }
 

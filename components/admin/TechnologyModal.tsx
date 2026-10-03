@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { X, Save, Plus, ChevronDown } from "lucide-react";
 import type { Technology, TechnologyCategory, TechnologyInput } from "@/types/technology";
 import { technologyCategoryConfig } from "@/types/technology";
+import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
 
 interface TechnologyModalProps {
   isOpen: boolean;
@@ -43,6 +44,7 @@ function TechnologyModalForm({
   const [iconPreviewError, setIconPreviewError] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [isConfirmSaveOpen, setIsConfirmSaveOpen] = useState(false);
 
   function validate(): boolean {
     const newErrors: Record<string, string> = {};
@@ -75,11 +77,7 @@ function TechnologyModalForm({
     return Object.keys(newErrors).length === 0;
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-
-    if (!validate()) return;
-
+  async function executeSave() {
     setLoading(true);
     try {
       const data: TechnologyInput = {
@@ -91,12 +89,27 @@ function TechnologyModalForm({
       };
 
       await onSave(data);
+      setIsConfirmSaveOpen(false);
     } catch (err) {
       console.error("Erro ao salvar tecnologia:", err);
       setErrors({ form: "Ocorreu um erro ao salvar a tecnologia. Tente novamente." });
+      setIsConfirmSaveOpen(false);
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    if (isEditing) {
+      setIsConfirmSaveOpen(true);
+      return;
+    }
+
+    await executeSave();
   }
 
   const categoryConfig = technologyCategoryConfig[category];
@@ -315,6 +328,14 @@ function TechnologyModalForm({
           </button>
         </div>
       </form>
+
+      <ConfirmSaveModal
+        isOpen={isConfirmSaveOpen}
+        itemName={name.trim() || undefined}
+        loading={loading}
+        onClose={() => setIsConfirmSaveOpen(false)}
+        onConfirm={executeSave}
+      />
     </div>
   );
 }

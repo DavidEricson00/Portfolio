@@ -19,6 +19,7 @@ import type {
 import type { Technology } from "@/types/technology";
 import { TechnologySelector } from "@/components/admin/TechnologySelector";
 import { DynamicTextList } from "@/components/admin/DynamicTextList";
+import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
 import { createExperience, updateExperience } from "@/lib/data/experiences";
 import { slugify } from "@/lib/utils/slugify";
 
@@ -60,6 +61,7 @@ export default function ExperienceForm({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [globalError, setGlobalError] = useState<string | null>(null);
+  const [isConfirmSaveOpen, setIsConfirmSaveOpen] = useState(false);
 
   function validate(): boolean {
     const newErrors: Record<string, string> = {};
@@ -85,13 +87,7 @@ export default function ExperienceForm({
     return Object.keys(newErrors).length === 0;
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-
-    if (!validate()) {
-      return;
-    }
-
+  async function executeSave() {
     setLoading(true);
     setGlobalError(null);
 
@@ -122,6 +118,7 @@ export default function ExperienceForm({
         await createExperience(id, payload);
       }
 
+      setIsConfirmSaveOpen(false);
       router.push("/admin/experiencias");
       router.refresh();
     } catch (err: unknown) {
@@ -133,9 +130,25 @@ export default function ExperienceForm({
           : "Ocorreu um erro ao salvar a experiência. Tente novamente.";
 
       setGlobalError(errorMessage);
+      setIsConfirmSaveOpen(false);
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
+
+    if (isEditing) {
+      setIsConfirmSaveOpen(true);
+      return;
+    }
+
+    await executeSave();
   }
 
   return (
@@ -158,12 +171,6 @@ export default function ExperienceForm({
             {isEditing ? "Editar Experiência" : "Nova Experiência"}
           </h1>
         </div>
-
-        <p className="admin-placeholder-desc">
-          {isEditing
-            ? `Editando registro de ${initialData?.role} na ${initialData?.company}`
-            : "Cadastre uma nova experiência profissional com histórico, stack e realizações."}
-        </p>
       </div>
 
       {globalError && (
@@ -533,6 +540,18 @@ export default function ExperienceForm({
           </div>
         </div>
       </form>
+
+      <ConfirmSaveModal
+        isOpen={isConfirmSaveOpen}
+        itemName={
+          role.trim() && company.trim()
+            ? `${role.trim()} na ${company.trim()}`
+            : undefined
+        }
+        loading={loading}
+        onClose={() => setIsConfirmSaveOpen(false)}
+        onConfirm={executeSave}
+      />
     </div>
   );
 }

@@ -396,6 +396,7 @@
     opacity: 0;
     transform: scale(0.96) translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -446,7 +447,6 @@
 .admin-modal-footer {
   padding: 18px 24px;
   border-top: 1px solid var(--border);
-  background: rgba(15, 17, 24, 0.7);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -611,7 +611,7 @@
   pointer-events: none;
 }
 
-.admin-checkbox-label input[type="checkbox"]:checked + .admin-checkbox-custom {
+.admin-checkbox-label input[type="checkbox"]:checked+.admin-checkbox-custom {
   background: #526fd1;
   border-color: #6c8cff;
   color: #ffffff;
@@ -676,6 +676,12 @@
   margin: 0 auto 16px;
 }
 
+.admin-confirm-save-icon-wrap {
+  background: rgba(108, 140, 255, 0.12);
+  border-color: rgba(108, 140, 255, 0.3);
+  color: var(--primary-hover);
+}
+
 .admin-confirm-title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -724,6 +730,7 @@
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

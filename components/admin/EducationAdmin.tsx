@@ -138,9 +138,6 @@ export default function EducationAdmin({
           <div className="admin-page-title-row">
             <h1 className="admin-page-title">Formação</h1>
           </div>
-          <p className="admin-placeholder-desc">
-            Gerenciamento de graduações, pós-graduações, cursos e certificações.
-          </p>
         </div>
 
         <div className="admin-page-header-actions">
