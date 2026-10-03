@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, Loader2, CheckCircle2, AlertCircle, RefreshCw } from "lucide-react";
+import {
+  Send,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  RefreshCw,
+} from "lucide-react";
 import type { ContactFormData } from "@/types/contact";
 
 type FormErrors = Partial<Record<keyof ContactFormData, string>>;
@@ -10,13 +16,15 @@ type FormErrors = Partial<Record<keyof ContactFormData, string>>;
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
-    email: "",
+    contact: "",
     subject: "",
     message: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const validate = (): boolean => {
@@ -24,16 +32,22 @@ export function ContactForm() {
 
     if (!formData.name.trim()) {
       newErrors.name = "Por favor, informe seu nome.";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "O nome deve ter pelo menos 2 caracteres.";
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Por favor, informe seu e-mail.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      newErrors.email = "Informe um endereço de e-mail válido.";
+    if (!formData.contact.trim()) {
+      newErrors.contact =
+        "Por favor, informe uma forma de contato (e-mail, telefone ou rede social).";
+    } else if (formData.contact.trim().length < 3) {
+      newErrors.contact =
+        "Informe um contato válido com no mínimo 3 caracteres.";
     }
 
     if (!formData.subject.trim()) {
       newErrors.subject = "Por favor, informe o assunto.";
+    } else if (formData.subject.trim().length < 2) {
+      newErrors.subject = "O assunto deve ter pelo menos 2 caracteres.";
     }
 
     if (!formData.message.trim()) {
@@ -47,7 +61,7 @@ export function ContactForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -81,11 +95,13 @@ export function ContactForm() {
       }
 
       setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", contact: "", subject: "", message: "" });
     } catch (err: unknown) {
       setStatus("error");
       setErrorMessage(
-        err instanceof Error ? err.message : "Ocorreu um erro ao enviar. Tente novamente."
+        err instanceof Error
+          ? err.message
+          : "Ocorreu um erro ao enviar. Tente novamente.",
       );
     }
   };
@@ -113,7 +129,8 @@ export function ContactForm() {
             </div>
             <h3 className="contact-status-title">Mensagem enviada com sucesso!</h3>
             <p className="contact-status-text">
-              Obrigado pelo contato. Recebi sua mensagem e retornarei o mais breve possível.
+              Obrigado pelo contato. Recebi sua mensagem e retornarei o mais breve
+              possível.
             </p>
             <button
               type="button"
@@ -154,7 +171,9 @@ export function ContactForm() {
                 value={formData.name}
                 onChange={handleChange}
                 disabled={status === "submitting"}
-                className={`contact-input ${errors.name ? "contact-input-error" : ""}`}
+                className={`contact-input ${
+                  errors.name ? "contact-input-error" : ""
+                }`}
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? "name-error" : undefined}
               />
@@ -165,26 +184,28 @@ export function ContactForm() {
               )}
             </div>
 
-            {/* Field: E-mail */}
+            {/* Field: Contato (E-mail / Telefone / Rede Social) */}
             <div className="contact-field-group">
-              <label htmlFor="contact-email" className="contact-label">
-                E-mail <span className="contact-required">*</span>
+              <label htmlFor="contact-field" className="contact-label">
+                Contato <span className="contact-required">*</span>
               </label>
               <input
-                id="contact-email"
-                name="email"
-                type="email"
-                placeholder="seu.email@exemplo.com"
-                value={formData.email}
+                id="contact-field"
+                name="contact"
+                type="text"
+                placeholder="seu@email.com / (88) 99999-9999 / @seuinstagram"
+                value={formData.contact}
                 onChange={handleChange}
                 disabled={status === "submitting"}
-                className={`contact-input ${errors.email ? "contact-input-error" : ""}`}
-                aria-invalid={Boolean(errors.email)}
-                aria-describedby={errors.email ? "email-error" : undefined}
+                className={`contact-input ${
+                  errors.contact ? "contact-input-error" : ""
+                }`}
+                aria-invalid={Boolean(errors.contact)}
+                aria-describedby={errors.contact ? "contact-error" : undefined}
               />
-              {errors.email && (
-                <span id="email-error" className="contact-field-error">
-                  {errors.email}
+              {errors.contact && (
+                <span id="contact-error" className="contact-field-error">
+                  {errors.contact}
                 </span>
               )}
             </div>
@@ -202,7 +223,9 @@ export function ContactForm() {
                 value={formData.subject}
                 onChange={handleChange}
                 disabled={status === "submitting"}
-                className={`contact-input ${errors.subject ? "contact-input-error" : ""}`}
+                className={`contact-input ${
+                  errors.subject ? "contact-input-error" : ""
+                }`}
                 aria-invalid={Boolean(errors.subject)}
                 aria-describedby={errors.subject ? "subject-error" : undefined}
               />
@@ -226,7 +249,9 @@ export function ContactForm() {
                 value={formData.message}
                 onChange={handleChange}
                 disabled={status === "submitting"}
-                className={`contact-textarea ${errors.message ? "contact-input-error" : ""}`}
+                className={`contact-textarea ${
+                  errors.message ? "contact-input-error" : ""
+                }`}
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={errors.message ? "message-error" : undefined}
               />

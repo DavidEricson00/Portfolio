@@ -14,6 +14,7 @@ import "@/components/admin/experience-admin.css";
 import "@/components/admin/dynamic-text-list.css";
 import "@/components/admin/projects-admin.css";
 import "@/components/admin/posts-admin.css";
+import "@/components/admin/contacts-admin.css";
 
 export default function AdminLayout({
   children,

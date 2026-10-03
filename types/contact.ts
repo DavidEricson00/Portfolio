@@ -1,15 +1,15 @@
 export type ContactMessage = {
   id: string;
   name: string;
-  email: string;
+  contact: string;
   subject: string;
   message: string;
-  createdAt: Date | string;
+  createdAt: string;
 };
 
 export type ContactFormData = {
   name: string;
-  email: string;
+  contact: string;
   subject: string;
   message: string;
 };

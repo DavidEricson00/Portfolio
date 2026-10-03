@@ -9,7 +9,6 @@ import {
   Trash2,
   Calendar,
   FileText,
-  ExternalLink,
   Clock,
 } from "lucide-react";
 import type { Post } from "@/types/post";
