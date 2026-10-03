@@ -15,7 +15,13 @@ import {
   Star,
 } from "lucide-react";
 
-function GithubIcon({ size = 16, className = "" }: { size?: number; className?: string }) {
+function GithubIcon({
+  size = 16,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
   return (
     <svg
       width={size}
@@ -34,6 +40,7 @@ function GithubIcon({ size = 16, className = "" }: { size?: number; className?: 
     </svg>
   );
 }
+
 import type {
   Project,
   ProjectDocument,
@@ -65,11 +72,10 @@ export default function ProjectForm({
 
   // Basic Details
   const [name, setName] = useState(initialData?.name || "");
-  const [slug, setSlug] = useState(initialData?.slug || "");
-  const [slugManuallyModified, setSlugManuallyModified] = useState(isEditing);
-
   const [summary, setSummary] = useState(initialData?.summary || "");
-  const [coverImage, setCoverImage] = useState(initialData?.coverImage || "");
+  const [coverImage, setCoverImage] = useState(
+    initialData?.coverImage || "",
+  );
   const [repositoryUrl, setRepositoryUrl] = useState(
     initialData?.repositoryUrl || "",
   );
@@ -83,9 +89,9 @@ export default function ProjectForm({
   // Technologies
   const [technologyIds, setTechnologyIds] = useState<string[]>(
     initialData?.technologies?.map((t) => t.id) ||
-    (initialData as unknown as { technologyIds?: string[] })
-      ?.technologyIds ||
-    [],
+      (initialData as unknown as { technologyIds?: string[] })
+        ?.technologyIds ||
+      [],
   );
 
   // Highlights
@@ -96,6 +102,7 @@ export default function ProjectForm({
   // Sections (sorted by projectSectionConfigs[type].order)
   const [sections, setSections] = useState<ProjectSection[]>(() => {
     const rawSections = initialData?.sections || [];
+
     return [...rawSections].sort(
       (a, b) =>
         (projectSectionConfigs[a.type]?.order ?? 99) -
@@ -114,22 +121,11 @@ export default function ProjectForm({
     return sections.map((s) => s.type);
   }, [sections]);
 
-  // Auto-generate slug from name if not manually modified
   function handleNameChange(newName: string) {
     setName(newName);
-    if (!slugManuallyModified) {
-      setSlug(slugify(newName));
-    }
+
     if (errors.name) {
       setErrors((prev) => ({ ...prev, name: "" }));
-    }
-  }
-
-  function handleSlugChange(newSlug: string) {
-    setSlug(newSlug);
-    setSlugManuallyModified(true);
-    if (errors.slug) {
-      setErrors((prev) => ({ ...prev, slug: "" }));
     }
   }
 
@@ -162,7 +158,9 @@ export default function ProjectForm({
   }
 
   function handleRemoveSection(sectionId: string) {
-    setSections((current) => current.filter((s) => s.id !== sectionId));
+    setSections((current) =>
+      current.filter((s) => s.id !== sectionId),
+    );
   }
 
   function validate(): boolean {
@@ -172,15 +170,12 @@ export default function ProjectForm({
       newErrors.name = "O nome do projeto é obrigatório.";
     }
 
-    if (!slug.trim()) {
-      newErrors.slug = "O slug do projeto é obrigatório.";
-    }
-
     if (!summary.trim()) {
       newErrors.summary = "O resumo do projeto é obrigatório.";
     }
 
     const rankNum = Number(ranking);
+
     if (isNaN(rankNum) || rankNum < 1 || rankNum > 100) {
       newErrors.ranking = "O ranking deve ser um número entre 1 e 100.";
     }
@@ -188,7 +183,11 @@ export default function ProjectForm({
     if (coverImage.trim()) {
       try {
         const url = new URL(coverImage.trim(), "http://localhost");
-        if (!url.protocol.startsWith("http") && !coverImage.startsWith("/")) {
+
+        if (
+          !url.protocol.startsWith("http") &&
+          !coverImage.startsWith("/")
+        ) {
           newErrors.coverImage = "Informe uma URL válida de imagem.";
         }
       } catch {
@@ -200,7 +199,8 @@ export default function ProjectForm({
       try {
         new URL(repositoryUrl.trim());
       } catch {
-        newErrors.repositoryUrl = "Informe uma URL de repositório válida (ex: https://github.com/...).";
+        newErrors.repositoryUrl =
+          "Informe uma URL de repositório válida (ex: https://github.com/...).";
       }
     }
 
@@ -208,7 +208,8 @@ export default function ProjectForm({
       try {
         new URL(liveUrl.trim());
       } catch {
-        newErrors.liveUrl = "Informe uma URL pública válida (ex: https://...).";
+        newErrors.liveUrl =
+          "Informe uma URL pública válida (ex: https://...).";
       }
     }
 
@@ -221,6 +222,8 @@ export default function ProjectForm({
     setGlobalError(null);
 
     try {
+      const projectSlug = slugify(name.trim());
+
       // Clean highlights and section images
       const cleanedHighlights = highlights
         .map((h) => h.trim())
@@ -230,34 +233,40 @@ export default function ProjectForm({
         if (sec.type === "screenshots") {
           return {
             ...sec,
-            images: (sec.images || []).map((img) => img.trim()).filter(Boolean),
+            images: (sec.images || [])
+              .map((img) => img.trim())
+              .filter(Boolean),
           };
         }
+
         return sec;
       });
 
       const payload: ProjectDocument = {
         name: name.trim(),
-        slug: slug.trim().toLowerCase(),
+        slug: projectSlug,
         summary: summary.trim(),
         featured,
         ranking: Number(ranking),
         technologyIds,
         highlights: cleanedHighlights,
         sections: cleanedSections,
-        ...(coverImage.trim() ? { coverImage: coverImage.trim() } : {}),
+        ...(coverImage.trim()
+          ? { coverImage: coverImage.trim() }
+          : {}),
         ...(repositoryUrl.trim()
           ? { repositoryUrl: repositoryUrl.trim() }
           : {}),
         ...(liveUrl.trim() ? { liveUrl: liveUrl.trim() } : {}),
-        ...(dateCreated.trim() ? { dateCreated: dateCreated.trim() } : {}),
+        ...(dateCreated.trim()
+          ? { dateCreated: dateCreated.trim() }
+          : {}),
       };
 
       if (isEditing && initialData) {
         await updateProject(initialData.id, payload);
       } else {
-        const docId = payload.slug || slugify(payload.name) || `proj-${Date.now()}`;
-        await createProject(docId, payload);
+        await createProject(projectSlug, payload);
       }
 
       setIsConfirmSaveOpen(false);
@@ -265,10 +274,12 @@ export default function ProjectForm({
       router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao salvar projeto:", err);
+
       const errorMessage =
         err instanceof Error
           ? err.message
           : "Ocorreu um erro ao salvar o projeto. Tente novamente.";
+
       setGlobalError(errorMessage);
       setIsConfirmSaveOpen(false);
     } finally {
@@ -322,48 +333,30 @@ export default function ProjectForm({
               <span>Informações Gerais do Projeto</span>
             </h2>
 
-            <div className="admin-form-row">
-              {/* Nome */}
-              <div className="admin-form-group" style={{ flex: 1.5 }}>
-                <label htmlFor="proj-name" className="admin-form-label">
-                  <span>Nome do Projeto</span>
-                  <span className="required">*</span>
-                </label>
-                <input
-                  id="proj-name"
-                  type="text"
-                  placeholder="Ex: LetterDrop, Link Shortener..."
-                  value={name}
-                  onChange={(e) => handleNameChange(e.target.value)}
-                  className={`admin-form-input ${errors.name ? "admin-form-input-error" : ""
-                    }`}
-                  disabled={loading}
-                />
-                {errors.name && (
-                  <span className="admin-form-error-msg">{errors.name}</span>
-                )}
-              </div>
+            {/* Nome */}
+            <div className="admin-form-group">
+              <label htmlFor="proj-name" className="admin-form-label">
+                <span>Nome do Projeto</span>
+                <span className="required">*</span>
+              </label>
 
-              {/* Slug */}
-              <div className="admin-form-group" style={{ flex: 1.2 }}>
-                <label htmlFor="proj-slug" className="admin-form-label">
-                  <span>Slug Público (URL)</span>
-                  <span className="required">*</span>
-                </label>
-                <input
-                  id="proj-slug"
-                  type="text"
-                  placeholder="ex: letterdrop"
-                  value={slug}
-                  onChange={(e) => handleSlugChange(e.target.value)}
-                  className={`admin-form-input ${errors.slug ? "admin-form-input-error" : ""
-                    }`}
-                  disabled={loading}
-                />
-                {errors.slug && (
-                  <span className="admin-form-error-msg">{errors.slug}</span>
-                )}
-              </div>
+              <input
+                id="proj-name"
+                type="text"
+                placeholder="Ex: LetterDrop, Link Shortener..."
+                value={name}
+                onChange={(e) => handleNameChange(e.target.value)}
+                className={`admin-form-input ${
+                  errors.name ? "admin-form-input-error" : ""
+                }`}
+                disabled={loading}
+              />
+
+              {errors.name && (
+                <span className="admin-form-error-msg">
+                  {errors.name}
+                </span>
+              )}
             </div>
 
             {/* Resumo */}
@@ -372,6 +365,7 @@ export default function ProjectForm({
                 <span>Resumo / Subtítulo</span>
                 <span className="required">*</span>
               </label>
+
               <textarea
                 id="proj-summary"
                 rows={3}
@@ -379,16 +373,25 @@ export default function ProjectForm({
                 value={summary}
                 onChange={(e) => {
                   setSummary(e.target.value);
-                  if (errors.summary)
-                    setErrors((prev) => ({ ...prev, summary: "" }));
+
+                  if (errors.summary) {
+                    setErrors((prev) => ({
+                      ...prev,
+                      summary: "",
+                    }));
+                  }
                 }}
-                className={`admin-form-input ${errors.summary ? "admin-form-input-error" : ""
-                  }`}
+                className={`admin-form-input ${
+                  errors.summary ? "admin-form-input-error" : ""
+                }`}
                 style={{ resize: "vertical" }}
                 disabled={loading}
               />
+
               {errors.summary && (
-                <span className="admin-form-error-msg">{errors.summary}</span>
+                <span className="admin-form-error-msg">
+                  {errors.summary}
+                </span>
               )}
             </div>
 
@@ -398,8 +401,13 @@ export default function ProjectForm({
                 <label htmlFor="proj-cover" className="admin-form-label">
                   <span>URL da Imagem de Capa (Opcional)</span>
                 </label>
+
                 <div className="admin-input-wrapper">
-                  <ImageIcon size={16} className="admin-input-icon" />
+                  <ImageIcon
+                    size={16}
+                    className="admin-input-icon"
+                  />
+
                   <input
                     id="proj-cover"
                     type="text"
@@ -410,6 +418,7 @@ export default function ProjectForm({
                     disabled={loading}
                   />
                 </div>
+
                 {errors.coverImage && (
                   <span className="admin-form-error-msg">
                     {errors.coverImage}
@@ -421,6 +430,7 @@ export default function ProjectForm({
                 <label htmlFor="proj-date" className="admin-form-label">
                   <span>Data / Ano de Criação (Opcional)</span>
                 </label>
+
                 <input
                   id="proj-date"
                   type="text"
@@ -439,8 +449,13 @@ export default function ProjectForm({
                 <label htmlFor="proj-repo" className="admin-form-label">
                   <span>URL do Repositório GitHub (Opcional)</span>
                 </label>
+
                 <div className="admin-input-wrapper">
-                  <GithubIcon size={16} className="admin-input-icon" />
+                  <GithubIcon
+                    size={16}
+                    className="admin-input-icon"
+                  />
+
                   <input
                     id="proj-repo"
                     type="url"
@@ -451,6 +466,7 @@ export default function ProjectForm({
                     disabled={loading}
                   />
                 </div>
+
                 {errors.repositoryUrl && (
                   <span className="admin-form-error-msg">
                     {errors.repositoryUrl}
@@ -462,8 +478,13 @@ export default function ProjectForm({
                 <label htmlFor="proj-live" className="admin-form-label">
                   <span>URL da Aplicação no Ar (Opcional)</span>
                 </label>
+
                 <div className="admin-input-wrapper">
-                  <Globe size={16} className="admin-input-icon" />
+                  <Globe
+                    size={16}
+                    className="admin-input-icon"
+                  />
+
                   <input
                     id="proj-live"
                     type="url"
@@ -474,14 +495,20 @@ export default function ProjectForm({
                     disabled={loading}
                   />
                 </div>
+
                 {errors.liveUrl && (
-                  <span className="admin-form-error-msg">{errors.liveUrl}</span>
+                  <span className="admin-form-error-msg">
+                    {errors.liveUrl}
+                  </span>
                 )}
               </div>
             </div>
 
             {/* Ranking e Featured */}
-            <div className="admin-form-row" style={{ alignItems: "center" }}>
+            <div
+              className="admin-form-row"
+              style={{ alignItems: "center" }}
+            >
               <div className="admin-form-group" style={{ flex: 1 }}>
                 <label
                   className="admin-checkbox-label"
@@ -493,7 +520,9 @@ export default function ProjectForm({
                     onChange={(e) => setFeatured(e.target.checked)}
                     disabled={loading}
                   />
+
                   <div className="admin-checkbox-custom">✓</div>
+
                   <span className="admin-checkbox-text">
                     Projeto em destaque (Featured)
                   </span>
@@ -501,19 +530,28 @@ export default function ProjectForm({
               </div>
 
               <div className="admin-form-group" style={{ flex: 1.5 }}>
-                <label htmlFor="proj-ranking" className="admin-form-label">
+                <label
+                  htmlFor="proj-ranking"
+                  className="admin-form-label"
+                >
                   <span>Ranking de Relevância (1 a 100)</span>
                   <span className="required">*</span>
                 </label>
+
                 <div className="admin-range-container">
-                  <span className="admin-range-value">{ranking}</span>
+                  <span className="admin-range-value">
+                    {ranking}
+                  </span>
+
                   <input
                     id="proj-ranking"
                     type="range"
                     min={1}
                     max={100}
                     value={ranking}
-                    onChange={(e) => setRanking(Number(e.target.value))}
+                    onChange={(e) =>
+                      setRanking(Number(e.target.value))
+                    }
                     className="admin-range-slider"
                     disabled={loading}
                   />
@@ -528,6 +566,7 @@ export default function ProjectForm({
               <Sparkles size={18} />
               <span>Tecnologias do Projeto</span>
             </h2>
+
             <p className="admin-form-section-desc">
               Selecione as tecnologias utilizadas na arquitetura deste projeto.
             </p>
@@ -546,8 +585,10 @@ export default function ProjectForm({
               <Star size={18} />
               <span>Highlights & Pontos de Destaque</span>
             </h2>
+
             <p className="admin-form-section-desc">
-              Pontos-chave sobre decisões de arquitetura, mensageria, resiliência ou impacto.
+              Pontos-chave sobre decisões de arquitetura, mensageria,
+              resiliência ou impacto.
             </p>
 
             <DynamicTextList
@@ -574,10 +615,17 @@ export default function ProjectForm({
               <div>
                 <h2 className="admin-form-section-title">
                   <Layers size={18} />
-                  <span>Seções Detalhadas ({sections.length})</span>
+                  <span>
+                    Seções Detalhadas ({sections.length})
+                  </span>
                 </h2>
-                <p className="admin-form-section-desc" style={{ marginTop: 4 }}>
-                  As seções são ordenadas automaticamente pelo padrão de arquitetura do portfólio.
+
+                <p
+                  className="admin-form-section-desc"
+                  style={{ marginTop: 4 }}
+                >
+                  As seções são ordenadas automaticamente pelo padrão
+                  de arquitetura do portfólio.
                 </p>
               </div>
 
@@ -585,7 +633,9 @@ export default function ProjectForm({
                 type="button"
                 className="admin-btn admin-btn-primary"
                 onClick={() => setIsAddSectionModalOpen(true)}
-                disabled={loading || usedSectionTypes.length >= 9}
+                disabled={
+                  loading || usedSectionTypes.length >= 9
+                }
               >
                 <Plus size={16} />
                 <span>Adicionar seção</span>
@@ -594,15 +644,28 @@ export default function ProjectForm({
 
             {/* List of Section Editors */}
             {sections.length === 0 ? (
-              <div className="admin-empty-card" style={{ padding: "40px 20px" }}>
-                <div className="admin-empty-icon-wrap" style={{ width: 44, height: 44 }}>
+              <div
+                className="admin-empty-card"
+                style={{ padding: "40px 20px" }}
+              >
+                <div
+                  className="admin-empty-icon-wrap"
+                  style={{ width: 44, height: 44 }}
+                >
                   <Layers size={22} />
                 </div>
-                <h3 className="admin-empty-title" style={{ fontSize: "1.05rem" }}>
+
+                <h3
+                  className="admin-empty-title"
+                  style={{ fontSize: "1.05rem" }}
+                >
                   Nenhuma seção adicionada
                 </h3>
+
                 <p className="admin-empty-desc">
-                  Clique no botão &quot;Adicionar seção&quot; para estruturar a visão geral, arquitetura, decisões técnicas e screenshots.
+                  Clique no botão &quot;Adicionar seção&quot; para
+                  estruturar a visão geral, arquitetura, decisões
+                  técnicas e screenshots.
                 </p>
               </div>
             ) : (
@@ -612,7 +675,9 @@ export default function ProjectForm({
                     key={section.id}
                     section={section}
                     onChange={handleUpdateSection}
-                    onRemove={() => handleRemoveSection(section.id)}
+                    onRemove={() =>
+                      handleRemoveSection(section.id)
+                    }
                     disabled={loading}
                   />
                 ))}
@@ -623,7 +688,10 @@ export default function ProjectForm({
 
         {/* Form Bottom Bar */}
         <div className="admin-form-bottom-bar">
-          <Link href="/admin/projetos" className="admin-btn admin-btn-secondary">
+          <Link
+            href="/admin/projetos"
+            className="admin-btn admin-btn-secondary"
+          >
             Cancelar
           </Link>
 
@@ -636,8 +704,13 @@ export default function ProjectForm({
               <>
                 <div
                   className="admin-loading-spinner"
-                  style={{ width: 16, height: 16, borderWidth: 2 }}
+                  style={{
+                    width: 16,
+                    height: 16,
+                    borderWidth: 2,
+                  }}
                 />
+
                 <span>Salvando...</span>
               </>
             ) : isEditing ? (
