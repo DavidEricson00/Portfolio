@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Plus,
@@ -16,6 +17,7 @@ import type { ExperienceWithTechnologies } from "@/types/experience";
 import { technologyCategoryConfig } from "@/types/technology";
 import { ConfirmDeleteModal } from "@/components/admin/ConfirmDeleteModal";
 import { deleteExperience } from "@/lib/data/experiences";
+import { revalidateExperiences } from "@/lib/actions/experiences";
 
 interface ExperienceAdminProps {
   initialExperiences: ExperienceWithTechnologies[];
@@ -24,8 +26,17 @@ interface ExperienceAdminProps {
 export default function ExperienceAdmin({
   initialExperiences,
 }: ExperienceAdminProps) {
+  const router = useRouter();
+  const [prevInitialExperiences, setPrevInitialExperiences] =
+    useState<ExperienceWithTechnologies[]>(initialExperiences);
   const [experiences, setExperiences] =
     useState<ExperienceWithTechnologies[]>(initialExperiences);
+
+  if (initialExperiences !== prevInitialExperiences) {
+    setPrevInitialExperiences(initialExperiences);
+    setExperiences(initialExperiences);
+  }
+
   const [search, setSearch] = useState("");
 
   const [experienceToDelete, setExperienceToDelete] =
@@ -55,6 +66,7 @@ export default function ExperienceAdmin({
 
     try {
       await deleteExperience(experienceToDelete.id);
+      await revalidateExperiences();
 
       setExperiences((current) =>
         current.filter((item) => item.id !== experienceToDelete.id),
@@ -62,6 +74,7 @@ export default function ExperienceAdmin({
 
       setExperienceToDelete(null);
       setSuccess("Experiência excluída com sucesso.");
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao excluir experiência:", err);
       const errorMessage =

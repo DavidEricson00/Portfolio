@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Plus,
@@ -14,13 +15,22 @@ import {
 import type { Post } from "@/types/post";
 import { ConfirmDeleteModal } from "@/components/admin/ConfirmDeleteModal";
 import { deletePost, formatPostDate } from "@/lib/data/posts";
+import { revalidatePosts } from "@/lib/actions/posts";
 
 interface PostsAdminProps {
   initialPosts: Post[];
 }
 
 export default function PostsAdmin({ initialPosts = [] }: PostsAdminProps) {
+  const router = useRouter();
+  const [prevInitialPosts, setPrevInitialPosts] = useState<Post[]>(initialPosts);
   const [posts, setPosts] = useState<Post[]>(initialPosts);
+
+  if (initialPosts !== prevInitialPosts) {
+    setPrevInitialPosts(initialPosts);
+    setPosts(initialPosts);
+  }
+
   const [search, setSearch] = useState("");
 
   const [postToDelete, setPostToDelete] = useState<Post | null>(null);
@@ -53,6 +63,7 @@ export default function PostsAdmin({ initialPosts = [] }: PostsAdminProps) {
 
     try {
       await deletePost(postToDelete.id);
+      await revalidatePosts();
 
       setPosts((current) =>
         current.filter((item) => item.id !== postToDelete.id),
@@ -60,6 +71,7 @@ export default function PostsAdmin({ initialPosts = [] }: PostsAdminProps) {
 
       setPostToDelete(null);
       setSuccess("Post excluído com sucesso.");
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao excluir post:", err);
 

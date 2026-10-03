@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Plus,
   Pencil,
@@ -20,6 +21,7 @@ import {
   updateEducation,
   deleteEducation,
 } from "@/lib/data/education";
+import { revalidateEducation } from "@/lib/actions/education";
 
 interface EducationAdminProps {
   initialEducations: Education[];
@@ -28,8 +30,16 @@ interface EducationAdminProps {
 export default function EducationAdmin({
   initialEducations,
 }: EducationAdminProps) {
+  const router = useRouter();
+  const [prevInitialEducations, setPrevInitialEducations] =
+    useState<Education[]>(initialEducations);
   const [educations, setEducations] =
     useState<Education[]>(initialEducations);
+
+  if (initialEducations !== prevInitialEducations) {
+    setPrevInitialEducations(initialEducations);
+    setEducations(initialEducations);
+  }
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [educationToEdit, setEducationToEdit] =
@@ -71,6 +81,7 @@ export default function EducationAdmin({
     try {
       if (isEditing) {
         await updateEducation(id, data);
+        await revalidateEducation();
 
         setEducations((current) =>
           current.map((item) =>
@@ -81,6 +92,7 @@ export default function EducationAdmin({
         setSuccess("Formação atualizada com sucesso.");
       } else {
         await createEducation(id, data);
+        await revalidateEducation();
 
         const newEducation: Education = {
           id,
@@ -92,6 +104,7 @@ export default function EducationAdmin({
       }
 
       closeModal();
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao salvar formação:", err);
       const errorMessage =
@@ -111,6 +124,7 @@ export default function EducationAdmin({
 
     try {
       await deleteEducation(educationToDelete.id);
+      await revalidateEducation();
 
       setEducations((current) =>
         current.filter((item) => item.id !== educationToDelete.id),
@@ -118,6 +132,7 @@ export default function EducationAdmin({
 
       setEducationToDelete(null);
       setSuccess("Formação excluída com sucesso.");
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao excluir formação:", err);
       const errorMessage =

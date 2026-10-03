@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Plus,
@@ -38,6 +39,7 @@ import type { Technology } from "@/types/technology";
 import { technologyCategoryConfig } from "@/types/technology";
 import { ConfirmDeleteModal } from "@/components/admin/ConfirmDeleteModal";
 import { deleteProject } from "@/lib/data/projects";
+import { revalidateProjects } from "@/lib/actions/projects";
 
 interface ProjectsAdminProps {
   initialProjects: Project[];
@@ -47,7 +49,15 @@ interface ProjectsAdminProps {
 export default function ProjectsAdmin({
   initialProjects = [],
 }: ProjectsAdminProps) {
+  const router = useRouter();
+  const [prevInitialProjects, setPrevInitialProjects] = useState(initialProjects);
   const [projects, setProjects] = useState<Project[]>(initialProjects);
+
+  if (initialProjects !== prevInitialProjects) {
+    setPrevInitialProjects(initialProjects);
+    setProjects(initialProjects);
+  }
+
   const [search, setSearch] = useState("");
   const [featuredFilter, setFeaturedFilter] = useState<
     "all" | "featured" | "standard"
@@ -85,6 +95,7 @@ export default function ProjectsAdmin({
 
     try {
       await deleteProject(projectToDelete.id);
+      await revalidateProjects();
 
       setProjects((current) =>
         current.filter((item) => item.id !== projectToDelete.id),
@@ -92,6 +103,7 @@ export default function ProjectsAdmin({
 
       setProjectToDelete(null);
       setSuccess("Projeto excluído com sucesso.");
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao excluir projeto:", err);
       const errorMessage =

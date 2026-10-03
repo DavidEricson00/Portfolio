@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   ChevronDown,
   Pencil,
@@ -25,9 +26,8 @@ import {
   updateTechnology,
   deleteTechnology,
 } from "@/lib/data/technologies";
+import { revalidateTechnologies } from "@/lib/actions/technologies";
 import { technologyId } from "@/lib/utils/slugify";
-
-import { firebaseAuth } from "@/lib/firebase/client";
 
 interface TechnologiesAdminProps {
   initialTechnologies: Technology[];
@@ -36,8 +36,16 @@ interface TechnologiesAdminProps {
 export default function TechnologiesAdmin({
   initialTechnologies,
 }: TechnologiesAdminProps) {
+  const router = useRouter();
+  const [prevInitialTechnologies, setPrevInitialTechnologies] =
+    useState<Technology[]>(initialTechnologies);
   const [technologies, setTechnologies] =
     useState<Technology[]>(initialTechnologies);
+
+  if (initialTechnologies !== prevInitialTechnologies) {
+    setPrevInitialTechnologies(initialTechnologies);
+    setTechnologies(initialTechnologies);
+  }
 
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] =
@@ -96,6 +104,7 @@ export default function TechnologiesAdmin({
     try {
       if (technologyToEdit) {
         await updateTechnology(technologyToEdit.id, data);
+        await revalidateTechnologies();
 
         setTechnologies((current) =>
           current
@@ -120,6 +129,7 @@ export default function TechnologiesAdmin({
         }
 
         await createTechnology(newId, data);
+        await revalidateTechnologies();
 
         setTechnologies((current) =>
           [...current, { id: newId, ...data }].sort(
@@ -131,6 +141,7 @@ export default function TechnologiesAdmin({
       }
 
       closeModal();
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao salvar tecnologia:", err);
 
@@ -154,6 +165,7 @@ export default function TechnologiesAdmin({
 
     try {
       await deleteTechnology(technologyToDelete.id);
+      await revalidateTechnologies();
 
       setTechnologies((current) =>
         current.filter(
@@ -163,6 +175,7 @@ export default function TechnologiesAdmin({
 
       setTechnologyToDelete(null);
       setSuccess("Tecnologia excluída com sucesso.");
+      router.refresh();
     } catch (err: unknown) {
       console.error("Erro ao excluir tecnologia:", err);
       const errorMessage =

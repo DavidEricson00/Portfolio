@@ -7,12 +7,10 @@ export async function revalidateProjects() {
   revalidatePath("/", "page");
   revalidatePath("/projetos", "page");
   revalidatePath("/projetos/[slug]", "page");
+  revalidatePath("/sitemap.xml");
 
   // Área administrativa
   revalidatePath("/admin", "page");
   revalidatePath("/admin/projetos", "page");
   revalidatePath("/admin/projetos/[id]/editar", "page");
-
-  // Sitemap
-  revalidatePath("/sitemap.xml");
 }

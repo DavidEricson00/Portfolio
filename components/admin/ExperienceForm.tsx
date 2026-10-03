@@ -21,6 +21,7 @@ import { TechnologySelector } from "@/components/admin/TechnologySelector";
 import { DynamicTextList } from "@/components/admin/DynamicTextList";
 import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
 import { createExperience, updateExperience } from "@/lib/data/experiences";
+import { revalidateExperiences } from "@/lib/actions/experiences";
 import { slugify } from "@/lib/utils/slugify";
 
 interface ExperienceFormProps {
@@ -117,6 +118,8 @@ export default function ExperienceForm({
 
         await createExperience(id, payload);
       }
+
+      await revalidateExperiences();
 
       setIsConfirmSaveOpen(false);
       router.push("/admin/experiencias");

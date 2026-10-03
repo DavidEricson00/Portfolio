@@ -17,6 +17,7 @@ import type { Post } from "@/types/post";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
 import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
 import { createPost, updatePost } from "@/lib/data/posts";
+import { revalidatePosts } from "@/lib/actions/posts";
 import { slugify } from "@/lib/utils/slugify";
 
 interface PostFormProps {
@@ -184,6 +185,8 @@ export default function PostForm({
       } else {
         await createPost(finalSlug, payload);
       }
+
+      await revalidatePosts();
 
       setIsConfirmSaveOpen(false);
       router.push("/admin/posts");
