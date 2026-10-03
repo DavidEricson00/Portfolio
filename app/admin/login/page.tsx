@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Lock, Mail, KeyRound, AlertCircle, LogIn, ArrowLeft } from "lucide-react";
 import { login } from "@/lib/firebase/auth";
-import "@/components/admin/admin.css";
+import "@/components/admin/admin-ui.css";
+import "@/components/admin/admin-login.css";
 
 export default function AdminLoginPage() {
   const router = useRouter();

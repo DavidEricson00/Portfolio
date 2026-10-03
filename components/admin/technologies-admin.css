@@ -1,0 +1,240 @@
+/* Technologies Admin & TechnologySelector Component Styles */
+
+/* Technology Icon in Table & Cell */
+.admin-tech-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.admin-tech-icon-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.admin-tech-icon-fallback {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.admin-tech-name-cell {
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Icon Preview in Technology Modal */
+.admin-icon-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-icon-preview-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Technology Selector Component */
+.admin-tech-selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.admin-tech-selector-search {
+  max-width: 100%;
+}
+
+.admin-tech-selector-selected-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(108, 140, 255, 0.05);
+  border: 1px solid rgba(108, 140, 255, 0.2);
+  border-radius: 10px;
+}
+
+.admin-tech-selector-selected-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-tech-selector-selected-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.admin-tech-selector-clear-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 150ms ease;
+}
+
+.admin-tech-selector-clear-btn:hover {
+  color: #f87171;
+}
+
+.admin-tech-selector-selected-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.admin-tech-chip:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.15);
+}
+
+.admin-tech-chip-text {
+  color: #ffffff;
+}
+
+.admin-tech-chip-remove {
+  color: #cbd5e1;
+  transition: color 150ms ease;
+}
+
+.admin-tech-chip:hover .admin-tech-chip-remove {
+  color: #ef4444;
+}
+
+.admin-tech-selector-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.admin-tech-selector-category-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-tech-selector-cat-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8b90a0;
+}
+
+.admin-tech-selector-cat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.admin-tech-selector-cat-count {
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.admin-tech-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.admin-tech-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.admin-tech-option-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--foreground);
+}
+
+.admin-tech-option-selected {
+  font-weight: 600;
+}
+
+.admin-tech-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-tech-option-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1.5px solid;
+  display: inline-block;
+}
+
+.admin-tech-option-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .admin-tech-selector-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

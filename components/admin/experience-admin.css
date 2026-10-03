@@ -1,0 +1,230 @@
+/* Experience Admin & Form Layout Styles */
+
+/* Experience Cards Grid */
+.admin-experience-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-experience-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 180ms ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.admin-experience-card:hover {
+  border-color: rgba(108, 140, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.admin-experience-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.admin-experience-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-experience-role {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.admin-experience-company-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+}
+
+.admin-experience-company,
+.admin-experience-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-exp-icon {
+  color: #717684;
+}
+
+.admin-experience-period-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.admin-experience-current-tag {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #86efac;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.admin-experience-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-experience-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid;
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.admin-experience-points-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.admin-experience-point-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.admin-experience-point-bullet {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.admin-experience-more-points {
+  font-size: 0.78rem;
+  color: #8b90a0;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Form Page Layout (New / Edit) */
+.admin-form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.admin-form-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 150ms ease;
+  width: fit-content;
+}
+
+.admin-form-back-link:hover {
+  color: var(--primary-hover);
+}
+
+.admin-form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-form-main-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.admin-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.admin-form-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.admin-form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.admin-form-section-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin-top: -8px;
+}
+
+.admin-form-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 16px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+@media (max-width: 640px) {
+  .admin-form-main-card {
+    padding: 20px 16px;
+  }
+
+  .admin-form-bottom-bar {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .admin-form-bottom-bar .admin-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

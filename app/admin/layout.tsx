@@ -5,7 +5,13 @@ import { usePathname } from "next/navigation";
 import AdminGuard from "@/components/admin/AdminGuard";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminHeader } from "@/components/admin/AdminHeader";
-import "@/components/admin/admin.css";
+import "@/components/admin/admin-layout.css";
+import "@/components/admin/admin-ui.css";
+import "@/components/admin/admin-dashboard.css";
+import "@/components/admin/technologies-admin.css";
+import "@/components/admin/education-admin.css";
+import "@/components/admin/experience-admin.css";
+import "@/components/admin/dynamic-text-list.css";
 
 export default function AdminLayout({
   children,

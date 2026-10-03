@@ -1,0 +1,57 @@
+/* Dynamic Text List Component Styles */
+
+.admin-dynamic-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-dynamic-list-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.admin-dynamic-list-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.admin-dynamic-list-empty {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border);
+  border-radius: 9px;
+  font-size: 0.84rem;
+  color: #717684;
+  text-align: center;
+}
+
+.admin-dynamic-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-dynamic-list-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-dynamic-list-input {
+  flex: 1;
+}
+
+.admin-dynamic-list-del-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+}
+
+.admin-dynamic-list-add-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  font-size: 0.84rem;
+  padding: 8px 14px;
+}

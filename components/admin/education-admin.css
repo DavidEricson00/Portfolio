@@ -1,0 +1,93 @@
+/* Education Admin Styles */
+
+.admin-education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.admin-education-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 180ms ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.admin-education-card:hover {
+  border-color: rgba(108, 140, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.admin-education-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-education-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(108, 140, 255, 0.12);
+  border: 1px solid rgba(108, 140, 255, 0.25);
+  color: var(--primary-hover);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.admin-education-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-education-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-education-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.admin-education-card-inst {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.admin-education-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-education-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: #8b90a0;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+@media (max-width: 640px) {
+  .admin-education-grid {
+    grid-template-columns: 1fr;
+  }
+}
