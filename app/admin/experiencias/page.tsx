@@ -24,7 +24,6 @@ export default function AdminExperienciasPage() {
           O cadastro e a listagem de experiências profissionais e tecnologias
           associadas estarão disponíveis nas etapas seguintes.
         </p>
-        <span className="admin-placeholder-tag">Placeholder funcional</span>
       </div>
     </div>
   );

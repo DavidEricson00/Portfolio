@@ -3,7 +3,7 @@ import { getTechnologies } from "@/lib/data/technologies";
 import { getPosts } from "@/lib/data/posts";
 import { getExperiences } from "@/lib/data/experiences";
 import { getEducations } from "@/lib/data/education";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "@/components/admin/AdminDashboard";
 
 export default async function AdminDashboardPage() {
   const [

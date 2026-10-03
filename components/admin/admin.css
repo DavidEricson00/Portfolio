@@ -561,6 +561,7 @@
 .admin-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   text-align: left;
   font-size: 0.88rem;
 }
@@ -581,6 +582,34 @@
   padding: 14px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: middle;
+}
+
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+  width: auto;
+}
+
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+  width: 28%;
+}
+
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3) {
+  width: 90px;
+  text-align: center;
+}
+
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4) {
+  width: 110px;
+  text-align: center;
+}
+
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5) {
+  width: 110px;
+  text-align: center;
 }
 
 .admin-table tbody tr {
@@ -673,6 +702,7 @@
 .admin-rank-cell {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -702,8 +732,8 @@
 .admin-table-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
 }
 
 .admin-action-btn {
@@ -881,11 +911,28 @@
 .admin-range-container {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
+}
+
+.admin-range-value {
+  order: 0;
+  flex-shrink: 0;
+  min-width: 44px;
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: rgba(108, 140, 255, 0.1);
+  border: 1px solid rgba(108, 140, 255, 0.25);
+  color: var(--primary-hover);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
 }
 
 .admin-range-slider {
   flex: 1;
+  min-width: 0;
   height: 6px;
   appearance: none;
   background: rgba(255, 255, 255, 0.1);
@@ -909,17 +956,14 @@
   transform: scale(1.15);
 }
 
-.admin-range-value {
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--primary-hover);
-  background: rgba(108, 140, 255, 0.1);
-  border: 1px solid rgba(108, 140, 255, 0.25);
-  padding: 4px 10px;
-  border-radius: 6px;
-  min-width: 44px;
-  text-align: center;
+.admin-range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #6c8cff;
+  box-shadow: 0 0 10px rgba(108, 140, 255, 0.6);
+  cursor: pointer;
 }
 
 /* Checkbox Switch */
