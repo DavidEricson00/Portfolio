@@ -212,25 +212,25 @@
   font-weight: 600;
 }
 
-.admin-tech-option-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.admin-tech-option-indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  border: 1.5px solid;
-  display: inline-block;
-}
-
 .admin-tech-option-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.admin-tech-option-checkbox {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.admin-tech-option-checkbox-selected {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 @media (max-width: 640px) {

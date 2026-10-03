@@ -184,14 +184,16 @@ export function TechnologySelector({
                           : undefined
                       }
                     >
-                      <div className="admin-tech-option-icon">
-                        {isSelected ? (
-                          <Check size={14} style={{ color: catConfig.accentColor }} />
-                        ) : (
-                          <span
-                            className="admin-tech-option-indicator"
-                            style={{ borderColor: catConfig.accentColor }}
-                          />
+                      <div
+                        className={`admin-tech-option-checkbox ${
+                          isSelected ? "admin-tech-option-checkbox-selected" : ""
+                        }`}
+                        style={{
+                          borderColor: catConfig.accentColor,
+                        }}
+                      >
+                        {isSelected && (
+                          <Check size={12} style={{ color: catConfig.accentColor }} />
                         )}
                       </div>
                       <span className="admin-tech-option-name">{tech.name}</span>
