@@ -56,6 +56,7 @@ import { ProjectSectionEditor } from "@/components/admin/ProjectSectionEditor";
 import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
 import { createProject, updateProject } from "@/lib/data/projects";
 import { slugify } from "@/lib/utils/slugify";
+import { revalidateProjects } from "@/lib/actions/projects";
 
 interface ProjectFormProps {
   initialData?: Project | null;
@@ -268,6 +269,8 @@ export default function ProjectForm({
       } else {
         await createProject(projectSlug, payload);
       }
+
+      await revalidateProjects();
 
       setIsConfirmSaveOpen(false);
       router.push("/admin/projetos");
