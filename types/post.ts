@@ -4,7 +4,6 @@ export type Post = {
   title: string;
   date: string;
   content: string;
-  coverImage?: string;
   dateModified?: string;
   excerpt?: string;
 };

@@ -9,10 +9,10 @@ import {
   Plus,
   FileText,
   Calendar,
-  Image as ImageIcon,
   Clock,
   Link2,
 } from "lucide-react";
+
 import type { Post } from "@/types/post";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
 import { ConfirmSaveModal } from "@/components/admin/ConfirmSaveModal";
@@ -30,6 +30,7 @@ function getTodayDateString(): string {
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const day = String(now.getDate()).padStart(2, "0");
+
   return `${year}-${month}-${day}`;
 }
 
@@ -49,13 +50,12 @@ export default function PostForm({
   const [date, setDate] = useState(
     initialData?.date || getTodayDateString(),
   );
+
   const [dateModified, setDateModified] = useState(
     initialData?.dateModified || "",
   );
+
   const [excerpt, setExcerpt] = useState(initialData?.excerpt || "");
-  const [coverImage, setCoverImage] = useState(
-    initialData?.coverImage || "",
-  );
   const [content, setContent] = useState(initialData?.content || "");
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -74,6 +74,7 @@ export default function PostForm({
     if (!isEditing && !isSlugManual) {
       const autoSlug = slugify(newTitle);
       setSlug(autoSlug);
+
       if (errors.slug) {
         setErrors((prev) => ({ ...prev, slug: "" }));
       }
@@ -97,6 +98,7 @@ export default function PostForm({
 
   function handleContentChange(newContent: string) {
     setContent(newContent);
+
     if (errors.content) {
       setErrors((prev) => ({ ...prev, content: "" }));
     }
@@ -110,8 +112,10 @@ export default function PostForm({
     }
 
     const normalizedSlug = slugify(slug.trim());
+
     if (!normalizedSlug) {
-      newErrors.slug = "O slug do post é obrigatório e deve conter caracteres válidos.";
+      newErrors.slug =
+        "O slug do post é obrigatório e deve conter caracteres válidos.";
     }
 
     if (!date.trim()) {
@@ -119,6 +123,7 @@ export default function PostForm({
     } else {
       // Validate date format YYYY-MM-DD or valid date string
       const dateParts = date.trim().split("-");
+
       if (
         dateParts.length !== 3 ||
         isNaN(Number(dateParts[0])) ||
@@ -131,35 +136,25 @@ export default function PostForm({
 
     if (dateModified.trim()) {
       const modParts = dateModified.trim().split("-");
+
       if (
         modParts.length !== 3 ||
         isNaN(Number(modParts[0])) ||
         isNaN(Number(modParts[1])) ||
         isNaN(Number(modParts[2]))
       ) {
-        newErrors.dateModified = "Formato de data inválido. Use AAAA-MM-DD.";
+        newErrors.dateModified =
+          "Formato de data inválido. Use AAAA-MM-DD.";
       }
     }
 
     if (!content.trim()) {
-      newErrors.content = "O conteúdo do post em Markdown é obrigatório.";
-    }
-
-    if (coverImage.trim()) {
-      try {
-        const url = new URL(coverImage.trim(), "http://localhost");
-        if (
-          !url.protocol.startsWith("http") &&
-          !coverImage.startsWith("/")
-        ) {
-          newErrors.coverImage = "Informe uma URL válida de imagem.";
-        }
-      } catch {
-        newErrors.coverImage = "Informe uma URL válida.";
-      }
+      newErrors.content =
+        "O conteúdo do post em Markdown é obrigatório.";
     }
 
     setErrors(newErrors);
+
     return Object.keys(newErrors).length === 0;
   }
 
@@ -176,8 +171,9 @@ export default function PostForm({
         date: date.trim(),
         content: content.trim(),
         ...(excerpt.trim() ? { excerpt: excerpt.trim() } : {}),
-        ...(coverImage.trim() ? { coverImage: coverImage.trim() } : {}),
-        ...(dateModified.trim() ? { dateModified: dateModified.trim() } : {}),
+        ...(dateModified.trim()
+          ? { dateModified: dateModified.trim() }
+          : {}),
       };
 
       if (isEditing && initialData) {
@@ -223,12 +219,18 @@ export default function PostForm({
     <div className="admin-content">
       {/* Top Header */}
       <div className="admin-form-header">
-        <Link href="/admin/posts" className="admin-form-back-link">
+        <Link
+          href="/admin/posts"
+          className="admin-form-back-link"
+        >
           <ArrowLeft size={16} />
           <span>Voltar para Blog</span>
         </Link>
 
-        <div className="admin-page-title-row" style={{ marginTop: 8 }}>
+        <div
+          className="admin-page-title-row"
+          style={{ marginTop: 8 }}
+        >
           <h1 className="admin-page-title">
             {isEditing ? "Editar Post" : "Novo Post"}
           </h1>
@@ -243,7 +245,10 @@ export default function PostForm({
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="admin-form-layout">
+      <form
+        onSubmit={handleSubmit}
+        className="admin-form-layout"
+      >
         <div className="admin-form-main-card">
           {/* Section 1: Dados Básicos */}
           <div className="admin-form-section">
@@ -254,7 +259,10 @@ export default function PostForm({
 
             {/* Título */}
             <div className="admin-form-group">
-              <label htmlFor="post-title" className="admin-form-label">
+              <label
+                htmlFor="post-title"
+                className="admin-form-label"
+              >
                 <span>Título do Post</span>
                 <span className="required">*</span>
               </label>
@@ -264,9 +272,13 @@ export default function PostForm({
                 type="text"
                 placeholder="Ex: O que aprendi sobre SEO, GEO e AIO na prática"
                 value={title}
-                onChange={(e) => handleTitleChange(e.target.value)}
+                onChange={(e) =>
+                  handleTitleChange(e.target.value)
+                }
                 className={`admin-form-input ${
-                  errors.title ? "admin-form-input-error" : ""
+                  errors.title
+                    ? "admin-form-input-error"
+                    : ""
                 }`}
                 disabled={loading}
               />
@@ -280,22 +292,33 @@ export default function PostForm({
 
             {/* Slug */}
             <div className="admin-form-group">
-              <label htmlFor="post-slug" className="admin-form-label">
+              <label
+                htmlFor="post-slug"
+                className="admin-form-label"
+              >
                 <span>Slug (URL Pública)</span>
                 <span className="required">*</span>
               </label>
 
               <div className="admin-input-wrapper">
-                <Link2 size={16} className="admin-input-icon" />
+                <Link2
+                  size={16}
+                  className="admin-input-icon"
+                />
+
                 <input
                   id="post-slug"
                   type="text"
                   placeholder="o-que-aprendi-sobre-seo-geo-e-aio"
                   value={slug}
-                  onChange={(e) => handleSlugChange(e.target.value)}
+                  onChange={(e) =>
+                    handleSlugChange(e.target.value)
+                  }
                   onBlur={handleSlugBlur}
                   className={`admin-input ${
-                    errors.slug ? "admin-form-input-error" : ""
+                    errors.slug
+                      ? "admin-form-input-error"
+                      : ""
                   }`}
                   disabled={loading}
                 />
@@ -309,12 +332,15 @@ export default function PostForm({
                   marginTop: 4,
                   fontSize: "0.78rem",
                   color: "#8b90a0",
-                  fontFamily: "var(--font-geist-mono), monospace",
+                  fontFamily:
+                    "var(--font-geist-mono), monospace",
                 }}
               >
                 <span>
-                  URL pública: /blog/{slugify(slug) || "slug-do-post"}
+                  URL pública: /blog/
+                  {slugify(slug) || "slug-do-post"}
                 </span>
+
                 {!isEditing && isSlugManual && (
                   <button
                     type="button"
@@ -346,26 +372,42 @@ export default function PostForm({
 
             {/* Datas */}
             <div className="admin-form-row">
-              <div className="admin-form-group" style={{ flex: 1 }}>
-                <label htmlFor="post-date" className="admin-form-label">
+              <div
+                className="admin-form-group"
+                style={{ flex: 1 }}
+              >
+                <label
+                  htmlFor="post-date"
+                  className="admin-form-label"
+                >
                   <span>Data de Publicação</span>
                   <span className="required">*</span>
                 </label>
 
                 <div className="admin-input-wrapper">
-                  <Calendar size={16} className="admin-input-icon" />
+                  <Calendar
+                    size={16}
+                    className="admin-input-icon"
+                  />
+
                   <input
                     id="post-date"
                     type="date"
                     value={date}
                     onChange={(e) => {
                       setDate(e.target.value);
+
                       if (errors.date) {
-                        setErrors((prev) => ({ ...prev, date: "" }));
+                        setErrors((prev) => ({
+                          ...prev,
+                          date: "",
+                        }));
                       }
                     }}
                     className={`admin-input ${
-                      errors.date ? "admin-form-input-error" : ""
+                      errors.date
+                        ? "admin-form-input-error"
+                        : ""
                     }`}
                     disabled={loading}
                   />
@@ -378,19 +420,32 @@ export default function PostForm({
                 )}
               </div>
 
-              <div className="admin-form-group" style={{ flex: 1 }}>
-                <label htmlFor="post-date-modified" className="admin-form-label">
-                  <span>Data de Modificação (Opcional)</span>
+              <div
+                className="admin-form-group"
+                style={{ flex: 1 }}
+              >
+                <label
+                  htmlFor="post-date-modified"
+                  className="admin-form-label"
+                >
+                  <span>
+                    Data de Modificação (Opcional)
+                  </span>
                 </label>
 
                 <div className="admin-input-wrapper">
-                  <Clock size={16} className="admin-input-icon" />
+                  <Clock
+                    size={16}
+                    className="admin-input-icon"
+                  />
+
                   <input
                     id="post-date-modified"
                     type="date"
                     value={dateModified}
                     onChange={(e) => {
                       setDateModified(e.target.value);
+
                       if (errors.dateModified) {
                         setErrors((prev) => ({
                           ...prev,
@@ -399,7 +454,9 @@ export default function PostForm({
                       }
                     }}
                     className={`admin-input ${
-                      errors.dateModified ? "admin-form-input-error" : ""
+                      errors.dateModified
+                        ? "admin-form-input-error"
+                        : ""
                     }`}
                     disabled={loading}
                   />
@@ -413,46 +470,15 @@ export default function PostForm({
               </div>
             </div>
 
-            {/* Imagem de Capa */}
-            <div className="admin-form-group">
-              <label htmlFor="post-cover" className="admin-form-label">
-                <span>URL da Imagem de Capa (Opcional)</span>
-              </label>
-
-              <div className="admin-input-wrapper">
-                <ImageIcon size={16} className="admin-input-icon" />
-                <input
-                  id="post-cover"
-                  type="text"
-                  placeholder="https://... ou /assets/..."
-                  value={coverImage}
-                  onChange={(e) => {
-                    setCoverImage(e.target.value);
-                    if (errors.coverImage) {
-                      setErrors((prev) => ({
-                        ...prev,
-                        coverImage: "",
-                      }));
-                    }
-                  }}
-                  className={`admin-input ${
-                    errors.coverImage ? "admin-form-input-error" : ""
-                  }`}
-                  disabled={loading}
-                />
-              </div>
-
-              {errors.coverImage && (
-                <span className="admin-form-error-msg">
-                  {errors.coverImage}
-                </span>
-              )}
-            </div>
-
             {/* Resumo / Excerpt */}
             <div className="admin-form-group">
-              <label htmlFor="post-excerpt" className="admin-form-label">
-                <span>Resumo / Excerpt (Opcional)</span>
+              <label
+                htmlFor="post-excerpt"
+                className="admin-form-label"
+              >
+                <span>
+                  Resumo / Excerpt (Opcional)
+                </span>
               </label>
 
               <textarea
@@ -460,7 +486,9 @@ export default function PostForm({
                 rows={3}
                 placeholder="Breve resumo ou chamada para listagens e metatags de SEO..."
                 value={excerpt}
-                onChange={(e) => setExcerpt(e.target.value)}
+                onChange={(e) =>
+                  setExcerpt(e.target.value)
+                }
                 className="admin-form-input"
                 style={{ resize: "vertical" }}
                 disabled={loading}
@@ -472,14 +500,18 @@ export default function PostForm({
           <div className="admin-form-section">
             <h2 className="admin-form-section-title">
               <span>Conteúdo do Artigo (Markdown)</span>
-              <span className="required" style={{ color: "#f87171" }}>
+              <span
+                className="required"
+                style={{ color: "#f87171" }}
+              >
                 *
               </span>
             </h2>
 
             <p className="admin-form-section-desc">
-              Utilize o editor Markdown abaixo. Você pode alternar entre edição,
-              preview ou modo dividido em tempo real.
+              Utilize o editor Markdown abaixo. Você pode
+              alternar entre edição, preview ou modo dividido
+              em tempo real.
             </p>
 
             <MarkdownEditor
@@ -491,7 +523,10 @@ export default function PostForm({
             />
 
             {errors.content && (
-              <span className="admin-form-error-msg" style={{ marginTop: 6 }}>
+              <span
+                className="admin-form-error-msg"
+                style={{ marginTop: 6 }}
+              >
                 {errors.content}
               </span>
             )}

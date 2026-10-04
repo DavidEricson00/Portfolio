@@ -21,7 +21,6 @@ export function buildArticleSchema(post: Post) {
     mainEntityOfPage: articleUrl,
     author: { "@id": SITE_CONFIG.personId },
     publisher: { "@id": SITE_CONFIG.personId },
-    image: post.coverImage,
   });
 
   return schema;

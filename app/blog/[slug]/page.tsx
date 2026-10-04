@@ -56,11 +56,7 @@ export async function generateMetadata({
   const description =
     post.excerpt ?? extractExcerpt(post.content);
 
-  const postImage = post.coverImage
-    ? post.coverImage.startsWith("http")
-      ? post.coverImage
-      : `${SITE_CONFIG.url}${post.coverImage}`
-    : `${SITE_CONFIG.url}/og-image.png`;
+  const postImage = `${SITE_CONFIG.url}/og-image.png`;
 
   return {
     title: post.title,
