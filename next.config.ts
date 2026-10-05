@@ -8,7 +8,7 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https://i.imgur.com https://imgur.com https://img.itch.zone https://github.com https://user-images.githubusercontent.com https://skillicons.dev https://go-skill-icons.vercel.app;
   font-src 'self' data:;
-  connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://skillicons.dev https://go-skill-icons.vercel.app https://firebase.googleapis.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://www.google-analytics.com;
+  connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://skillicons.dev https://go-skill-icons.vercel.app https://firebase.googleapis.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com;
   frame-ancestors 'none';
   object-src 'none';
   base-uri 'self';
@@ -69,4 +69,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-

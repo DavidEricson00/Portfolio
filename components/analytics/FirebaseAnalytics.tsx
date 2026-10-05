@@ -1,11 +1,21 @@
 "use client";
 
 import { useEffect } from "react";
-import { firebaseAnalytics } from "@/lib/firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
+
+import { firebaseApp } from "@/lib/firebase/app";
 
 export function FirebaseAnalytics() {
   useEffect(() => {
-    void firebaseAnalytics;
+    async function initializeAnalytics() {
+      if (!(await isSupported())) {
+        return;
+      }
+
+      getAnalytics(firebaseApp);
+    }
+
+    void initializeAnalytics();
   }, []);
 
   return null;
