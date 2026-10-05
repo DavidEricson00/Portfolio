@@ -16,6 +16,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { getTechnologies } from "@/lib/data/technologies";
 
+import { FirebaseAnalytics } from "@/components/analytics/FirebaseAnalytics";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -139,6 +141,7 @@ export default async function RootLayout({
 
         <Footer />
 
+        <FirebaseAnalytics />
         <Analytics />
         <SpeedInsights />
       </body>
