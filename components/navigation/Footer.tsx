@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { contactChannels } from "@/data/contact";
 import { ArrowUpRight } from "lucide-react";
+import { trackEvent } from "@/lib/firebase/track";
 import "./footer.css";
 
 export function Footer() {
@@ -41,6 +42,12 @@ export function Footer() {
                     target={channel.isExternal ? "_blank" : undefined}
                     rel={channel.isExternal ? "noopener noreferrer" : undefined}
                     className="site-footer-link"
+                    onClick={() => {
+                      void trackEvent("social_click", {
+                        channel: channel.id as "email" | "whatsapp" | "linkedin" | "github",
+                        source: "footer",
+                      });
+                    }}
                   >
                     <span>{channel.name}</span>
                     {channel.isExternal && (

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+import { trackEvent } from "@/lib/firebase/track";
 import pixelDavid from "@/app/assets/images/pixel-david.png";
 import pixelDavidHover from "@/app/assets/images/pixel-david-hover.png";
 import "./hero.css";
@@ -95,12 +96,24 @@ export function HeroSection() {
           </div>
 
           <div className="hero-actions">
-            <a className="button button-primary" href="#projetos">
+            <a
+              className="button button-primary"
+              href="#projetos"
+              onClick={() => {
+                void trackEvent("cta_hero_click", { label: "ver_projetos" });
+              }}
+            >
               Ver projetos
               <span>↗</span>
             </a>
 
-            <a className="button button-secondary" href="#contato">
+            <a
+              className="button button-secondary"
+              href="#contato"
+              onClick={() => {
+                void trackEvent("cta_hero_click", { label: "entre_em_contato" });
+              }}
+            >
               Entre em contato
             </a>
           </div>

@@ -6,6 +6,7 @@ import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
 import { technologyCategoryConfig } from "@/types/technology";
 import { useState } from "react";
+import { trackEvent } from "@/lib/firebase/track";
 
 function GithubIcon({ size = 15 }: { size?: number }) {
   return (
@@ -40,6 +41,11 @@ export function ProjectGridCard({
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   const handleCardClick = () => {
+    void trackEvent("project_card_click", {
+      project_slug: project.slug,
+      project_name: project.name,
+      source: "projects_grid",
+    });
     router.push(`/projetos/${project.slug}`);
   };
 
@@ -82,7 +88,14 @@ export function ProjectGridCard({
               rel="noopener noreferrer"
               className="project-grid-action-btn"
               title="Ver repositório no GitHub"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                void trackEvent("project_github_click", {
+                  project_slug: project.slug,
+                  project_name: project.name,
+                  source: "projects_grid",
+                });
+              }}
               aria-label={`Código fonte de ${project.name} no GitHub`}
             >
               <GithubIcon size={15} />
@@ -96,7 +109,14 @@ export function ProjectGridCard({
               rel="noopener noreferrer"
               className="project-grid-action-btn"
               title="Acessar projeto online"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                void trackEvent("project_demo_click", {
+                  project_slug: project.slug,
+                  project_name: project.name,
+                  source: "projects_grid",
+                });
+              }}
               aria-label={`Demo online de ${project.name}`}
             >
               <ExternalLink size={15} />

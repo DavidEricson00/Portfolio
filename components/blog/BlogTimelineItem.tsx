@@ -7,6 +7,7 @@ import {
   formatPostDate,
   estimateReadingTime,
 } from "@/lib/data/posts";
+import { trackEvent } from "@/lib/firebase/track";
 
 export type BlogTimelineItemProps = {
   post: Post;
@@ -36,6 +37,12 @@ export function BlogTimelineItem({
         href={`/blog/${post.slug}`}
         className="blog-post-card"
         aria-label={`Ler artigo: ${post.title}`}
+        onClick={() => {
+          void trackEvent("blog_post_click", {
+            post_slug: post.slug,
+            post_title: post.title,
+          });
+        }}
       >
         <div className="blog-post-meta">
           <time dateTime={post.date} className="blog-post-date">

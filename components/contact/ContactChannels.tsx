@@ -3,6 +3,7 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { contactChannels } from "@/data/contact";
 import { ContactIcon } from "./ContactIcon";
+import { trackEvent } from "@/lib/firebase/track";
 
 export function ContactChannels() {
   return (
@@ -34,6 +35,12 @@ export function ContactChannels() {
                 target={channel.isExternal ? "_blank" : undefined}
                 rel={channel.isExternal ? "noopener noreferrer" : undefined}
                 className="contact-channel-card"
+                onClick={() => {
+                  void trackEvent("social_click", {
+                    channel: channel.id as "email" | "whatsapp" | "linkedin" | "github",
+                    source: "contact_section",
+                  });
+                }}
               >
                 <div className="contact-channel-icon-wrap" aria-hidden="true">
                   <ContactIcon name={channel.icon} size={20} />

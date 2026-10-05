@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { ExternalLink, ArrowUpRight, Layers } from "lucide-react";
 import type { Project } from "@/types/project";
 import { TechnologyPill } from "@/components/experience/TechnologyPill";
+import { trackEvent } from "@/lib/firebase/track";
 
 function GithubIcon({ size = 16 }: { size?: number }) {
   return (
@@ -36,6 +37,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleCardClick = () => {
+    void trackEvent("project_card_click", {
+      project_slug: project.slug,
+      project_name: project.name,
+      source: "home_swiper",
+    });
     router.push(`/projetos/${project.slug}`);
   };
 
@@ -80,7 +86,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
               rel="noopener noreferrer"
               className="project-action-btn"
               title="Ver repositório no GitHub"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                void trackEvent("project_github_click", {
+                  project_slug: project.slug,
+                  project_name: project.name,
+                  source: "home_swiper",
+                });
+              }}
               aria-label={`Código fonte de ${project.name} no GitHub`}
             >
               <GithubIcon size={16} />
@@ -94,7 +107,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
               rel="noopener noreferrer"
               className="project-action-btn"
               title="Acessar projeto online"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                void trackEvent("project_demo_click", {
+                  project_slug: project.slug,
+                  project_name: project.name,
+                  source: "home_swiper",
+                });
+              }}
               aria-label={`Demo online de ${project.name}`}
             >
               <ExternalLink size={16} />

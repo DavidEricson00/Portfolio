@@ -10,6 +10,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import type { ContactFormData } from "@/types/contact";
+import { trackEvent } from "@/lib/firebase/track";
 
 type FormErrors = Partial<Record<keyof ContactFormData, string>>;
 
@@ -95,9 +96,13 @@ export function ContactForm() {
       }
 
       setStatus("success");
+      void trackEvent("contact_form_submit", {});
       setFormData({ name: "", contact: "", subject: "", message: "" });
     } catch (err: unknown) {
       setStatus("error");
+      void trackEvent("contact_form_error", {
+        error_type: err instanceof TypeError ? "network" : "server",
+      });
       setErrorMessage(
         err instanceof Error
           ? err.message

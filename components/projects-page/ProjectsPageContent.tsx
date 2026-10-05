@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback, Suspense } from "react";
+import { useState, useMemo, useCallback, Suspense, useEffect, useRef } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import type { Project } from "@/types/project";
 import { ProjectsHeader } from "./ProjectsHeader";
@@ -9,6 +9,7 @@ import { TechnologyFilterGroup } from "./TechnologyFilterGroup";
 import { ProjectGrid } from "./ProjectGrid";
 import "./projects-page.css";
 import type { Technology } from "@/types/technology";
+import { trackEvent } from "@/lib/firebase/track";
 
 type ProjectsPageContentProps = {
   projects: Project[];
@@ -137,6 +138,7 @@ function ProjectsLogic({
   });
 
   const [prevSearch, setPrevSearch] = useState(searchParams.toString());
+  const isInitialMount = useRef(true);
 
   if (searchParams.toString() !== prevSearch) {
     setPrevSearch(searchParams.toString());
@@ -157,6 +159,36 @@ function ProjectsLogic({
 
     setSearchQuery(qParam);
   }
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    const query = searchQuery.trim();
+    if (query.length < 2) return;
+
+    const timer = setTimeout(() => {
+      const trimmedQuery = query.toLowerCase();
+      const resultsCount = projects.filter((project) => {
+        const matchesSearch = project.name.toLowerCase().includes(trimmedQuery);
+        if (!matchesSearch) return false;
+        if (selectedTechIds.length > 0) {
+          const projectTechIds = new Set(project.technologies.map((t) => t.id));
+          return selectedTechIds.every((id) => projectTechIds.has(id));
+        }
+        return true;
+      }).length;
+
+      void trackEvent("project_search", {
+        query_length: query.length,
+        results_count: resultsCount,
+      });
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, projects, selectedTechIds]);
 
   const syncUrlParams = useCallback(
     (newSearch: string, newTechs: string[]) => {
@@ -184,15 +216,30 @@ function ProjectsLogic({
   };
 
   const handleToggleTech = (techId: string) => {
-    const nextTechs = selectedTechIds.includes(techId)
+    const isSelected = selectedTechIds.includes(techId);
+    const nextTechs = isSelected
       ? selectedTechIds.filter((id) => id !== techId)
       : [...selectedTechIds, techId];
+
+    const techObj = technologies.find((t) => t.id === techId);
+    const techName = techObj ? techObj.name : techId;
+
+    void trackEvent("project_tech_filter", {
+      tech_id: techId,
+      tech_name: techName,
+      action: isSelected ? "deselect" : "select",
+      active_count: nextTechs.length,
+    });
 
     setSelectedTechIds(nextTechs);
     syncUrlParams(searchQuery, nextTechs);
   };
 
   const handleClearFilters = () => {
+    void trackEvent("project_filter_clear", {
+      prev_filter_count: selectedTechIds.length,
+      had_search: searchQuery.trim().length > 0,
+    });
     setSearchQuery("");
     setSelectedTechIds([]);
     router.replace(pathname, { scroll: false });

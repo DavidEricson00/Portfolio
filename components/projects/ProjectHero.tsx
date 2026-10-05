@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { Project } from "@/types/project";
 import { TechnologyPill } from "@/components/experience/TechnologyPill";
+import { trackEvent } from "@/lib/firebase/track";
 
 function GithubIcon({ size = 16 }: { size?: number }) {
   return (
@@ -96,6 +97,13 @@ export function ProjectHero({ project }: ProjectHeroProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="project-glass-btn project-glass-btn-secondary"
+                    onClick={() => {
+                      void trackEvent("project_github_click", {
+                        project_slug: project.slug,
+                        project_name: project.name,
+                        source: "project_detail",
+                      });
+                    }}
                   >
                     <GithubIcon size={16} />
                     <span>Ver no GitHub</span>
@@ -108,6 +116,13 @@ export function ProjectHero({ project }: ProjectHeroProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="project-glass-btn project-glass-btn-primary"
+                    onClick={() => {
+                      void trackEvent("project_demo_click", {
+                        project_slug: project.slug,
+                        project_name: project.name,
+                        source: "project_detail",
+                      });
+                    }}
                   >
                     <span>Acessar Projeto</span>
                     <ExternalLink size={15} />

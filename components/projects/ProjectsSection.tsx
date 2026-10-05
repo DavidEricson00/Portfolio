@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import type { Project } from "@/types/project";
+import { trackEvent } from "@/lib/firebase/track";
 
 import { ProjectsSwiper } from "./ProjectsSwiper";
 
@@ -52,6 +53,9 @@ export function ProjectsSection({
             <Link
               href="/projetos"
               className="button button-secondary projects-view-all-btn"
+              onClick={() => {
+                void trackEvent("projects_view_all_click", {});
+              }}
             >
               <span>Ver todos os projetos</span>
               <ArrowRight size={16} />
