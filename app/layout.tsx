@@ -18,6 +18,8 @@ import { getTechnologies } from "@/lib/data/technologies";
 
 import { FirebaseAnalytics } from "@/components/analytics/FirebaseAnalytics";
 
+import { GoogleTagManager } from "@next/third-parties/google";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -127,6 +129,8 @@ export default async function RootLayout({
       lang={SITE_CONFIG.language}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <GoogleTagManager gtmId="GTM-TCMMB226" />
+
       <body className="min-h-full flex flex-col">
         <JsonLd
           schema={[
