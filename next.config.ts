@@ -6,7 +6,8 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' ${isDevelopment ? "'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' ${isDevelopment ? "https://www.googletagmanager.com https://fonts.googleapis.com" : ""};
-  img-src 'self' blob: data: https://i.imgur.com https://imgur.com https://img.itch.zone https://github.com https://user-images.githubusercontent.com https://skillicons.dev https://go-skill-icons.vercel.app ${isDevelopment ? "https://fonts.gstatic.com" : ""};  font-src 'self' data: ${isDevelopment ? "https://fonts.gstatic.com" : ""};
+  img-src 'self' blob: data: https://i.imgur.com https://imgur.com https://img.itch.zone https://github.com https://user-images.githubusercontent.com https://skillicons.dev https://go-skill-icons.vercel.app ${isDevelopment ? "https://fonts.gstatic.com https://www.googletagmanager.com" : ""};
+  font-src 'self' data: ${isDevelopment ? "https://fonts.gstatic.com" : ""};
   connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://skillicons.dev https://go-skill-icons.vercel.app https://firebase.googleapis.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com;
   frame-ancestors 'none';
   object-src 'none';
