@@ -19,6 +19,7 @@ import { getTechnologies } from "@/lib/data/technologies";
 import { FirebaseAnalytics } from "@/components/analytics/FirebaseAnalytics";
 
 import { GoogleTagManager } from "@next/third-parties/google";
+import { UtmCleaner } from "@/components/analytics/UtmCleaner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -132,6 +133,8 @@ export default async function RootLayout({
       <GoogleTagManager gtmId="GTM-TCMMB226" />
 
       <body className="min-h-full flex flex-col">
+        <UtmCleaner />
+
         <JsonLd
           schema={[
             await buildPersonSchema(technologies),
