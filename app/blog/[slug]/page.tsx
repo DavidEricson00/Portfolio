@@ -138,41 +138,34 @@ export default async function BlogPostPage({
             className="blog-detail-breadcrumb"
             aria-label="Navegação de contexto"
           >
-            <ol
-              style={{
-                listStyle: "none",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: 0,
-                margin: 0,
-              }}
-            >
-              <li>
-                <Link
-                  href="/blog"
-                  className="blog-detail-breadcrumb-link"
-                >
+            <ol className="blog-detail-breadcrumb-list">
+              <li className="blog-detail-breadcrumb-item">
+                <Link href="/blog" className="blog-detail-breadcrumb-link">
                   <ArrowLeft size={14} />
                   <span>Blog</span>
                 </Link>
               </li>
 
-              <li aria-hidden="true">
+              <li
+                className="blog-detail-breadcrumb-item blog-detail-breadcrumb-item--separator"
+                aria-hidden="true"
+              >
                 <ChevronRight
                   size={13}
                   className="blog-detail-breadcrumb-separator"
                 />
               </li>
 
-              <li aria-current="page">
+              <li
+                className="blog-detail-breadcrumb-item blog-detail-breadcrumb-item--current"
+                aria-current="page"
+              >
                 <span className="blog-detail-breadcrumb-current">
                   {post.title}
                 </span>
               </li>
             </ol>
           </nav>
-
           {/* Post Header */}
           <header className="blog-detail-header">
             <h1 className="blog-detail-title">

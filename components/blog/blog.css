@@ -269,13 +269,49 @@
 
 /* Breadcrumb Navigation */
 .blog-detail-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: block;
+  min-width: 0;
   margin-bottom: 28px;
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.82rem;
   color: var(--muted);
+}
+
+.blog-detail-breadcrumb-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.blog-detail-breadcrumb-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Blog link e separador nunca encolhem */
+.blog-detail-breadcrumb-item:not(.blog-detail-breadcrumb-item--current) {
+  flex-shrink: 0;
+}
+
+/* O título atual ocupa o espaço restante e trunca */
+.blog-detail-breadcrumb-item--current {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.blog-detail-breadcrumb-current {
+  display: block;
+  min-width: 0;
+  color: var(--foreground);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .blog-detail-breadcrumb-link {
@@ -324,6 +360,8 @@
   letter-spacing: -0.035em;
   color: #ffffff;
   line-height: 1.2;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .blog-detail-meta-row {
@@ -354,6 +392,8 @@
   color: #e5e7eb;
   font-size: 1rem;
   line-height: 1.8;
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 
 /* Paragraphs */
@@ -363,6 +403,12 @@
   color: #e5e7eb;
   font-weight: 400;
   line-height: 1.8;
+}
+
+.blog-detail-article table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .blog-detail-article p:last-child {
