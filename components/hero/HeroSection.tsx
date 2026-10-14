@@ -108,6 +108,19 @@ export function HeroSection() {
             </a>
 
             <a
+              className="button button-primary"
+              href="/curriculo-david-ericson.pdf"
+              target="_blank"
+              rel="noopener noreferrer"              
+              onClick={() => {
+                void trackEvent("cta_hero_click", { label: "ver_curriculo" });
+              }}
+            >
+              Ver currículo
+              <span>↗</span>
+            </a>
+
+            <a
               className="button button-secondary"
               href="#contato"
               onClick={() => {

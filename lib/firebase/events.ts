@@ -1,6 +1,6 @@
 export type AnalyticsEventMap = {
   cta_hero_click: {
-    label: "ver_projetos" | "entre_em_contato";
+    label: "ver_projetos" | "entre_em_contato" | "ver_curriculo";
   };
 
   project_card_click: {
