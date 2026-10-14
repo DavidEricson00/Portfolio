@@ -1,8 +1,21 @@
+<div align="center">
+
 # Portfolio Web Application
 
-A modern, high-performance personal portfolio and content management platform built with Next.js (App Router), React, TypeScript, and Google Cloud Firestore. The application is engineered with an emphasis on performance, structured data, search and AI discovery, multi-vendor telemetry, and client-side content administration.
+A modern, high-performance personal portfolio and content management platform built with Next.js (App Router), React, TypeScript, and Google Cloud Firestore.
 
-Live Application: [davidericson.vercel.app](https://davidericson.vercel.app/?utm_source=github&utm_medium=profile&utm_campaign=portfolio)
+Engineered with an emphasis on performance, structured data, search and AI discovery, multi-vendor telemetry, and client-side content administration.
+
+[![Live](https://img.shields.io/badge/Live-davidericson.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://davidericson.vercel.app/?utm_source=github&utm_medium=profile&utm_campaign=portfolio)
+
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript_5-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+
+</div>
 
 ---
 
@@ -37,6 +50,9 @@ Data flows through a centralized access layer in `lib/data/`, connecting directl
 
 ### Directory Structure
 
+<details>
+<summary>Expand</summary>
+
 ```
 ├── app/                  # Next.js App Router pages, layouts, and route handlers
 │   ├── admin/            # Administrative portal (CRUD modules & login)
@@ -65,6 +81,8 @@ Data flows through a centralized access layer in `lib/data/`, connecting directl
 └── types/                # TypeScript type definitions and interfaces
 ```
 
+</details>
+
 ---
 
 ## Technology Stack
@@ -89,12 +107,14 @@ The application includes an administrative management panel accessible under `/a
 
 Firestore stores portfolio entities across dedicated collections:
 
-- `technologies`: Tech stack registry with categorization, display ranking, and icon identifiers.
-- `projects`: Detailed case studies with summary, repository links, deployment URLs, section arrays, and relational technology IDs.
-- `posts`: Technical articles authored in Markdown with metadata and timestamps.
-- `experiences`: Professional timeline entries referencing associated technologies.
-- `education`: Academic and technical certifications.
-- `contacts`: Inbox records submitted via the public contact form.
+| Collection | Description |
+|---|---|
+| `technologies` | Tech stack registry with categorization, display ranking, and icon identifiers |
+| `projects` | Detailed case studies with summary, repository links, deployment URLs, section arrays, and relational technology IDs |
+| `posts` | Technical articles authored in Markdown with metadata and timestamps |
+| `experiences` | Professional timeline entries referencing associated technologies |
+| `education` | Academic and technical certifications |
+| `contacts` | Inbox records submitted via the public contact form |
 
 While Cloud Firestore is a document-oriented NoSQL database, the data layer implements a relational resolution pattern: `projects` and `experiences` store arrays of foreign keys (`technologyIds`). When queried, `lib/data/projects.ts` and `lib/data/experiences.ts` fetch the `technologies` catalog concurrently, map relations, and sort them in descending order based on each technology's configured ranking.
 
@@ -127,14 +147,16 @@ The platform integrates a multi-tier telemetry architecture designed for insight
 
 Event dispatching is centralized through `lib/firebase/track.ts` and strictly typed via `AnalyticsEventMap`:
 
-- `cta_hero_click`: Interaction with primary call-to-action buttons (view projects, resume download, contact navigation).
-- `project_card_click`: Navigation from featured carousel or project directory to project details.
-- `project_github_click` & `project_demo_click`: Outbound clicks to source repositories and live deployments.
-- `project_tech_filter`: Multi-tag selection and deselection metrics with active filter counts.
-- `project_search`: Debounced search query monitoring (recording query character length and matched result counts without capturing raw sensitive keystrokes).
-- `project_filter_clear`: Filter reset tracking.
-- `social_click`: Interaction with external profiles (GitHub, LinkedIn, WhatsApp, email).
-- `contact_form_submit` & `contact_form_error`: Form completion and submission error monitoring.
+| Event | Description |
+|---|---|
+| `cta_hero_click` | Interaction with primary call-to-action buttons (view projects, resume download, contact navigation) |
+| `project_card_click` | Navigation from featured carousel or project directory to project details |
+| `project_github_click`, `project_demo_click` | Outbound clicks to source repositories and live deployments |
+| `project_tech_filter` | Multi-tag selection and deselection metrics with active filter counts |
+| `project_search` | Debounced search query monitoring (query character length and matched result counts, without capturing raw sensitive keystrokes) |
+| `project_filter_clear` | Filter reset tracking |
+| `social_click` | Interaction with external profiles (GitHub, LinkedIn, WhatsApp, email) |
+| `contact_form_submit`, `contact_form_error` | Form completion and submission error monitoring |
 
 ### Privacy & Hygiene Controls
 
@@ -161,12 +183,14 @@ Each route implements `generateMetadata` configuring:
 
 Structured data is rendered into the document head through a dedicated `JsonLd` component, mapping interconnected entities:
 
-- **Person:** Author entity containing professional title, contact channel, verified external profiles (`sameAs`), educational affiliations (`alumniOf`), and skill associations (`knowsAbout`).
-- **WebSite & ProfilePage:** Root site descriptors identifying primary entity targets.
-- **CollectionPage:** Directory listings for projects (`/projetos`) and technical articles (`/blog`).
-- **WebApplication & CreativeWork:** Dynamic project schemas differentiating live web applications from software works, referencing repository URLs and programming languages.
-- **BlogPosting:** Article records detailing publication dates, modification dates, word counts, and author relationships.
-- **BreadcrumbList:** Hierarchical navigation paths for deep routes.
+| Schema | Purpose |
+|---|---|
+| **Person** | Author entity containing professional title, contact channel, verified external profiles (`sameAs`), educational affiliations (`alumniOf`), and skill associations (`knowsAbout`) |
+| **WebSite & ProfilePage** | Root site descriptors identifying primary entity targets |
+| **CollectionPage** | Directory listings for projects (`/projetos`) and technical articles (`/blog`) |
+| **WebApplication & CreativeWork** | Dynamic project schemas differentiating live web applications from software works, referencing repository URLs and programming languages |
+| **BlogPosting** | Article records detailing publication dates, modification dates, word counts, and author relationships |
+| **BreadcrumbList** | Hierarchical navigation paths for deep routes |
 
 ### Discovery Endpoints
 
@@ -189,9 +213,9 @@ Structured data is rendered into the document head through a dedicated `JsonLd` 
 
 The hero section features an interactive portrait that alters its visual state upon cursor hover. To prevent hover triggers over transparent rectangular bounding areas of the PNG asset:
 
-- An offscreen HTML5 `<canvas>` copies the natural image dimensions on mouse movement.
-- Cursor coordinates are mapped to pixel coordinates, checking the alpha channel (`pixel[3] > 0`).
-- The hover state only activates when the pointer intersects non-transparent artwork pixels, executed with minimal overhead.
+1. An offscreen HTML5 `<canvas>` copies the natural image dimensions on mouse movement.
+2. Cursor coordinates are mapped to pixel coordinates, checking the alpha channel (`pixel[3] > 0`).
+3. The hover state only activates when the pointer intersects non-transparent artwork pixels, executed with minimal overhead.
 
 ### Component Suspense & Search Architecture
 
@@ -211,21 +235,28 @@ The hero section features an interactive portrait that alters its visual state u
 
 `next.config.ts` enforces modern HTTP security headers across all incoming requests:
 
-- **Content Security Policy (CSP):** Strict policy restricting origins for scripts, styles, fonts, frames, images, and network connections. Configured to permit only necessary endpoints:
-  - Scripts: Self, Vercel Analytics, Google Tag Manager, Microsoft Clarity.
-  - Connections: Firebase API endpoints, Firestore, Google Analytics, Microsoft Clarity, and Vercel Insights.
-  - Images: Self, data/blob URIs, whitelisted external media hosts, GTM, and Clarity.
-- **Strict-Transport-Security (HSTS):** `max-age=63072000; includeSubDomains; preload` ensuring HTTPS enforcement.
-- **X-Frame-Options & frame-ancestors:** Configured to `DENY` / `'none'` to prevent clickjacking.
-- **X-Content-Type-Options:** `nosniff` preventing MIME-type sniffing.
-- **Referrer-Policy:** `strict-origin-when-cross-origin`.
-- **Permissions-Policy:** Explicitly disables camera, microphone, and geolocation APIs.
-- **Cross-Origin-Opener-Policy:** `same-origin`.
+| Header | Value / Behavior |
+|---|---|
+| **Content-Security-Policy** | Strict policy restricting origins for scripts, styles, fonts, frames, images, and network connections |
+| **Strict-Transport-Security** | `max-age=63072000; includeSubDomains; preload` ensuring HTTPS enforcement |
+| **X-Frame-Options / frame-ancestors** | `DENY` / `'none'` to prevent clickjacking |
+| **X-Content-Type-Options** | `nosniff` preventing MIME-type sniffing |
+| **Referrer-Policy** | `strict-origin-when-cross-origin` |
+| **Permissions-Policy** | Explicitly disables camera, microphone, and geolocation APIs |
+| **Cross-Origin-Opener-Policy** | `same-origin` |
+
+The CSP is configured to permit only necessary endpoints:
+
+- **Scripts:** Self, Vercel Analytics, Google Tag Manager, Microsoft Clarity.
+- **Connections:** Firebase API endpoints, Firestore, Google Analytics, Microsoft Clarity, and Vercel Insights.
+- **Images:** Self, data/blob URIs, whitelisted external media hosts, GTM, and Clarity.
 
 ### Route Protection & Authentication Boundaries
 
-- Administrative pages are shielded by `AdminGuard`, a client-side component listening to Firebase Authentication state and redirecting unauthenticated visitors to `/admin/login`.
-- *Security Architecture Note:* Client-side guards protect interface rendering. Comprehensive data access authorization relies on Google Cloud Firestore Security Rules configured in the Firebase Console to restrict create, update, and delete privileges to authenticated administrative sessions.
+Administrative pages are shielded by `AdminGuard`, a client-side component listening to Firebase Authentication state and redirecting unauthenticated visitors to `/admin/login`.
+
+> [!IMPORTANT]
+> **Security Architecture Note:** Client-side guards protect interface rendering. Comprehensive data access authorization relies on Google Cloud Firestore Security Rules configured in the Firebase Console to restrict create, update, and delete privileges to authenticated administrative sessions.
 
 ### Public API Defensive Measures (`/api/contact`)
 
@@ -240,14 +271,10 @@ The contact route handler incorporates several defensive layers against abuse an
 
 ## Deployment & Production Environment
 
-- **Hosting Platform:** [Vercel](https://vercel.com)
-- **Production URL:** `https://davidericson.vercel.app`
-- **Database & Auth:** Google Cloud Platform / Firebase
-- **External Media Hosts:** Imgur, GitHub User Content, Itch.zone, SkillIcons
-
-### Author & Professional Links
-
-- **Engineer:** David Ericson
-- **GitHub:** [github.com/DavidEricson00](https://github.com/DavidEricson00)
-- **LinkedIn:** [linkedin.com/in/davidericson00](https://www.linkedin.com/in/davidericson00/)
-- **X / Twitter:** [x.com/DavidEricson00](https://x.com/DavidEricson00)
+| | |
+|---|---|
+| **Hosting Platform** | [Vercel](https://vercel.com) |
+| **Production URL** | [davidericson.vercel.app](https://davidericson.vercel.app/) |
+| **Repository** | [github.com/DavidEricson00/Portfolio](https://github.com/DavidEricson00/Portfolio) |
+| **Database & Auth** | Google Cloud Platform / Firebase |
+| **External Media Hosts** | Imgur, GitHub User Content, Itch.zone, SkillIcons |
