@@ -8,7 +8,7 @@ import pixelDavid from "@/app/assets/images/pixel-david.png";
 import pixelDavidHover from "@/app/assets/images/pixel-david-hover.png";
 import "./hero.css";
 
-const HERO_STACK = ["Node.js", "TypeScript", "React", "PostgreSQL"];
+const HERO_STACK = ["Node.js", "TypeScript", "React", "PostgreSQL", "Docker"];
 
 export function HeroSection() {
   const imageRef = useRef<HTMLImageElement>(null);
